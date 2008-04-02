@@ -4,7 +4,7 @@ Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
 Requires at least: 2.0.2
 Tested up to: 2.5
-Stable tag: 2.2.1
+Stable tag: .1
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -12,6 +12,8 @@ Scans your WordPress installation for security vulnerabilities.
 
 Scans your WordPress installation for security vulnerabilities and suggests
 corrective actions.
+
+Currently in beta
 
 == Installation ==
 
