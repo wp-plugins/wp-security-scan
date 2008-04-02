@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: .1a
+Version: 2.2
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -14,13 +14,14 @@ function add_men_pg() {
         add_menu_page('Security Scan', 'Security Scan', 10, basename(__FILE__), 'mrt_opt_mng_pg');
 }
 
-function check_perms($path,$perm)
+function check_perms($name,$path,$perm)
 {
     clearstatcache();
 //    $configmod = fileperms($path);
     $configmod = substr(sprintf(".%o.", fileperms($path)), -4);
     $trcss = (($configmod != $perm) ? "background-color:#fd7a7a;" : "background-color:#91f587;");
     echo "<tr style=".$trcss.">";
+    echo '<td style="border:0px;">' . $name . "</td";
     echo '<td style="border:0px;">'. $path ."</td>";
     echo '<td style="border:0px;">' . $perm . '</td>';
     echo '<td style="border:0px;">' . $configmod . '</td>';
@@ -35,19 +36,21 @@ function mrt_opt_mng_pg() {
                <div id="message" class="updated fade"><p><?php echo "SECURITY SCAN";?></p></div>
 <table width="100%"  border="0" cellspacing="0" cellpadding="3" style="text-align:center;">
          <tr>
+        <th style="border:0px;"><b>Name</b></th>
         <th style="border:0px;"><b>File/Dir</b></th>
         <th style="border:0px;"><b>Needed Chmod</b></th>
         <th style="border:0px;"><b>Current Chmod</b></th>
     </tr>
     <?php
-        check_perms("../wp-includes","0644");
-        check_perms("../.htaccess","0644");
-        check_perms("index.php","0644");
-        check_perms("js/","0644");
-        check_perms("../wp-content/themes","0644");
-        check_perms("../wp-content/plugins","0644");
-        check_perms("../wp-admin","0644");
-        check_perms("../wp-content","0644");
+        check_perms("root directory","../","0644");
+        check_perms("wp-includes/","../wp-includes","0644");
+        check_perms(".htaccess","../.htaccess","0644");
+        check_perms("wp-admin/index.php","index.php","0644");
+        check_perms("wp-admin/js/","js/","0644");
+        check_perms("wp-content/themes/","../wp-content/themes","0644");
+        check_perms("wp-content/plugins/","../wp-content/plugins","0644");
+        check_perms("wp-admin/","../wp-admin","0644");
+        check_perms("wp/content/","../wp-content","0644");
     ?>
 </table>
           </div>
