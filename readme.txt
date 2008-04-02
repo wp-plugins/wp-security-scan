@@ -2,7 +2,7 @@
 Contributors: hallsofmontezuma
 Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
-Requires at least: 2.0.2
+Requires at least: 2.5
 Tested up to: 2.5
 Stable tag: .2
 
