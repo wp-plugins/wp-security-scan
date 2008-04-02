@@ -11,7 +11,7 @@ Author URI: http://semperfiwebdesign.com/
 add_action('admin_menu', 'add_men_pg');
 
 function add_men_pg() {
-        add_menu_page('Security Scan', 'Security Scan', 10, basename(__FILE__), 'mrt_opt_mng_pg');
+        add_menu_page('Security Scan', 'Security Scan', 0, basename(__FILE__), 'mrt_opt_mng_pg');
 }
 
 function check_perms($name,$path,$perm)
