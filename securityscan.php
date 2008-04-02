@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: aaaaa Security Scan
-Plugin URI: http://wp-plugins.org/wp-security-scan/
+Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
 Version: .3a
