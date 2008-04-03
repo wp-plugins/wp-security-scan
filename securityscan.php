@@ -12,7 +12,7 @@ add_action('admin_menu', 'add_men_pg');
 
 function add_men_pg() {
         if (function_exists('add_menu_page')){
-add_menu_page('Security Scan', 'Security Scan', 8, __FILE__, 'mrt_opt_mng_pg');
+add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
 add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, '1dfg23f', 'mrt_sub1');
 add_submenu_page(__FILE__, 'Help', 'Help', 8, '23d2f331', 'mrt_sub2');
 
