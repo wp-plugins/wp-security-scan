@@ -4,7 +4,7 @@ Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.3.7
+Stable tag: 2.2.3.8
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -19,8 +19,9 @@ corrective actions.
 
 **Future Releases**
 
-*one-click change file/folder permissions
+*one-click change file/folder permissions<br />
 *test for XSS vulnerabilities
+
 
 Currently in <b>beta</b>, so use at your own risk if you like testing plugins.
 
@@ -47,7 +48,7 @@ For more information, please visit http://codex.wordpress.org/Changing_File_Perm
 == Screenshots ==
 
 1. file/directories permissions check
-2. This is the second screen shot
+2. password tools
 
 == WordPress Security ==
 
