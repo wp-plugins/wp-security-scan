@@ -4,10 +4,10 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.3.3
+Version: 2.2.3.4
 Author URI: http://semperfiwebdesign.com/
 */
-require_once(ABSPATH."wp-content/plugins/securityscan/menu.php");
+require_once(ABSPATH."wp-content/plugins/wp-security-scan/menu.php");
 //require_once(ABSPATH."wp-content/plugins/securityscan/functions.php");
 //require_once(ABSPATH."wp-content/plugins/securityscan/scripts.js");
 
@@ -32,6 +32,7 @@ function check_perms($name,$path,$perm)
     echo '<td style="border:0px;">'. $path ."</td>";
     echo '<td style="border:0px;">' . $perm . '</td>';
     echo '<td style="border:0px;">' . $configmod . '</td>';
+//    echo '<td style="border:0px;">' . '<input type="submit" name="' . $perm . '" value="Change now.">' . '</td>';
     echo "</tr>";
 }
 
@@ -39,7 +40,7 @@ function mrt_opt_mng_pg() {
         ?>
         <div class=wrap>
                 <h2><?php _e('WP - Security Scan') ?></h2>
-          <div style="height:299px">
+          <div >
                <div id="message" class="updated fade"><p><?php echo "SECURITY SCAN";?></p></div>
 <?php
 
@@ -58,6 +59,7 @@ echo $g2k5;?>
         <th style="border:0px;"><b>File/Dir</b></th>
         <th style="border:0px;"><b>Needed Chmod</b></th>
         <th style="border:0px;"><b>Current Chmod</b></th>
+  <!--      <th style="border:0px;"><b>Change Permissions</b></th>-->
     </tr>
     <?php
         check_perms("root directory","../","0745");
