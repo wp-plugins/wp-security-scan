@@ -13,8 +13,8 @@ Scans your WordPress installation for security vulnerabilities.
 Scans your WordPress installation for security vulnerabilities and suggests
 corrective actions.
 
-  -passwords
-  -file permissions
+-passwords<br />
+-file permissions
 
 Currently in <b>beta</b>, so use at your own risk if you like testing plugins.
 
