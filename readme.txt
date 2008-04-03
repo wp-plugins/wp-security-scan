@@ -45,31 +45,31 @@ For more information, please visit http://codex.wordpress.org/Changing_File_Perm
 
 == Arbitrary section ==
 
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+<strong>Plugin currently in BETA version.
 
-== A brief Markdown Example ==
+== WordPress Security ==
 
-Ordered list:
+Security Scanner:
 
-1. Some feature
-1. Another feature
-1. Something else about the plugin
+1. Scans Wordpress installation for file/directory permissions vulnerabilites
+1. Recommends corrective actions
+1. Scans for general security vulnerabilities
 
-Unordered list:
+Join the BETA testers group if:
 
-* something
-* something else
-* third thing
+* you have experience as a software tester
+* you have no experience as a software tester
+* you have a WordPress installation dedicated for testing
+* you have a general enthusiasm for WordPress use and/or development
 
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
 
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
+Visit our homepage at [Semper Fi Web Design](http://semperfiwebdesign.com/ "Raleigh Web Design") or our plugin page at [Semper Fi Plugins][sf plugins].
+We look forward to hearing your comments and suggestions.
 
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
+[sf plugins]: http://semperfiwebdesign.com/wordpress/plugins
+            "Raleigh Web Design"
 
-`<?php code(); // goes in backticks ?>`
+> WordPress Security Scanner for *2.3, 2.5*. Although if you're using lower
+> than 2.3 you should go ahead and install it because of **security**.
+
+`<?php code(); // backticks ?>`
