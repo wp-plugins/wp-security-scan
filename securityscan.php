@@ -4,15 +4,18 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: .3
+Version: .3.3
 Author URI: http://semperfiwebdesign.com/
 */
-
+require_once('../wp-content/plugins/securityscan/menu.php');
 add_action('admin_menu', 'add_men_pg');
 
 function add_men_pg() {
         if (function_exists('add_menu_page')){
 add_menu_page('Security Scan', 'Security Scan', 8, __FILE__, 'mrt_opt_mng_pg');
+add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, '1dfg23f', 'mrt_sub1');
+add_submenu_page(__FILE__, 'Help', 'Help', 8, '23d2f331', 'mrt_sub2');
+
 }
 }
 function check_perms($name,$path,$perm)
@@ -43,15 +46,15 @@ function mrt_opt_mng_pg() {
         <th style="border:0px;"><b>Current Chmod</b></th>
     </tr>
     <?php
-        check_perms("root directory","../","0644");
-        check_perms("wp-includes/","../wp-includes","0644");
+        check_perms("root directory","../","0745");
+        check_perms("wp-includes/","../wp-includes","0447");
         check_perms(".htaccess","../.htaccess","0644");
         check_perms("wp-admin/index.php","index.php","0644");
-        check_perms("wp-admin/js/","js/","0644");
-        check_perms("wp-content/themes/","../wp-content/themes","0644");
-        check_perms("wp-content/plugins/","../wp-content/plugins","0644");
-        check_perms("wp-admin/","../wp-admin","0644");
-        check_perms("wp/content/","../wp-content","0644");
+        check_perms("wp-admin/js/","js/","0775");
+        check_perms("wp-content/themes/","../wp-content/themes","0745");
+        check_perms("wp-content/plugins/","../wp-content/plugins","0745");
+        check_perms("wp-admin/","../wp-admin","0745");
+        check_perms("wp/content/","../wp-content","0745");
     ?>
 </table>
           </div>
