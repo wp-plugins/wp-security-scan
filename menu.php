@@ -1,108 +1,17 @@
 <?php
+
+require_once(ABSPATH."wp-content/plugins/securityscan/functions.php");
+require_once(ABSPATH."wp-content/plugins/securityscan/scripts.js");
+
+
 function mrt_sub1(){
  ?>
         <div class=wrap>
-                <h2><?php _e('WP - Security Scan') ?></h2>
+                <h2><?php _e('WP - Password Tools') ?></h2>
           <div style="height:299px">
               <?php
-echo "Password Strength Tool";
+echo "<br /><strong>Password Strength Tool</strong>";
 ?>
-
-<script language="JavaScript1.1">
-function testPassword(passwd){
-var description = new Array();
-description[0] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=30 bgcolor=#ff0000></td><td height=4 width=120 bgcolor=tan></td></tr></table></td><td>   <b>Weakest</b></td></tr></table>";
-description[1] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=60 bgcolor=#990000></td><td height=4 width=90 bgcolor=tan></td></tr></table></td><td>   <b>Weak</b></td></tr></table>";
-description[2] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=90 bgcolor=#990099></td><td height=4 width=60 bgcolor=tan></td></tr></table></td><td>   <b>Improving</b></td></tr></table>";
-description[3] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=120 bgcolor=#000099></td><td height=4 width=30 bgcolor=tan></td></tr></table></td><td>   <b>Strong</b></td></tr></table>";
-description[4] = "<table><tr><td><table><tr><td height=4 width=150 bgcolor=#0000ff></td></tr></table></td><td>   <b>Strongest</b></td></tr></table>";
-description[5] = "<table><tr><td><table><tr><td height=4 width=150 bgcolor=tan></td></tr></table></td><td>   <b>Begin Typing</b></td></tr></table>";
-
-var base = 0
-var combos = 0
-if (passwd.match(/[a-z]/)){
-base = (base+26);
-   }
-
-if (passwd.match(/[A-Z]/)){
-base = (base+26);
-   }
-if (passwd.match(/\d+/)){
-
-base = (base+10);
-
-}
-
-
-
-if (passwd.match(/[>!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/))
-
-{
-
-base = (base+33);
-
-}
-
-
-
-combos=Math.pow(base,passwd.length);
-
-
-
-if(combos == 1)
-
-{
-
-strVerdict = description[5];
-
-}
-
-else if(combos > 1 && combos < 1000000)
-
-{
-
-strVerdict = description[0];
-
-}
-
-else if (combos >= 1000000 && combos < 1000000000000)
-
-{
-
-strVerdict = description[1];
-
-}
-
-else if (combos >= 1000000000000 && combos < 1000000000000000000)
-
-{
-
-strVerdict = description[2];
-
-}
-
-else if (combos >= 1000000000000000000 && combos < 1000000000000000000000000)
-
-{
-
-strVerdict = description[3];
-
-}
-
-else
-{
-strVerdict = description[4];
-}
-document.getElementById("Words").innerHTML= (strVerdict);
-}
-</script>
-
-
-
-
-
-
-
 <table><tr valign=top><td><form name="commandForm">
 
 Type password: <input type=password size=30 maxlength=50 name=password onkeyup="testPassword(document.forms.commandForm.password.value);" value="">
@@ -114,8 +23,10 @@ Type password: <input type=password size=30 maxlength=50 name=password onkeyup="
 
 
 </form>
-
-
+<?php
+echo "<br /><br /><strong>Strong Password Generator</strong><br />";
+echo "Strong Password: " . '<font color="red">' . make_password(15) . "</font>";
+?>
 
 <?php 
 
@@ -168,7 +79,6 @@ function mrt_sub2(){
                 <h2><?php _e('WP - Security Scan') ?></h2>
           <div style="height:299px">
               coming soon...
-
           </div>
    Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
