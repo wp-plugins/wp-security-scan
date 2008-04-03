@@ -2,9 +2,9 @@
 Contributors: hallsofmontezuma
 Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
-Requires at least: 2.5
+Requires at least: 2.3
 Tested up to: 2.5
-Stable tag: .2
+Stable tag: .3
 
 Scans your WordPress installation for security vulnerabilities.
 
