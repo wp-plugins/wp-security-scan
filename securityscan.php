@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: .3.3
+Version: .3.4
 Author URI: http://semperfiwebdesign.com/
 */
 require_once('../wp-content/plugins/securityscan/menu.php');
