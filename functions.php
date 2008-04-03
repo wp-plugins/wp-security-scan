@@ -15,6 +15,20 @@ for($i = 0; $i < $password_length; $i ++) {
 return $token;
 }
 
+function check_perms($name,$path,$perm)
+{
+    clearstatcache();
+//    $configmod = fileperms($path);
+    $configmod = substr(sprintf(".%o.", fileperms($path)), -4);
+    $trcss = (($configmod != $perm) ? "background-color:#fd7a7a;" : "background-color:#91f587;");
+    echo "<tr style=".$trcss.">";
+    echo '<td style="border:0px;">' . $name . "</td";
+    echo '<td style="border:0px;">'. $path ."</td>";
+    echo '<td style="border:0px;">' . $perm . '</td>';
+    echo '<td style="border:0px;">' . $configmod . '</td>';
+//    echo '<td style="border:0px;">' . '<input type="submit" name="' . $perm . '" value="Change now.">' . '</td>';
+    echo "</tr>";
+}
 
 
 ?>
