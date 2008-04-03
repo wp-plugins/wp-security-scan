@@ -13,7 +13,10 @@ Scans your WordPress installation for security vulnerabilities.
 Scans your WordPress installation for security vulnerabilities and suggests
 corrective actions.
 
-Currently in beta
+  -passwords
+  -file permissions
+
+Currently in <b>beta</b>, so use at your own risk if you like testing plugins.
 
 == Installation ==
 
@@ -22,13 +25,18 @@ Currently in beta
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How do I change the file permissions on my WordPress installation?  =
 
-An answer to that question.
+From the linux command line (for advanced users):
+    chmod xxx filename.ext
+    (replace xxx with with the permissions settings for the file or folder)
 
-= What about foo bar? =
+From your FTP client:
+    Most FTP clients, such as filezilla, etc, allow for changing file
+permissions.  Please consult your clients documentation for your specific
+directions.
 
-Answer to foo bar dilemma.
+For more information, please visit http://codex.wordpress.org/Changing_File_Permissions
 
 == Screenshots ==
 
