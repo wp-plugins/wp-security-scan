@@ -102,9 +102,9 @@ function mrt_sub2(){
         <div class=wrap>
                 <h2><?php _e('WP - Security Support') ?></h2>
           <div style="height:299px">
-support page coming soon...
+<br /><br />support page coming soon...
 <br /><br /><br />
-              <em>For comments, suggestions, bug reporting, etc email michael@semperfiwebdesign.com</em>
+              <em>For comments, suggestions, bug reporting, etc email <a href="mailto:michael@semperfiwebdesign.com">michael@semperfiwebdesign.com</a></em>
 
 
           </div>

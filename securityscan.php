@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.3.5
+Version: 2.2.3.7
 Author URI: http://semperfiwebdesign.com/
 */
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/menu.php");
@@ -42,7 +42,12 @@ if ($wp_version < 2.3) $g2k5 = "You need at least version 2.3.  Upgrade immediat
 //if ($wp_version == 2.3) $g2k5 = "equals 2.3";
 echo "<b>" . $wp_version . "</b>" . "<br />";
 echo $g2k5;?>
-
+<br /><br /><br /><br /><br /><br />
+<b>Future Releases</b>
+<ul>
+<li>one-click change file/folder permissions</li>
+<li>test for XSS vulnerabilities</li>
+</ul>
 </div>
              Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
