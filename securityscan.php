@@ -9,7 +9,6 @@ Author URI: http://semperfiwebdesign.com/
 */
 require_once('../wp-content/plugins/securityscan/menu.php');
 add_action('admin_menu', 'add_men_pg');
-
 function add_men_pg() {
         if (function_exists('add_menu_page')){
 add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
@@ -38,6 +37,17 @@ function mrt_opt_mng_pg() {
                 <h2><?php _e('WP - Security Scan') ?></h2>
           <div style="height:299px">
                <div id="message" class="updated fade"><p><?php echo "SECURITY SCAN";?></p></div>
+<?php
+
+echo "WordPress versions = ";
+global $wp_version;
+if ($wp_version >= 2.3) $g2k5 = "You need at least version 2.3 for security.  This is acceptable.";
+if ($wp_version < 2.3) $g2k5 = "You need at least version 2.3.  Upgrade immediately for security reasons.";
+//if ($wp_version == 2.3) $g2k5 = "equals 2.3";
+echo $wp_version . "<br />";
+echo $g2k5;?>
+
+
 <table width="100%"  border="0" cellspacing="0" cellpadding="3" style="text-align:center;">
          <tr>
         <th style="border:0px;"><b>Name</b></th>

@@ -168,6 +168,7 @@ function mrt_sub2(){
                 <h2><?php _e('WP - Security Scan') ?></h2>
           <div style="height:299px">
               coming soon...
+
           </div>
    Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
