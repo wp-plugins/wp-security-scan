@@ -12,15 +12,15 @@ function mrt_sub0(){?>
   <!--      <th style="border:0px;"><b>Change Permissions</b></th>-->
     </tr>
     <?php
-        check_perms("root directory","../","0745");
-        check_perms("wp-includes/","../wp-includes","0745");
+        check_perms("root directory","../","0755");
+        check_perms("wp-includes/","../wp-includes","0755");
         check_perms(".htaccess","../.htaccess","0644");
         check_perms("wp-admin/index.php","index.php","0644");
-        check_perms("wp-admin/js/","js/","0775");
-        check_perms("wp-content/themes/","../wp-content/themes","0745");
-        check_perms("wp-content/plugins/","../wp-content/plugins","0745");
-        check_perms("wp-admin/","../wp-admin","0745");
-        check_perms("wp-content/","../wp-content","0745");
+        check_perms("wp-admin/js/","js/","0755");
+        check_perms("wp-content/themes/","../wp-content/themes","0755");
+        check_perms("wp-content/plugins/","../wp-content/plugins","0755");
+        check_perms("wp-admin/","../wp-admin","0755");
+        check_perms("wp-content/","../wp-content","0755");
     ?>
 </table>
           </div>
