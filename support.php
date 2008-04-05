@@ -1,6 +1,4 @@
 <?php
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
 function mrt_sub2(){
  ?>

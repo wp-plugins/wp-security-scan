@@ -76,3 +76,48 @@ function mrt_get_serverinfo() {
 <?php
 }
 ?>
+
+
+<?php
+function mrt_check_table_prefix(){
+if($GLOBALS['table_prefix']=='wp_'){
+echo '<font color="red">Your table prefix should not be <i>wp_</i>.  Please <a href="' . ABSPATH . '/wp-admin/admin.php?page=database">click here</a> to change it.</font><br />';
+}else{
+echo '<font color="green">Your table prefix is not <i>wp_</i>.</font><br />';
+}
+}
+
+function mrt_errorsoff(){
+echo '<font color="green">WordPress DB Errors turned off</font><br />';
+}
+
+function mrt_wpdberrors()
+{
+		global $wpdb;
+		$wpdb->show_errors = false;
+
+}
+
+function mrt_version_removal(){
+echo '<font color="green">Your WordPress version is successfully hidden</font><br />';
+}
+
+function mrt_remove_wp_version()
+{
+                if (!is_admin()) {
+                        global $wp_version;
+                        $wp_version = '';
+                              }
+
+}
+
+function mrt_check_version(){
+echo "WordPress Version: ";
+global $wp_version;
+if ($wp_version == 2.5) $g2k5 = '<font color="green">You have the latest stable version of WordPress.</font><br />';
+if ($wp_version < 2.5) $g2k5 = '<font color="red">You need version 2.5.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</font><br />';
+echo "<b>" . $wp_version . "</b>  &nbsp;&nbsp;&nbsp " ;echo $g2k5;
+}
+
+?>
+
