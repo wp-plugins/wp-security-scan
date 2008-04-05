@@ -4,7 +4,7 @@ Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.41
+Stable tag: 2.2.42
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -15,7 +15,8 @@ corrective actions.
 
 -passwords<br />
 -file permissions<br />
--database security
+-database security<br />
+-version hiding
 
 **Future Releases**
 
@@ -44,6 +45,13 @@ permissions.  Please consult your clients documentation for your specific
 directions.
 
 For more information, please visit http://codex.wordpress.org/Changing_File_Permissions
+
+= Why do I need to hide my version of WordPress?  =
+
+Alot of attackers and automated tools will try and determine software versions
+before launching exploit code. Removing your WordPress blog version may
+discourage some attackers and certainly will mitigate virus and worm programs
+that rely on software versions.
 
 == Screenshots ==
 
