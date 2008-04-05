@@ -13,7 +13,7 @@ function mrt_sub0(){?>
     </tr>
     <?php
         check_perms("root directory","../","0745");
-        check_perms("wp-includes/","../wp-includes","0447");
+        check_perms("wp-includes/","../wp-includes","0745");
         check_perms(".htaccess","../.htaccess","0644");
         check_perms("wp-admin/index.php","index.php","0644");
         check_perms("wp-admin/js/","js/","0775");
