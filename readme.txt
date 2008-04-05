@@ -4,7 +4,7 @@ Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.42
+Stable tag: 2.2.43
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -52,6 +52,9 @@ Alot of attackers and automated tools will try and determine software versions
 before launching exploit code. Removing your WordPress blog version may
 discourage some attackers and certainly will mitigate virus and worm programs
 that rely on software versions.
+
+NOTE: Hiding your version of WordPress may break any plugins you have which
+are version dependant.
 
 == Screenshots ==
 
