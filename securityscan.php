@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.47
+Version: 2.2.48
 Author URI: http://semperfiwebdesign.com/
 */
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
@@ -49,7 +49,7 @@ mrt_errorsoff();
 <hr align=center size=2 width=500px>
 <br /><br />
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
-<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</ul>
+<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li></ul>
 </div>
 <div style="float: left; height: 410;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
 <?php mrt_get_serverinfo(); ?>
