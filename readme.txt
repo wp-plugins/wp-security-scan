@@ -22,14 +22,19 @@ corrective actions.
 
 *one-click change file/folder permissions<br />
 *test for XSS vulnerabilities
+*intrusion detection/prevention
+*lock out/log incorrect login attempts
 
-
-Currently in <b>beta</b>, so use at your own risk if you like testing plugins.
 
 == Installation ==
 
-1. Upload `securityscan.php` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+1. Create backup.
+2. Upload the zip file to the `/wp-content/plugins/` directory
+3. Unzip.
+4. Activate the plugin through the 'Plugins' menu in WordPress
+
+
+Please let me know any bugs, improvements, comments, suggestions.
 
 == Frequently Asked Questions ==
 

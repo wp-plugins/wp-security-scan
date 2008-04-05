@@ -49,7 +49,7 @@ mrt_errorsoff();
 <hr align=center size=2 width=500px>
 <br /><br />
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
-<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li></ul>
+<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</ul>
 </div>
 <div style="float: left; height: 410;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
 <?php mrt_get_serverinfo(); ?>
