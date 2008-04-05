@@ -81,7 +81,7 @@ function mrt_get_serverinfo() {
 <?php
 function mrt_check_table_prefix(){
 if($GLOBALS['table_prefix']=='wp_'){
-echo '<font color="red">Your table prefix should not be <i>wp_</i>.  <a href="wp-admin/admin.php?page=database">Click here</a> to change it.</font><br />';
+echo '<font color="red">Your table prefix should not be <i>wp_</i>.  <a href="admin.php?page=database">Click here</a> to change it.</font><br />';
 }else{
 echo '<font color="green">Your table prefix is not <i>wp_</i>.</font><br />';
 }
