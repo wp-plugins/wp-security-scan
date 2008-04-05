@@ -7,6 +7,25 @@ Author: Michael Torbert
 Version: 2.2.49
 Author URI: http://semperfiwebdesign.com/
 */
+
+/*
+Copyright (C) 2008 semperfiwebdesign.com (michael AT semperfiwebdesign DOT com)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");

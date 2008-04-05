@@ -6,7 +6,7 @@ function mrt_sub2(){
                 <h2><?php _e('WP - Security Support') ?></h2>
           <div style="height:299px">
 <br /><br />support page coming soon...
-<br /><br /><br />
+<br /><br /><strong>Backup early, backup often!</strong><br /><br /><br /><br /><br />
               <em>For comments, suggestions, bug reporting, etc email <a href="mailto:michael@semperfiwebdesign.com">michael@semperfiwebdesign.com</a></em>
           </div>
    Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
