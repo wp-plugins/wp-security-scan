@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: hallsofmontezuma
 Donate link: http://semperfiwebdesign.com
-Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin
+Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
 Tested up to: 2.5
