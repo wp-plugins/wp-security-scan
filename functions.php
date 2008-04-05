@@ -88,7 +88,7 @@ echo '<font color="green">Your table prefix is not <i>wp_</i>.</font><br />';
 }
 
 function mrt_errorsoff(){
-echo '<font color="green">WordPress DB Errors turned off</font><br />';
+echo '<font color="green">WordPress DB Errors turned off.</font><br />';
 }
 
 function mrt_wpdberrors()
@@ -99,7 +99,7 @@ function mrt_wpdberrors()
 }
 
 function mrt_version_removal(){
-echo '<font color="green">Your WordPress version is successfully hidden</font><br />';
+echo '<font color="green">Your WordPress version is successfully hidden.</font><br />';
 }
 
 function mrt_remove_wp_version()
