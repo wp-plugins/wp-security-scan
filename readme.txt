@@ -26,6 +26,7 @@ corrective actions.
 *intrusion detection/prevention<br />
 *lock out/log incorrect login attempts<br />
 *user enumeration protection<br />
+*WordPress admin protection/security*
 
 == Installation ==
 
