@@ -25,7 +25,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$version = "2.2.52";
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
@@ -33,6 +32,7 @@ require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
+add_action( 'admin_notices', mrt_update_notice, 5 );
 add_action('admin_head', 'mrt_hd');
 add_action("init",mrt_wpdberrors,1);
 add_action("parse_query",mrt_wpdberrors,1);
@@ -46,6 +46,16 @@ add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 
 add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
 add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
 }}
+
+function mrt_update_notice(){
+/*$mrt_version = "2.2.52";
+$mrt_latest = fgets(fopen("http://semperfiwebdesign.com/wp-security-scan.html", "r"));
+echo $mrt_latest . " and " . $mrt_version;
+if($mrt_latest > $mrt_version)
+    echo "New Version Available";
+   else
+      echo "Latest Version";
+  */  }
 
 function mrt_opt_mng_pg() {
         ?>
@@ -64,6 +74,8 @@ mrt_check_version();
 mrt_check_table_prefix();
 mrt_version_removal();
 mrt_errorsoff();
+
+
 $name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
 if ($name=="admin"){
   echo '<font color="red">"admin" user exists.</font>';
