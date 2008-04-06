@@ -33,6 +33,7 @@ require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
+add_action('admin_head', 'mrt_hd');
 add_action("init",mrt_wpdberrors,1);
 add_action("parse_query",mrt_wpdberrors,1);
 add_action('admin_menu', 'add_men_pg');
@@ -71,8 +72,6 @@ if ($name=="admin"){
       echo '<font color="green">No user "admin".</font>';
       }
 ?>
-
-
 <br /><br />
 <hr align=center size=2 width=500px>
 <br /><br />
@@ -86,4 +85,13 @@ if ($name=="admin"){
 </div>
              Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
-<?php } ?>
+<?php } 
+
+function mrt_hd()
+{
+ $siteurl = get_option('siteurl');?>
+<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/style.css" />
+<?php }
+?>
+

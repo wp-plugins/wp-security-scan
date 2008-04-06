@@ -23,6 +23,8 @@ function mrt_sub0(){?>
         check_perms("wp-content/","../wp-content","0755");
     ?>
 </table>
+
+
           </div>
              Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div><?}
