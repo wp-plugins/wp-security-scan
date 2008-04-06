@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.51
+Version: 2.2.52
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -25,7 +25,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$version = "2.2.51";
+$version = "2.2.52";
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
