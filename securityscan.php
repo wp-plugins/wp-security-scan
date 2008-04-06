@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://wordpress.org/extend/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.50
+Version: 2.2.51
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -25,7 +25,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
+$version = "2.2.51";
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
@@ -58,11 +58,20 @@ function mrt_opt_mng_pg() {
 <br /><div style="float: left;width: 600px; height: 410px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Initial Scan</h3></div>
 <?php
+global $wpdb;
 mrt_check_version();
 mrt_check_table_prefix();
 mrt_version_removal();
 mrt_errorsoff();
+$name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
+if ($name=="admin"){
+  echo '<font color="red">"admin" user exists.</font>';
+  }
+  else{
+      echo '<font color="green">No user "admin".</font>';
+      }
 ?>
+
 
 <br /><br />
 <hr align=center size=2 width=500px>
