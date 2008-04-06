@@ -19,8 +19,7 @@ corrective actions.
 -database security<br />
 -version hiding
 
-**Future Releases**
-
+**Future Releases**<br />
 *one-click change file/folder permissions<br />
 *test for XSS vulnerabilities<br />
 *intrusion detection/prevention<br />
