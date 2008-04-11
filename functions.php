@@ -78,6 +78,25 @@ function mrt_get_serverinfo() {
 ?>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 function mrt_check_table_prefix(){
 if($GLOBALS['table_prefix']=='wp_'){
