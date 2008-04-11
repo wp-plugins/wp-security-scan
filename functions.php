@@ -75,29 +75,7 @@ function mrt_get_serverinfo() {
         <li><?php _e('PHP XML support'); ?> : <strong><?php echo $xml; ?></strong></li>
 <?php
 }
-?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
 function mrt_check_table_prefix(){
 if($GLOBALS['table_prefix']=='wp_'){
 echo '<font color="red">Your table prefix should not be <i>wp_</i>.  <a href="admin.php?page=database">Click here</a> to change it.</font><br />';
