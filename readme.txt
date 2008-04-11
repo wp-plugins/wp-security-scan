@@ -5,7 +5,7 @@ Tags: security, securityscan, chmod, permissions, admin, administration, authent
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.56.9
+Stable tag: 2.2.56.10
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -92,7 +92,7 @@ Join the BETA testers group if:
 Visit our homepage at [Semper Fi Web Design](http://semperfiwebdesign.com/ "Raleigh Web Design") or our plugin page at [Semper Fi Plugins][sf plugins].
 We look forward to hearing your comments and suggestions.
 
-[sf plugins]: http://semperfiwebdesign.com/wordpress/plugins
+[sf plugins]: http://semperfiwebdesign.com/plugins/
             "Raleigh Web Design"
 
 > WordPress Security Scanner for *2.3, 2.5*. Although if you're using lower
