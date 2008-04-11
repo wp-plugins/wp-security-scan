@@ -142,6 +142,4 @@ echo "<b>" . $wp_version . "</b>  &nbsp;&nbsp;&nbsp " ;echo $g2k5;
 function mrt_javascript(){
 $siteurl = get_option('siteurl');
 ?><script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script><?php
-}
-?>
-
+}?>
