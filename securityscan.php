@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.15
+Version: 2.2.56.16
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -84,9 +84,9 @@ if ($name=="admin"){
       echo '<font color="green">No user "admin".</font>';
       }
 ?>
-<br /><br />
+<br /><br /><br />
 <hr align=center size=2 width=500px>
-<br /><br />
+<br />
 
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
 <ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li><li>WordPress admin protection/security</li></ul>
