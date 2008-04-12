@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.19
+Version: 2.2.56.20
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -133,4 +133,3 @@ function mrt_hd()
 <!--<link rel="stylesheet" type="text/css" href="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/style.css" />-->
 <?php }
 ?>
-
