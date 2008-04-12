@@ -1,4 +1,3 @@
-<script language="JavaScript1.1">
 function testPassword(passwd){
 var description = new Array();
 description[0] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=30 bgcolor=#ff0000></td><td height=4 width=120 bgcolor=tan></td></tr></table></td><td>   <b>Weakest</b></td></tr></table>";
@@ -26,5 +25,3 @@ else strVerdict = description[4];
 
 document.getElementById("Words").innerHTML= (strVerdict);
 }
-</script>
-

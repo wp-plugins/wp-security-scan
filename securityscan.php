@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.18
+Version: 2.2.56.19
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -30,7 +30,7 @@ require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
+//require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
 add_action( 'admin_notices', mrt_update_notice, 5 );
 add_action('admin_head', 'mrt_hd');
@@ -38,7 +38,7 @@ add_action("init",mrt_wpdberrors,1);
 add_action("parse_query",mrt_wpdberrors,1);
 add_action('admin_menu', 'add_men_pg');
 add_action("init",mrt_remove_wp_version,1);
-add_action('admin_head', 'mrt_root_scripts');
+//add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
         if (function_exists('add_menu_page')){
 add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
@@ -48,10 +48,10 @@ add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
 add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
 }}
 
-function mrt_root_scripts(){
+/*function mrt_root_scripts(){
 $siteurl = get_option('siteurl');
-echo "<script type='text/javascript' src='" . $siteurl . "wp-content/wp-security_scan/scripts.js'></script>";
-}
+echo '<script language="JavaScript" type="text/javascript" src="' . $siteurl . '/wp-content/plugins/wp-security-scan/scripts.js"></script>';
+}*/
 
 function mrt_update_notice(){
 /*$mrt_version = "2.2.52";
@@ -128,6 +128,8 @@ function mrt_hd()
 {
  $siteurl = get_option('siteurl');?>
 <script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/scripts.js"></script>
+
 <!--<link rel="stylesheet" type="text/css" href="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/style.css" />-->
 <?php }
 ?>
