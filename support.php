@@ -11,4 +11,4 @@ function mrt_sub2(){
           </div>
    Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
-<?php}?>
+<?php } ?>
