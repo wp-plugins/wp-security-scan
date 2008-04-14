@@ -27,5 +27,5 @@ function mrt_sub0(){?>
 
           </div>
              Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
-        </div><?}
-
+        </div>
+<?php } ?>
