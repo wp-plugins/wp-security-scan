@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.20
+Version: 2.2.56.21
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -99,12 +99,12 @@ if ($name=="admin"){
 </div>
 
 
-<div style="float: left; height: 430px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
+<div style="float: left; height: 430px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 15px;">
 <div width=600px style="text-align:center;font-weight:bold;"><h3>System Information Scan</h3></div>
 <?php mrt_get_serverinfo(); ?>
 </div>
 
-<div style="float: left;width: 350px; height: 255;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
+<div style="float: left;width: 350px; height: 255;border: 1px solid #999;margin: 0 15px 15px 0;padding: 25px;">
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Donations</h3></div>
 <div style="text-align:center"><em>This plugin is updated as a free services to the WordPress community.  Donations of any size are appreciated.</em>
 <br /><br />
