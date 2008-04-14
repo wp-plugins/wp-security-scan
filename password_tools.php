@@ -17,5 +17,4 @@ echo "Strong Password: " . '<font color="red">' . make_password(15) . "</font>";
      </div>
    Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
         </div>
-<? }
-
+<?php } ?>
