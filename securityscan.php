@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.23
+Version: 2.2.56.24
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -40,13 +40,14 @@ add_action('admin_menu', 'add_men_pg');
 add_action("init",mrt_remove_wp_version,1);
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
-        if (function_exists('add_menu_page')){
-add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
-add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
-add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
-add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
-add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
-}}
+         if (function_exists('add_menu_page')){
+            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
+            add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
+            add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
+            add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
+            add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
+         }
+}
 
 /*function mrt_root_scripts(){
 $siteurl = get_option('siteurl');
@@ -91,7 +92,16 @@ if ($name=="admin"){
   else{
       echo '<font color="green">No user "admin".</font>';
       }
+?><br /><?php 
+$filename = '.htaccess';
+if (file_exists($filename)) {
+    echo '<font color="green">.htaccess exists in wp-admin/</font>';
+} else {
+    echo '<font color="red">The file .htaccess does not exist in wp-admin/.</font>';
+}
+
 ?>
+
 <br /><br /><br />
 <hr align=center size=2 width=500px>
 <br />
