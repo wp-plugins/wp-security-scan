@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.30
+Version: 2.2.56.31
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -75,7 +75,7 @@ function mrt_opt_mng_pg() {
 
           <div>
 <!--               <div id="message" class="updated fade"><p></p></div>-->
-<br /><div style="float: left;width: 600px; height: 430px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
+<br /><div style="float: left;width: 600px; height: 450px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Initial Scan</h3></div>
 <?php
 global $wpdb;
@@ -87,7 +87,7 @@ mrt_errorsoff();
 
 $name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
 if ($name=="admin"){
-  echo '<font color="red">"admin" user exists.</font>';
+  echo '<a href="http://semperfiwebdesign.com/documentation/wp-security-scan/change-wordpress-admin-username/" title="WordPress Admin" target="_blank"><font color="red">"admin" user exists.</font></a>';
   }
   else{
       echo '<font color="green">No user "admin".</font>';
@@ -103,6 +103,8 @@ if (file_exists($filename)) {
 ?>
 
 <br /><br /><br />
+<div style="text-align:center;color:grey;"><em>**click on an above link for documentation**</em></div>
+<br />
 <hr align=center size=2 width=500px>
 <br />
 
