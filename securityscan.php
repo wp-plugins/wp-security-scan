@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.34
+Version: 2.2.56.35
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -123,10 +123,21 @@ if (file_exists($filename)) {
 <div style="text-align:center"><em>This plugin is updated as a free services to the WordPress community.  Donations of any size are appreciated.</em>
 <br /><br />
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
-<br /><br /><h4>Recent Donations</h4></div><?php 
+<br /><br /><h4>Highest Donations</h4></div><?php 
 
 if (function_exists('fopen')) {
-   $file = fopen("http://semperfiwebdesign.com/donations.php", "r");
+   $file = fopen("http://semperfiwebdesign.com/top_donations.php", "r");
+   while ( ! feof($file) ) {
+         $text = fgets($file);
+         echo '<li>' . $text . '</li>';
+   }
+   fclose($file);
+}
+?>
+<br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div><?php
+
+if (function_exists('fopen')) {
+   $file = fopen("http://semperfiwebdesign.com/recent_donations.php", "r");
    while ( ! feof($file) ) {
          $text = fgets($file);
          echo '<li>' . $text . '</li>';
