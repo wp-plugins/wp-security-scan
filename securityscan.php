@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.36
+Version: 2.2.56.37
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -120,7 +120,7 @@ if (file_exists($filename)) {
 
 <div style="float: left;width: 350px; height: 255;border: 1px solid #999;margin: 0 15px 15px 0;padding: 25px;">
 <div width=600px style="text-align:center;font-weight:bold;"><h3>Donations</h3></div>
-<div style="text-align:center"><em>This plugin is updated as a free services to the WordPress community.  Donations of any size are appreciated.</em>
+<div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
 <br /><br />
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
 <br /><br /><h4>Highest Donations</h4></div><?php 
