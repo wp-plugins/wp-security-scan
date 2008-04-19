@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.52
+Version: 2.2.56.53
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -125,18 +125,32 @@ if (file_exists($filename)) {
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
 <br /><br /><h4>Highest Donations</h4></div><?php 
 
-$ch = curl_init("http://semperfiwebdesign.com/top_donations.php");
+/*$ch = curl_init("http://semperfiwebdesign.com/top_donations.php");
 $fp = fopen("top_donations.php", "w");
 curl_setopt($ch, CURLOPT_FILE, $fp);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_exec($ch);
 curl_close($ch);
 fclose($fp);
+*/
 
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/top_donations.php");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_exec($ch);
+curl_close($ch);
 
 ?>
 <br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div><?php
 
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/recent_donations.php");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_exec($ch);
+curl_close($ch);
+
+/*
 $ch = curl_init("http://semperfiwebdesign.com/recent_donations.php");
 $fp = fopen("recent_donations.php", "w");
 curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -144,6 +158,7 @@ curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_exec($ch);
 curl_close($ch);
 fclose($fp);
+*/
 ?>
 </div>
 <div style="clear:both"></div>
