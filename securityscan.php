@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.51
+Version: 2.2.56.52
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -126,6 +126,7 @@ if (file_exists($filename)) {
 <br /><br /><h4>Highest Donations</h4></div><?php 
 
 $ch = curl_init("http://semperfiwebdesign.com/top_donations.php");
+$fp = fopen("top_donations.php", "w");
 curl_setopt($ch, CURLOPT_FILE, $fp);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_exec($ch);
@@ -137,6 +138,7 @@ fclose($fp);
 <br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div><?php
 
 $ch = curl_init("http://semperfiwebdesign.com/recent_donations.php");
+$fp = fopen("recent_donations.php", "w");
 curl_setopt($ch, CURLOPT_FILE, $fp);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_exec($ch);
