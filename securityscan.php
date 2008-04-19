@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.56.53
+Version: 2.2.56.54
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -38,6 +38,7 @@ add_action("init",mrt_wpdberrors,1);
 add_action("parse_query",mrt_wpdberrors,1);
 add_action('admin_menu', 'add_men_pg');
 add_action("init",mrt_remove_wp_version,1);
+remove_action('wp_head', 'wp_generator');
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
          if (function_exists('add_menu_page')){
@@ -83,7 +84,7 @@ mrt_check_version();
 mrt_check_table_prefix();
 mrt_version_removal();
 mrt_errorsoff();
-
+echo '<div style="color:green">WP ID META tag removed form WordPress core</div>';
 
 $name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
 if ($name=="admin"){
