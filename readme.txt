@@ -5,7 +5,7 @@ Tags: security, securityscan, chmod, permissions, admin, administration, authent
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.56.55
+Stable tag: 2.2.56.56
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -18,8 +18,8 @@ corrective actions.
 -file permissions<br />
 -database security<br />
 -version hiding<br />
--WordPress admin protection/security
--removes WP Generator META tag from core code
+-WordPress admin protection/security<br />
+-removes WP Generator META tag from core code<br />
 
 
 **Future Releases**<br />
