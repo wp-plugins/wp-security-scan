@@ -5,7 +5,7 @@ Tags: security, securityscan, chmod, permissions, admin, administration, authent
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 2.2.56.54
+Stable tag: 2.2.56.55
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -42,6 +42,12 @@ corrective actions.
 Please let me know any bugs, improvements, comments, suggestions.
 
 == Frequently Asked Questions ==
+
+= Can I deactivate WP Security Scan once I've run it once? =
+
+No.  WP Security Scan needs to be left activated to work.  Version hiding,
+turning off DB errors, removing WP ID META tag from HTML output, and other
+functionality will cease if you deactivate the plugin.
 
 = How do I change the file permissions on my WordPress installation?  =
 
