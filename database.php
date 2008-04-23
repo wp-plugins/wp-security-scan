@@ -41,7 +41,7 @@ function mrt_sub3(){
             }
         }
         if (!isset($rightsenough) && $rightsenough != true) {
-            exit('<font color="#ff0000">Your User which is used to access your Wordpress Tables/Database, hasn\'t enough rights( is missing ALTER-right) to alter your Tablestructure.<br />');
+            exit('<font color="#ff0000">Your User which is used to access your Wordpress Tables/Database, hasn\'t enough rights( is missing ALTER-right) to alter your Tablestructure.  Please visit the plugin <a href="http://semperfiwebdesign.com/documentation/wp-security-scan/change-wordpress-database-table-name-prefix/" target=_blank">documentation</a> for more information.<br />');
         }
         if (isset($rightstomuch) && $rightstomuch === true) {
             echo ('<font color="#FF9B05">Your currently used User to Access the Wordpress Database, holds too many rights. '.
