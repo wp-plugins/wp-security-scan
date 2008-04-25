@@ -111,8 +111,8 @@ function mrt_remove_wp_version()
 function mrt_check_version(){
 //echo "WordPress Version: ";
 global $wp_version;
-if ($wp_version == 2.5.1) $g2k5 = '<font color="green"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You have the latest stable version of WordPress.</font><br />';
-if ($wp_version < 2.5.1) $g2k5 = '<font color="red"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You need version 2.5.1.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</font><br />';
+if ($wp_version == "2.5.1") $g2k5 = '<font color="green"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You have the latest stable version of WordPress.</font><br />';
+if ($wp_version != "2.5.1") $g2k5 = '<font color="red"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You need version 2.5.1.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</font><br />';
 /*echo "<b>" . $wp_version . "</b>  &nbsp;&nbsp;&nbsp " ;*/echo $g2k5;
 }
 
