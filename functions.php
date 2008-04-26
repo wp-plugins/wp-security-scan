@@ -96,14 +96,15 @@ function mrt_wpdberrors()
 }
 
 function mrt_version_removal(){
-echo '<font color="green">Your WordPress version is successfully hidden.</font><br />';
+global $wp_version;
+   echo '<font color="green">Your WordPress version is successfully hidden.</font><br />';
 }
 
 function mrt_remove_wp_version()
 {
                 if (!is_admin()) {
                         global $wp_version;
-                        $wp_version = '';
+                        $wp_version = 'abc';
                               }
 
 }

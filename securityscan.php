@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.58.1
+Version: 2.2.59.1
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -32,12 +32,15 @@ require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
 //require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
+
 add_action( 'admin_notices', mrt_update_notice, 5 );
 add_action('admin_head', 'mrt_hd');
 add_action("init",mrt_wpdberrors,1);
 add_action("parse_query",mrt_wpdberrors,1);
 add_action('admin_menu', 'add_men_pg');
-add_action("init",mrt_remove_wp_version,1);
+add_action("init",mrt_remove_wp_version,1);   //comment out this line to make ddsitemapgen work
+
+
 remove_action('wp_head', 'wp_generator');
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
