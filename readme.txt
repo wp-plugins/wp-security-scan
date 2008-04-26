@@ -4,8 +4,8 @@ Donate link: http://semperfiwebdesign.com
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
-Tested up to: 2.5
-Stable tag: 2.2.58.1
+Tested up to: 2.5.1
+Stable tag: 2.2.59.1
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -30,7 +30,10 @@ corrective actions.
 *user enumeration protection<br />
 *.htaccess verification<br />
 *doc links<br />
-*change log
+
+[Changelog](http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/ "WP Security Scan Changelog")
+[Documentation](http://semperfiwebdesign.com/category/documentation/wp-security-scan/ "WP Security Scan
+Documentation")
 
 == Installation ==
 
@@ -72,6 +75,13 @@ that rely on software versions.
 
 NOTE: Hiding your version of WordPress may break any plugins you have which
 are version dependant.
+
+= How do I make Dagon Design's sitemap generator plugin compatible? =
+There is currently a small compatibility issue.  This can be temporarily
+solved by opening securityscan.php and commenting out the line
+`add_action("init",mrt_remove_wp_version,1);`
+I have contacted Dagon Designs about creating a solution, which should
+hopefully be in a future upgrade to their plugin.
 
 == Screenshots ==
 
