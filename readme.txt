@@ -5,7 +5,7 @@ Tags: security, securityscan, chmod, permissions, admin, administration, authent
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.0
 Tested up to: 2.5.1
-Stable tag: 2.2.59.1
+Stable tag: 2.2.60.1
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -31,7 +31,7 @@ corrective actions.
 *.htaccess verification<br />
 *doc links<br />
 
-[Changelog](http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/ "WP Security Scan Changelog")
+[Changelog](http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/ "WP Security Scan Changelog")<br />
 [Documentation](http://semperfiwebdesign.com/category/documentation/wp-security-scan/ "WP Security Scan
 Documentation")
 

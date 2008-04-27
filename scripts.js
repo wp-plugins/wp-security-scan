@@ -25,3 +25,4 @@ else strVerdict = description[4];
 
 document.getElementById("Words").innerHTML= (strVerdict);
 }
+////

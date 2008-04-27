@@ -5,7 +5,11 @@ function mrt_sub2(){
         <div class=wrap>
                 <h2><?php _e('WP - Security Support') ?></h2>
           <div style="height:299px">
-<br /><br />support page coming soon...
+Under Construction...<br /><br />
+<ul>
+<li><a href='http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/' target="_blank">Changelog</a></li>
+<li><a href='http://semperfiwebdesign.com/documentation/wp-security-scan/' target="_blank">Documentation</a></li>
+</ul>
 <br /><br /><strong>Backup early, backup often!</strong><br /><br /><br /><br /><br />
               <em>For comments, suggestions, bug reporting, etc please <a href="http://semperfiwebdesign.com/contact/">click here</a>.</em>
           </div>
