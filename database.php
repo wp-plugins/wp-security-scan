@@ -8,7 +8,7 @@ function mrt_sub3(){
  <div class=wrap>
                 <h2><?php _e('WP - Database Security') ?></h2>
           <div style="height:299px"><br />
-<i>Make a backup before using this tool:</i>
+<h3><i>Make a backup of your database before using this tool:</i></h3>
         <p>Change your database table prefix to mitigate zero-day SQL Injection attacks.</p>
     <form action='' method='post' name='prefixchanging'>
     <?php
@@ -16,7 +16,7 @@ function mrt_sub3(){
         wp_nonce_field('prefix-changer-change_prefix');
     }
     ?>
-     Please Change the current:<input type="Text" name="prefix_n" value="<?php echo($GLOBALS['table_prefix']);?>" size="10" maxlength="10"> prefix to something different (i.e. use the random password generator).<br />
+     Please Change the current:<input type="Text" name="prefix_n" value="<?php echo($GLOBALS['table_prefix']);?>" size="20" maxlength="50"> prefix to something different (i.e. use the random password generator).<br />
      Allowed Chars are all latin Alphanumeric Chars as well as the Chars <strong>-</strong> and <strong>_</strong>.
     <input type='submit' name='renameprefix' value='Start Renaming'/>
     </form>
