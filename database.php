@@ -9,6 +9,13 @@ function mrt_sub3(){
                 <h2><?php _e('WP - Database Security') ?></h2>
           <div style="height:299px"><br />
 <h3><i>Make a backup of your database before using this tool:</i></h3>
+
+<?php /*global $wpdb; 
+$mrtright = $wpdb->get_results("SHOW GRANTS FOR '".DB_USER."'@'".DB_HOST."'", ARRAY_N); 
+echo "rights: "; 
+print_r($mrtright);*/
+?>
+
         <p>Change your database table prefix to mitigate zero-day SQL Injection attacks.</p>
     <form action='' method='post' name='prefixchanging'>
     <?php
