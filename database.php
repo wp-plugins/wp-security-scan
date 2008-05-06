@@ -17,13 +17,17 @@ print_r($mrtright);*/
 ?>
 
         <p>Change your database table prefix to mitigate zero-day SQL Injection attacks.</p>
+        <p><b>Before running this script:</b>
+           <ul><li>wp-config must be set to writable before running this script.</li>
+               <li>the database user you're using with WordPress must have ALTER rights</li></ul>
+
     <form action='' method='post' name='prefixchanging'>
     <?php
     if (function_exists('wp_nonce_field')) {
         wp_nonce_field('prefix-changer-change_prefix');
     }
     ?>
-     Please Change the current:<input type="Text" name="prefix_n" value="<?php echo($GLOBALS['table_prefix']);?>" size="20" maxlength="50"> prefix to something different (i.e. use the random password generator).<br />
+     Change the current:<input type="Text" name="prefix_n" value="<?php echo($GLOBALS['table_prefix']);?>" size="20" maxlength="50"> prefix to something different if it's the default wp_<br />
      Allowed Chars are all latin Alphanumeric Chars as well as the Chars <strong>-</strong> and <strong>_</strong>.
     <input type='submit' name='renameprefix' value='Start Renaming'/>
     </form>
