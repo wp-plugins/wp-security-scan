@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.2.60.2
+Version: 2.2.63
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -79,8 +79,8 @@ function mrt_opt_mng_pg() {
 
           <div>
 <!--               <div id="message" class="updated fade"><p></p></div>-->
-<br /><div style="float: left;width: 600px; height: 450px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Initial Scan</h3></div>
+<br /><div style="float: left;width: 33%; height: 100%;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
+<div style="text-align:center;font-weight:bold;"><h3>Initial Scan</h3></div>
 <?php
 
 ///////////
@@ -114,21 +114,21 @@ if (file_exists($filename)) {
 <br /><br /><br />
 <div style="text-align:center;color:grey;"><em>**click on an above link for documentation**</em></div>
 <br />
-<hr align=center size=2 width=500px>
+<hr align=center size=2 width=33%>
 <br />
 
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
+<div style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
 <ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li><li>WordPress admin protection/security</li></ul>
 </div>
 
 
-<div style="float: left; height: 430px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 15px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>System Information Scan</h3></div>
+<div style="float: left; height: 30%;border: 1px solid #999;margin: 0 15px 15px 0;padding: 15px;">
+<div style="text-align:center;font-weight:bold;"><h3>System Information Scan</h3></div>
 <?php mrt_get_serverinfo(); ?>
 </div>
 
-<div style="float: left;width: 350px; height: 255;border: 1px solid #999;margin: 0 15px 15px 0;padding: 25px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Donations</h3></div>
+<div style="float: left;width: 30%; border: 1px solid #999;">
+<div style="text-align:center;font-weight:bold;"><h3>Donations</h3></div>
 <div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
 <br /><br />
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
