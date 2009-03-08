@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.3.3
+Version: 2.3.4
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -69,7 +69,7 @@ if($mrt_latest > $mrt_version)
   */  }
 
 
-	function yourplugin_helloworld_meta_box(){  
+	function wpss_mrt_meta_box(){  
 	
 		global $wpdb;
 		mrt_check_version();
@@ -102,7 +102,7 @@ if($mrt_latest > $mrt_version)
 		<?php	}
 		
 		
-	function yourplugin_helloworld_meta_box2(){ ?>
+	function wpss_mrt_meta_box2(){ ?>
 		<div style="padding-left:10px;">
 			<?php mrt_get_serverinfo(); ?>
 		</div>
@@ -110,7 +110,7 @@ if($mrt_latest > $mrt_version)
 		<?php	}
 	
 	
-	function yourplugin_helloworld_meta_box3(){  
+	function wpss_mrt_meta_box3(){  
 		
 		?>
 		
@@ -170,9 +170,9 @@ function mrt_opt_mng_pg() {
 
 <?php  
 
-add_meta_box("yourplugin_helloworld", 'Initial Scan', "yourplugin_helloworld_meta_box", "wpss");  
-add_meta_box("yourplugin_helloworld", 'System Information Scan', "yourplugin_helloworld_meta_box2", "wpss2");  
-add_meta_box("yourplugin_helloworld", 'Donations', "yourplugin_helloworld_meta_box3", "wpss3");  
+add_meta_box("wpss_mrt", 'Initial Scan', "wpss_mrt_meta_box", "wpss");  
+add_meta_box("wpss_mrt", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");  
+add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");  
 
 ?>
 
