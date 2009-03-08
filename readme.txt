@@ -4,8 +4,8 @@ Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorb
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.3
-Tested up to: 2.6bleeding
-Stable tag: 2.3
+Tested up to: 2.7.1
+Stable tag: 2.3.4
 
 Scans your WordPress installation for security vulnerabilities.
 
