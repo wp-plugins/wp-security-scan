@@ -116,8 +116,8 @@ $mrt_wp_ver = ereg_replace("[^0-9]", "", $wp_version);
 while ($mrt_wp_ver > 10){
     $mrt_wp_ver = $mrt_wp_ver/10;
     }
-if ($mrt_wp_ver >= "2.51") $g2k5 = '<font color="green"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You have the latest stable version of WordPress.</font><br />';
-if ($mrt_wp_ver < "2.51") $g2k5 = '<font color="red"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You need version 2.5.1.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</font><br />';
+if ($mrt_wp_ver >= "2.7") $g2k5 = '<font color="green"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You have the latest stable version of WordPress.</font><br />';
+if ($mrt_wp_ver < "2.7") $g2k5 = '<font color="red"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You need version 2.7.1.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</font><br />';
 /*echo "<b>" . $wp_version . "</b>  &nbsp;&nbsp;&nbsp " ;*/echo $g2k5;
 }
 
