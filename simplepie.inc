@@ -1,754 +1,135 @@
 <?php
-/**
- * SimplePie
- *
- * A PHP-Based RSS and Atom Feed Framework.
- * Takes the hard work out of managing a complete RSS/Atom solution.
- *
- * Copyright (c) 2004-2008, Ryan Parman and Geoffrey Sneddon
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * 	* Redistributions of source code must retain the above copyright notice, this list of
- * 	  conditions and the following disclaimer.
- *
- * 	* Redistributions in binary form must reproduce the above copyright notice, this list
- * 	  of conditions and the following disclaimer in the documentation and/or other materials
- * 	  provided with the distribution.
- *
- * 	* Neither the name of the SimplePie Team nor the names of its contributors may be used
- * 	  to endorse or promote products derived from this software without specific prior
- * 	  written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
- * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
- * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS
- * AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * @package SimplePie
- * @version 1.1.3
- * @copyright 2004-2008 Ryan Parman, Geoffrey Sneddon
- * @author Ryan Parman
- * @author Geoffrey Sneddon
- * @link http://simplepie.org/ SimplePie
- * @link http://simplepie.org/support/ Please submit all bug reports and feature requests to the SimplePie forums
- * @license http://www.opensource.org/licenses/bsd-license.php BSD License
- * @todo phpDoc comments
- */
-
-/**
- * SimplePie Name
- */
 define('SIMPLEPIE_NAME', 'SimplePie');
-
-/**
- * SimplePie Version
- */
 define('SIMPLEPIE_VERSION', '1.1.3');
-
-/**
- * SimplePie Build
- */
 define('SIMPLEPIE_BUILD', 20081219);
-
-/**
- * SimplePie Website URL
- */
 define('SIMPLEPIE_URL', 'http://simplepie.org');
-
-/**
- * SimplePie Useragent
- * @see SimplePie::set_useragent()
- */
 define('SIMPLEPIE_USERAGENT', SIMPLEPIE_NAME . '/' . SIMPLEPIE_VERSION . ' (Feed Parser; ' . SIMPLEPIE_URL . '; Allow like Gecko) Build/' . SIMPLEPIE_BUILD);
-
-/**
- * SimplePie Linkback
- */
 define('SIMPLEPIE_LINKBACK', '<a href="' . SIMPLEPIE_URL . '" title="' . SIMPLEPIE_NAME . ' ' . SIMPLEPIE_VERSION . '">' . SIMPLEPIE_NAME . '</a>');
-
-/**
- * No Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_NONE', 0);
-
-/**
- * Feed Link Element Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_AUTODISCOVERY', 1);
-
-/**
- * Local Feed Extension Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_LOCAL_EXTENSION', 2);
-
-/**
- * Local Feed Body Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_LOCAL_BODY', 4);
-
-/**
- * Remote Feed Extension Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_REMOTE_EXTENSION', 8);
-
-/**
- * Remote Feed Body Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_REMOTE_BODY', 16);
-
-/**
- * All Feed Autodiscovery
- * @see SimplePie::set_autodiscovery_level()
- */
 define('SIMPLEPIE_LOCATOR_ALL', 31);
-
-/**
- * No known feed type
- */
 define('SIMPLEPIE_TYPE_NONE', 0);
-
-/**
- * RSS 0.90
- */
 define('SIMPLEPIE_TYPE_RSS_090', 1);
-
-/**
- * RSS 0.91 (Netscape)
- */
 define('SIMPLEPIE_TYPE_RSS_091_NETSCAPE', 2);
-
-/**
- * RSS 0.91 (Userland)
- */
 define('SIMPLEPIE_TYPE_RSS_091_USERLAND', 4);
-
-/**
- * RSS 0.91 (both Netscape and Userland)
- */
 define('SIMPLEPIE_TYPE_RSS_091', 6);
-
-/**
- * RSS 0.92
- */
 define('SIMPLEPIE_TYPE_RSS_092', 8);
-
-/**
- * RSS 0.93
- */
 define('SIMPLEPIE_TYPE_RSS_093', 16);
-
-/**
- * RSS 0.94
- */
 define('SIMPLEPIE_TYPE_RSS_094', 32);
-
-/**
- * RSS 1.0
- */
 define('SIMPLEPIE_TYPE_RSS_10', 64);
-
-/**
- * RSS 2.0
- */
 define('SIMPLEPIE_TYPE_RSS_20', 128);
-
-/**
- * RDF-based RSS
- */
 define('SIMPLEPIE_TYPE_RSS_RDF', 65);
-
-/**
- * Non-RDF-based RSS (truly intended as syndication format)
- */
 define('SIMPLEPIE_TYPE_RSS_SYNDICATION', 190);
-
-/**
- * All RSS
- */
 define('SIMPLEPIE_TYPE_RSS_ALL', 255);
-
-/**
- * Atom 0.3
- */
 define('SIMPLEPIE_TYPE_ATOM_03', 256);
-
-/**
- * Atom 1.0
- */
 define('SIMPLEPIE_TYPE_ATOM_10', 512);
-
-/**
- * All Atom
- */
 define('SIMPLEPIE_TYPE_ATOM_ALL', 768);
-
-/**
- * All feed types
- */
 define('SIMPLEPIE_TYPE_ALL', 1023);
-
-/**
- * No construct
- */
 define('SIMPLEPIE_CONSTRUCT_NONE', 0);
-
-/**
- * Text construct
- */
 define('SIMPLEPIE_CONSTRUCT_TEXT', 1);
-
-/**
- * HTML construct
- */
 define('SIMPLEPIE_CONSTRUCT_HTML', 2);
-
-/**
- * XHTML construct
- */
 define('SIMPLEPIE_CONSTRUCT_XHTML', 4);
-
-/**
- * base64-encoded construct
- */
 define('SIMPLEPIE_CONSTRUCT_BASE64', 8);
-
-/**
- * IRI construct
- */
 define('SIMPLEPIE_CONSTRUCT_IRI', 16);
-
-/**
- * A construct that might be HTML
- */
 define('SIMPLEPIE_CONSTRUCT_MAYBE_HTML', 32);
-
-/**
- * All constructs
- */
 define('SIMPLEPIE_CONSTRUCT_ALL', 63);
-
-/**
- * PCRE for HTML attributes
- */
 define('SIMPLEPIE_PCRE_HTML_ATTRIBUTE', '((?:[\x09\x0A\x0B\x0C\x0D\x20]+[^\x09\x0A\x0B\x0C\x0D\x20\x2F\x3E][^\x09\x0A\x0B\x0C\x0D\x20\x2F\x3D\x3E]*(?:[\x09\x0A\x0B\x0C\x0D\x20]*=[\x09\x0A\x0B\x0C\x0D\x20]*(?:"(?:[^"]*)"|\'(?:[^\']*)\'|(?:[^\x09\x0A\x0B\x0C\x0D\x20\x22\x27\x3E][^\x09\x0A\x0B\x0C\x0D\x20\x3E]*)?))?)*)[\x09\x0A\x0B\x0C\x0D\x20]*');
-
-/**
- * PCRE for XML attributes
- */
 define('SIMPLEPIE_PCRE_XML_ATTRIBUTE', '((?:\s+(?:(?:[^\s:]+:)?[^\s:]+)\s*=\s*(?:"(?:[^"]*)"|\'(?:[^\']*)\'))*)\s*');
-
-/**
- * XML Namespace
- */
 define('SIMPLEPIE_NAMESPACE_XML', 'http://www.w3.org/XML/1998/namespace');
-
-/**
- * Atom 1.0 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_ATOM_10', 'http://www.w3.org/2005/Atom');
-
-/**
- * Atom 0.3 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_ATOM_03', 'http://purl.org/atom/ns#');
-
-/**
- * RDF Namespace
- */
 define('SIMPLEPIE_NAMESPACE_RDF', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
-
-/**
- * RSS 0.90 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_RSS_090', 'http://my.netscape.com/rdf/simple/0.9/');
-
-/**
- * RSS 1.0 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_RSS_10', 'http://purl.org/rss/1.0/');
-
-/**
- * RSS 1.0 Content Module Namespace
- */
 define('SIMPLEPIE_NAMESPACE_RSS_10_MODULES_CONTENT', 'http://purl.org/rss/1.0/modules/content/');
-
-/**
- * RSS 2.0 Namespace
- * (Stupid, I know, but I'm certain it will confuse people less with support.)
- */
 define('SIMPLEPIE_NAMESPACE_RSS_20', '');
-
-/**
- * DC 1.0 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_DC_10', 'http://purl.org/dc/elements/1.0/');
-
-/**
- * DC 1.1 Namespace
- */
 define('SIMPLEPIE_NAMESPACE_DC_11', 'http://purl.org/dc/elements/1.1/');
-
-/**
- * W3C Basic Geo (WGS84 lat/long) Vocabulary Namespace
- */
 define('SIMPLEPIE_NAMESPACE_W3C_BASIC_GEO', 'http://www.w3.org/2003/01/geo/wgs84_pos#');
-
-/**
- * GeoRSS Namespace
- */
 define('SIMPLEPIE_NAMESPACE_GEORSS', 'http://www.georss.org/georss');
-
-/**
- * Media RSS Namespace
- */
 define('SIMPLEPIE_NAMESPACE_MEDIARSS', 'http://search.yahoo.com/mrss/');
-
-/**
- * Wrong Media RSS Namespace
- */
 define('SIMPLEPIE_NAMESPACE_MEDIARSS_WRONG', 'http://search.yahoo.com/mrss');
-
-/**
- * iTunes RSS Namespace
- */
 define('SIMPLEPIE_NAMESPACE_ITUNES', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
-
-/**
- * XHTML Namespace
- */
 define('SIMPLEPIE_NAMESPACE_XHTML', 'http://www.w3.org/1999/xhtml');
-
-/**
- * IANA Link Relations Registry
- */
 define('SIMPLEPIE_IANA_LINK_RELATIONS_REGISTRY', 'http://www.iana.org/assignments/relation/');
-
-/**
- * Whether we're running on PHP5
- */
 define('SIMPLEPIE_PHP5', version_compare(PHP_VERSION, '5.0.0', '>='));
-
-/**
- * No file source
- */
 define('SIMPLEPIE_FILE_SOURCE_NONE', 0);
-
-/**
- * Remote file source
- */
 define('SIMPLEPIE_FILE_SOURCE_REMOTE', 1);
-
-/**
- * Local file source
- */
 define('SIMPLEPIE_FILE_SOURCE_LOCAL', 2);
-
-/**
- * fsockopen() file source
- */
 define('SIMPLEPIE_FILE_SOURCE_FSOCKOPEN', 4);
-
-/**
- * cURL file source
- */
 define('SIMPLEPIE_FILE_SOURCE_CURL', 8);
-
-/**
- * file_get_contents() file source
- */
 define('SIMPLEPIE_FILE_SOURCE_FILE_GET_CONTENTS', 16);
-
-/**
- * SimplePie
- *
- * @package SimplePie
- * @version "Razzleberry"
- * @copyright 2004-2007 Ryan Parman, Geoffrey Sneddon
- * @author Ryan Parman
- * @author Geoffrey Sneddon
- * @todo Option for type of fetching (cache, not modified header, fetch, etc.)
- */
 class SimplePie
 {
-	/**
-	 * @var array Raw data
-	 * @access private
-	 */
 	var $data = array();
-
-	/**
-	 * @var mixed Error string
-	 * @access private
-	 */
 	var $error;
-
-	/**
-	 * @var object Instance of SimplePie_Sanitize (or other class)
-	 * @see SimplePie::set_sanitize_class()
-	 * @access private
-	 */
 	var $sanitize;
-
-	/**
-	 * @var string SimplePie Useragent
-	 * @see SimplePie::set_useragent()
-	 * @access private
-	 */
 	var $useragent = SIMPLEPIE_USERAGENT;
-
-	/**
-	 * @var string Feed URL
-	 * @see SimplePie::set_feed_url()
-	 * @access private
-	 */
 	var $feed_url;
-
-	/**
-	 * @var object Instance of SimplePie_File to use as a feed
-	 * @see SimplePie::set_file()
-	 * @access private
-	 */
 	var $file;
-
-	/**
-	 * @var string Raw feed data
-	 * @see SimplePie::set_raw_data()
-	 * @access private
-	 */
 	var $raw_data;
-
-	/**
-	 * @var int Timeout for fetching remote files
-	 * @see SimplePie::set_timeout()
-	 * @access private
-	 */
 	var $timeout = 10;
-
-	/**
-	 * @var bool Forces fsockopen() to be used for remote files instead
-	 * of cURL, even if a new enough version is installed
-	 * @see SimplePie::force_fsockopen()
-	 * @access private
-	 */
 	var $force_fsockopen = false;
-
-	/**
-	 * @var bool Force the given data/URL to be treated as a feed no matter what
-	 * it appears like
-	 * @see SimplePie::force_feed()
-	 * @access private
-	 */
 	var $force_feed = false;
-
-	/**
-	 * @var bool Enable/Disable XML dump
-	 * @see SimplePie::enable_xml_dump()
-	 * @access private
-	 */
 	var $xml_dump = false;
-
-	/**
-	 * @var bool Enable/Disable Caching
-	 * @see SimplePie::enable_cache()
-	 * @access private
-	 */
 	var $cache = true;
-
-	/**
-	 * @var int Cache duration (in seconds)
-	 * @see SimplePie::set_cache_duration()
-	 * @access private
-	 */
 	var $cache_duration = 3600;
-
-	/**
-	 * @var int Auto-discovery cache duration (in seconds)
-	 * @see SimplePie::set_autodiscovery_cache_duration()
-	 * @access private
-	 */
 	var $autodiscovery_cache_duration = 604800; // 7 Days.
-
-	/**
-	 * @var string Cache location (relative to executing script)
-	 * @see SimplePie::set_cache_location()
-	 * @access private
-	 */
 	var $cache_location = './cache';
-
-	/**
-	 * @var string Function that creates the cache filename
-	 * @see SimplePie::set_cache_name_function()
-	 * @access private
-	 */
 	var $cache_name_function = 'md5';
-
-	/**
-	 * @var bool Reorder feed by date descending
-	 * @see SimplePie::enable_order_by_date()
-	 * @access private
-	 */
 	var $order_by_date = true;
-
-	/**
-	 * @var mixed Force input encoding to be set to the follow value
-	 * (false, or anything type-cast to false, disables this feature)
-	 * @see SimplePie::set_input_encoding()
-	 * @access private
-	 */
 	var $input_encoding = false;
-
-	/**
-	 * @var int Feed Autodiscovery Level
-	 * @see SimplePie::set_autodiscovery_level()
-	 * @access private
-	 */
 	var $autodiscovery = SIMPLEPIE_LOCATOR_ALL;
-
-	/**
-	 * @var string Class used for caching feeds
-	 * @see SimplePie::set_cache_class()
-	 * @access private
-	 */
 	var $cache_class = 'SimplePie_Cache';
-
-	/**
-	 * @var string Class used for locating feeds
-	 * @see SimplePie::set_locator_class()
-	 * @access private
-	 */
 	var $locator_class = 'SimplePie_Locator';
-
-	/**
-	 * @var string Class used for parsing feeds
-	 * @see SimplePie::set_parser_class()
-	 * @access private
-	 */
 	var $parser_class = 'SimplePie_Parser';
-
-	/**
-	 * @var string Class used for fetching feeds
-	 * @see SimplePie::set_file_class()
-	 * @access private
-	 */
 	var $file_class = 'SimplePie_File';
-
-	/**
-	 * @var string Class used for items
-	 * @see SimplePie::set_item_class()
-	 * @access private
-	 */
 	var $item_class = 'SimplePie_Item';
-
-	/**
-	 * @var string Class used for authors
-	 * @see SimplePie::set_author_class()
-	 * @access private
-	 */
 	var $author_class = 'SimplePie_Author';
-
-	/**
-	 * @var string Class used for categories
-	 * @see SimplePie::set_category_class()
-	 * @access private
-	 */
 	var $category_class = 'SimplePie_Category';
-
-	/**
-	 * @var string Class used for enclosures
-	 * @see SimplePie::set_enclosures_class()
-	 * @access private
-	 */
 	var $enclosure_class = 'SimplePie_Enclosure';
-
-	/**
-	 * @var string Class used for Media RSS <media:text> captions
-	 * @see SimplePie::set_caption_class()
-	 * @access private
-	 */
 	var $caption_class = 'SimplePie_Caption';
-
-	/**
-	 * @var string Class used for Media RSS <media:copyright>
-	 * @see SimplePie::set_copyright_class()
-	 * @access private
-	 */
 	var $copyright_class = 'SimplePie_Copyright';
-
-	/**
-	 * @var string Class used for Media RSS <media:credit>
-	 * @see SimplePie::set_credit_class()
-	 * @access private
-	 */
 	var $credit_class = 'SimplePie_Credit';
-
-	/**
-	 * @var string Class used for Media RSS <media:rating>
-	 * @see SimplePie::set_rating_class()
-	 * @access private
-	 */
 	var $rating_class = 'SimplePie_Rating';
-
-	/**
-	 * @var string Class used for Media RSS <media:restriction>
-	 * @see SimplePie::set_restriction_class()
-	 * @access private
-	 */
 	var $restriction_class = 'SimplePie_Restriction';
-
-	/**
-	 * @var string Class used for content-type sniffing
-	 * @see SimplePie::set_content_type_sniffer_class()
-	 * @access private
-	 */
 	var $content_type_sniffer_class = 'SimplePie_Content_Type_Sniffer';
-
-	/**
-	 * @var string Class used for item sources.
-	 * @see SimplePie::set_source_class()
-	 * @access private
-	 */
 	var $source_class = 'SimplePie_Source';
-
-	/**
-	 * @var mixed Set javascript query string parameter (false, or
-	 * anything type-cast to false, disables this feature)
-	 * @see SimplePie::set_javascript()
-	 * @access private
-	 */
 	var $javascript = 'js';
-
-	/**
-	 * @var int Maximum number of feeds to check with autodiscovery
-	 * @see SimplePie::set_max_checked_feeds()
-	 * @access private
-	 */
 	var $max_checked_feeds = 10;
-
-	/**
-	 * @var string Web-accessible path to the handler_favicon.php file.
-	 * @see SimplePie::set_favicon_handler()
-	 * @access private
-	 */
 	var $favicon_handler = '';
-
-	/**
-	 * @var string Web-accessible path to the handler_image.php file.
-	 * @see SimplePie::set_image_handler()
-	 * @access private
-	 */
 	var $image_handler = '';
-
-	/**
-	 * @var array Stores the URLs when multiple feeds are being initialized.
-	 * @see SimplePie::set_feed_url()
-	 * @access private
-	 */
 	var $multifeed_url = array();
-
-	/**
-	 * @var array Stores SimplePie objects when multiple feeds initialized.
-	 * @access private
-	 */
 	var $multifeed_objects = array();
-
-	/**
-	 * @var array Stores the get_object_vars() array for use with multifeeds.
-	 * @see SimplePie::set_feed_url()
-	 * @access private
-	 */
 	var $config_settings = null;
-
-	/**
-	 * @var integer Stores the number of items to return per-feed with multifeeds.
-	 * @see SimplePie::set_item_limit()
-	 * @access private
-	 */
 	var $item_limit = 0;
-
-	/**
-	 * @var array Stores the default attributes to be stripped by strip_attributes().
-	 * @see SimplePie::strip_attributes()
-	 * @access private
-	 */
 	var $strip_attributes = array('bgsound', 'class', 'expr', 'id', 'style', 'onclick', 'onerror', 'onfinish', 'onmouseover', 'onmouseout', 'onfocus', 'onblur', 'lowsrc', 'dynsrc');
-
-	/**
-	 * @var array Stores the default tags to be stripped by strip_htmltags().
-	 * @see SimplePie::strip_htmltags()
-	 * @access private
-	 */
 	var $strip_htmltags = array('base', 'blink', 'body', 'doctype', 'embed', 'font', 'form', 'frame', 'frameset', 'html', 'iframe', 'input', 'marquee', 'meta', 'noscript', 'object', 'param', 'script', 'style');
-
-	/**
-	 * The SimplePie class contains feed level data and options
-	 *
-	 * There are two ways that you can create a new SimplePie object. The first
-	 * is by passing a feed URL as a parameter to the SimplePie constructor
-	 * (as well as optionally setting the cache location and cache expiry). This
-	 * will initialise the whole feed with all of the default settings, and you
-	 * can begin accessing methods and properties immediately.
-	 *
-	 * The second way is to create the SimplePie object with no parameters
-	 * at all. This will enable you to set configuration options. After setting
-	 * them, you must initialise the feed using $feed->init(). At that point the
-	 * object's methods and properties will be available to you. This format is
-	 * what is used throughout this documentation.
-	 *
-	 * @access public
-	 * @since 1.0 Preview Release
-	 * @param string $feed_url This is the URL you want to parse.
-	 * @param string $cache_location This is where you want the cache to be stored.
-	 * @param int $cache_duration This is the number of seconds that you want to store the cache file for.
-	 */
 	function SimplePie($feed_url = null, $cache_location = null, $cache_duration = null)
 	{
-		// Other objects, instances created here so we can set options on them
 		$this->sanitize =& new SimplePie_Sanitize;
-
-		// Set options if they're passed to the constructor
 		if ($cache_location !== null)
 		{
 			$this->set_cache_location($cache_location);
 		}
-
 		if ($cache_duration !== null)
 		{
 			$this->set_cache_duration($cache_duration);
 		}
-
-		// Only init the script if we're passed a feed URL
 		if ($feed_url !== null)
 		{
 			$this->set_feed_url($feed_url);
 			$this->init();
 		}
 	}
-
-	/**
-	 * Used for converting object to a string
-	 */
 	function __toString()
 	{
 		return md5(serialize($this->data));
 	}
-
-	/**
-	 * Remove items that link back to this before destroying this object
-	 */
 	function __destruct()
 	{
 		if (!empty($this->data['items']))
@@ -768,36 +149,10 @@ class SimplePie
 			unset($this->data['ordered_items']);
 		}
 	}
-
-	/**
-	 * Force the given data/URL to be treated as a feed no matter what it
-	 * appears like
-	 *
-	 * @access public
-	 * @since 1.1
-	 * @param bool $enable Force the given data/URL to be treated as a feed
-	 */
 	function force_feed($enable = false)
 	{
 		$this->force_feed = (bool) $enable;
 	}
-
-	/**
-	 * This is the URL of the feed you want to parse.
-	 *
-	 * This allows you to enter the URL of the feed you want to parse, or the
-	 * website you want to try to use auto-discovery on. This takes priority
-	 * over any set raw data.
-	 *
-	 * You can set multiple feeds to mash together by passing an array instead
-	 * of a string for the $url. Remember that with each additional feed comes
-	 * additional processing and resources.
-	 *
-	 * @access public
-	 * @since 1.0 Preview Release
-	 * @param mixed $url This is the URL (or array of URLs) that you want to parse.
-	 * @see SimplePie::set_raw_data()
-	 */
 	function set_feed_url($url)
 	{
 		if (is_array($url))
@@ -813,14 +168,6 @@ class SimplePie
 			$this->feed_url = SimplePie_Misc::fix_protocol($url, 1);
 		}
 	}
-
-	/**
-	 * Provides an instance of SimplePie_File to use as a feed
-	 *
-	 * @access public
-	 * @param object &$file Instance of SimplePie_File (or subclass)
-	 * @return bool True on success, false on failure
-	 */
 	function set_file(&$file)
 	{
 		if (is_a($file, 'SimplePie_File'))
@@ -831,139 +178,42 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to use a string of RSS/Atom data instead of a remote feed.
-	 *
-	 * If you have a feed available as a string in PHP, you can tell SimplePie
-	 * to parse that data string instead of a remote feed. Any set feed URL
-	 * takes precedence.
-	 *
-	 * @access public
-	 * @since 1.0 Beta 3
-	 * @param string $data RSS or Atom data as a string.
-	 * @see SimplePie::set_feed_url()
-	 */
 	function set_raw_data($data)
 	{
 		$this->raw_data = $data;
 	}
-
-	/**
-	 * Allows you to override the default timeout for fetching remote feeds.
-	 *
-	 * This allows you to change the maximum time the feed's server to respond
-	 * and send the feed back.
-	 *
-	 * @access public
-	 * @since 1.0 Beta 3
-	 * @param int $timeout The maximum number of seconds to spend waiting to retrieve a feed.
-	 */
 	function set_timeout($timeout = 10)
 	{
 		$this->timeout = (int) $timeout;
 	}
-
-	/**
-	 * Forces SimplePie to use fsockopen() instead of the preferred cURL
-	 * functions.
-	 *
-	 * @access public
-	 * @since 1.0 Beta 3
-	 * @param bool $enable Force fsockopen() to be used
-	 */
 	function force_fsockopen($enable = false)
 	{
 		$this->force_fsockopen = (bool) $enable;
 	}
-
-	/**
-	 * Outputs the raw XML content of the feed, after it has gone through
-	 * SimplePie's filters.
-	 *
-	 * Used only for debugging, this function will output the XML content as
-	 * text/xml. When SimplePie reads in a feed, it does a bit of cleaning up
-	 * before trying to parse it. Many parts of the feed are re-written in
-	 * memory, and in the end, you have a parsable feed. XML dump shows you the
-	 * actual XML that SimplePie tries to parse, which may or may not be very
-	 * different from the original feed.
-	 *
-	 * @access public
-	 * @since 1.0 Preview Release
-	 * @param bool $enable Enable XML dump
-	 */
 	function enable_xml_dump($enable = false)
 	{
 		$this->xml_dump = (bool) $enable;
 	}
-
-	/**
-	 * Enables/disables caching in SimplePie.
-	 *
-	 * This option allows you to disable caching all-together in SimplePie.
-	 * However, disabling the cache can lead to longer load times.
-	 *
-	 * @access public
-	 * @since 1.0 Preview Release
-	 * @param bool $enable Enable caching
-	 */
 	function enable_cache($enable = true)
 	{
 		$this->cache = (bool) $enable;
 	}
-
-	/**
-	 * Set the length of time (in seconds) that the contents of a feed
-	 * will be cached.
-	 *
-	 * @access public
-	 * @param int $seconds The feed content cache duration.
-	 */
 	function set_cache_duration($seconds = 3600)
 	{
 		$this->cache_duration = (int) $seconds;
 	}
-
-	/**
-	 * Set the length of time (in seconds) that the autodiscovered feed
-	 * URL will be cached.
-	 *
-	 * @access public
-	 * @param int $seconds The autodiscovered feed URL cache duration.
-	 */
 	function set_autodiscovery_cache_duration($seconds = 604800)
 	{
 		$this->autodiscovery_cache_duration = (int) $seconds;
 	}
-
-	/**
-	 * Set the file system location where the cached files should be stored.
-	 *
-	 * @access public
-	 * @param string $location The file system location.
-	 */
 	function set_cache_location($location = './cache')
 	{
 		$this->cache_location = (string) $location;
 	}
-
-	/**
-	 * Determines whether feed items should be sorted into reverse chronological order.
-	 *
-	 * @access public
-	 * @param bool $enable Sort as reverse chronological order.
-	 */
 	function enable_order_by_date($enable = true)
 	{
 		$this->order_by_date = (bool) $enable;
 	}
-
-	/**
-	 * Allows you to override the character encoding reported by the feed.
-	 *
-	 * @access public
-	 * @param string $encoding Character encoding.
-	 */
 	function set_input_encoding($encoding = false)
 	{
 		if ($encoding)
@@ -975,35 +225,10 @@ class SimplePie
 			$this->input_encoding = false;
 		}
 	}
-
-	/**
-	 * Set how much feed autodiscovery to do
-	 *
-	 * @access public
-	 * @see SIMPLEPIE_LOCATOR_NONE
-	 * @see SIMPLEPIE_LOCATOR_AUTODISCOVERY
-	 * @see SIMPLEPIE_LOCATOR_LOCAL_EXTENSION
-	 * @see SIMPLEPIE_LOCATOR_LOCAL_BODY
-	 * @see SIMPLEPIE_LOCATOR_REMOTE_EXTENSION
-	 * @see SIMPLEPIE_LOCATOR_REMOTE_BODY
-	 * @see SIMPLEPIE_LOCATOR_ALL
-	 * @param int $level Feed Autodiscovery Level (level can be a
-	 * combination of the above constants, see bitwise OR operator)
-	 */
 	function set_autodiscovery_level($level = SIMPLEPIE_LOCATOR_ALL)
 	{
 		$this->autodiscovery = (int) $level;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for caching.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_cache_class($class = 'SimplePie_Cache')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Cache'))
@@ -1013,16 +238,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for auto-discovery.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_locator_class($class = 'SimplePie_Locator')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Locator'))
@@ -1032,16 +247,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for XML parsing.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_parser_class($class = 'SimplePie_Parser')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Parser'))
@@ -1051,16 +256,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for remote file fetching.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_file_class($class = 'SimplePie_File')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_File'))
@@ -1070,16 +265,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for data sanitization.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_sanitize_class($class = 'SimplePie_Sanitize')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Sanitize'))
@@ -1089,16 +274,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for handling feed items.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_item_class($class = 'SimplePie_Item')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Item'))
@@ -1108,16 +283,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for handling author data.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_author_class($class = 'SimplePie_Author')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Author'))
@@ -1127,16 +292,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for handling category data.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_category_class($class = 'SimplePie_Category')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Category'))
@@ -1146,16 +301,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for feed enclosures.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_enclosure_class($class = 'SimplePie_Enclosure')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Enclosure'))
@@ -1165,16 +310,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for <media:text> captions
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_caption_class($class = 'SimplePie_Caption')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Caption'))
@@ -1184,16 +319,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for <media:copyright>
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_copyright_class($class = 'SimplePie_Copyright')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Copyright'))
@@ -1203,16 +328,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for <media:credit>
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_credit_class($class = 'SimplePie_Credit')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Credit'))
@@ -1222,16 +337,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for <media:rating>
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_rating_class($class = 'SimplePie_Rating')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Rating'))
@@ -1241,16 +346,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for <media:restriction>
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_restriction_class($class = 'SimplePie_Restriction')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Restriction'))
@@ -1260,16 +355,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses for content-type sniffing.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_content_type_sniffer_class($class = 'SimplePie_Content_Type_Sniffer')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Content_Type_Sniffer'))
@@ -1279,16 +364,6 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to change which class SimplePie uses item sources.
-	 * Useful when you are overloading or extending SimplePie's default classes.
-	 *
-	 * @access public
-	 * @param string $class Name of custom class.
-	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
-	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
-	 */
 	function set_source_class($class = 'SimplePie_Source')
 	{
 		if (SimplePie_Misc::is_subclass_of($class, 'SimplePie_Source'))
@@ -1298,24 +373,10 @@ class SimplePie
 		}
 		return false;
 	}
-
-	/**
-	 * Allows you to override the default user agent string.
-	 *
-	 * @access public
-	 * @param string $ua New user agent string.
-	 */
 	function set_useragent($ua = SIMPLEPIE_USERAGENT)
 	{
 		$this->useragent = (string) $ua;
 	}
-
-	/**
-	 * Set callback function to create cache filename with
-	 *
-	 * @access public
-	 * @param mixed $function Callback function
-	 */
 	function set_cache_name_function($function = 'md5')
 	{
 		if (is_callable($function))
@@ -1323,13 +384,6 @@ class SimplePie
 			$this->cache_name_function = $function;
 		}
 	}
-
-	/**
-	 * Set javascript query string parameter
-	 *
-	 * @access public
-	 * @param mixed $get Javascript query string parameter
-	 */
 	function set_javascript($get = 'js')
 	{
 		if ($get)
@@ -1341,14 +395,6 @@ class SimplePie
 			$this->javascript = false;
 		}
 	}
-
-	/**
-	 * Set options to make SP as fast as possible.  Forgoes a
-	 * substantial amount of data sanitization in favor of speed.
-	 *
-	 * @access public
-	 * @param bool $set Whether to set them or not
-	 */
 	function set_stupidly_fast($set = false)
 	{
 		if ($set)
@@ -1361,23 +407,14 @@ class SimplePie
 			$this->set_image_handler(false);
 		}
 	}
-
-	/**
-	 * Set maximum number of feeds to check with autodiscovery
-	 *
-	 * @access public
-	 * @param int $max Maximum number of feeds to check
-	 */
 	function set_max_checked_feeds($max = 10)
 	{
 		$this->max_checked_feeds = (int) $max;
 	}
-
 	function remove_div($enable = true)
 	{
 		$this->sanitize->remove_div($enable);
 	}
-
 	function strip_htmltags($tags = '', $encode = null)
 	{
 		if ($tags === '')
@@ -1390,12 +427,10 @@ class SimplePie
 			$this->sanitize->encode_instead_of_strip($tags);
 		}
 	}
-
 	function encode_instead_of_strip($enable = true)
 	{
 		$this->sanitize->encode_instead_of_strip($enable);
 	}
-
 	function strip_attributes($attribs = '')
 	{
 		if ($attribs === '')
@@ -1404,37 +439,18 @@ class SimplePie
 		}
 		$this->sanitize->strip_attributes($attribs);
 	}
-
 	function set_output_encoding($encoding = 'UTF-8')
 	{
 		$this->sanitize->set_output_encoding($encoding);
 	}
-
 	function strip_comments($strip = false)
 	{
 		$this->sanitize->strip_comments($strip);
 	}
-
-	/**
-	 * Set element/attribute key/value pairs of HTML attributes
-	 * containing URLs that need to be resolved relative to the feed
-	 *
-	 * @access public
-	 * @since 1.0
-	 * @param array $element_attribute Element/attribute key/value pairs
-	 */
 	function set_url_replacements($element_attribute = array('a' => 'href', 'area' => 'href', 'blockquote' => 'cite', 'del' => 'cite', 'form' => 'action', 'img' => array('longdesc', 'src'), 'input' => 'src', 'ins' => 'cite', 'q' => 'cite'))
 	{
 		$this->sanitize->set_url_replacements($element_attribute);
 	}
-
-	/**
-	 * Set the handler to enable the display of cached favicons.
-	 *
-	 * @access public
-	 * @param str $page Web-accessible path to the handler_favicon.php file.
-	 * @param str $qs The query string that the value should be passed to.
-	 */
 	function set_favicon_handler($page = false, $qs = 'i')
 	{
 		if ($page != false)
@@ -1446,14 +462,6 @@ class SimplePie
 			$this->favicon_handler = '';
 		}
 	}
-
-	/**
-	 * Set the handler to enable the display of cached images.
-	 *
-	 * @access public
-	 * @param str $page Web-accessible path to the handler_image.php file.
-	 * @param str $qs The query string that the value should be passed to.
-	 */
 	function set_image_handler($page = false, $qs = 'i')
 	{
 		if ($page != false)
@@ -1465,18 +473,10 @@ class SimplePie
 			$this->image_handler = '';
 		}
 	}
-
-	/**
-	 * Set the limit for items returned per-feed with multifeeds.
-	 *
-	 * @access public
-	 * @param integer $limit The maximum number of items to return.
-	 */
 	function set_item_limit($limit = 0)
 	{
 		$this->item_limit = (int) $limit;
 	}
-
 	function init()
 	{
 		if ((function_exists('version_compare') && version_compare(PHP_VERSION, '4.3.0', '<')) || !extension_loaded('xml') || !extension_loaded('pcre'))
@@ -1496,7 +496,6 @@ class SimplePie
 function embed_odeo(link) {
 	document.writeln('<embed src="http://odeo.com/flash/audio_player_fullsize.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="440" height="80" wmode="transparent" allowScriptAccess="any" flashvars="valid_sample_rate=true&external_url='+link+'"></embed>');
 }
-
 function embed_quicktime(type, bgcolor, width, height, link, placeholder, loop) {
 	if (placeholder != '') {
 		document.writeln('<embed type="'+type+'" style="cursor:hand; cursor:pointer;" href="'+link+'" src="'+placeholder+'" width="'+width+'" height="'+height+'" autoplay="false" target="myself" controller="false" loop="'+loop+'" scale="aspect" bgcolor="'+bgcolor+'" pluginspage="http://www.apple.com/quicktime/download/"></embed>');
@@ -1505,23 +504,18 @@ function embed_quicktime(type, bgcolor, width, height, link, placeholder, loop) 
 		document.writeln('<embed type="'+type+'" style="cursor:hand; cursor:pointer;" src="'+link+'" width="'+width+'" height="'+height+'" autoplay="false" target="myself" controller="true" loop="'+loop+'" scale="aspect" bgcolor="'+bgcolor+'" pluginspage="http://www.apple.com/quicktime/download/"></embed>');
 	}
 }
-
 function embed_flash(bgcolor, width, height, link, loop, type) {
 	document.writeln('<embed src="'+link+'" pluginspage="http://www.macromedia.com/go/getflashplayer" type="'+type+'" quality="high" width="'+width+'" height="'+height+'" bgcolor="'+bgcolor+'" loop="'+loop+'"></embed>');
 }
-
 function embed_flv(width, height, link, placeholder, loop, player) {
 	document.writeln('<embed src="'+player+'" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" quality="high" width="'+width+'" height="'+height+'" wmode="transparent" flashvars="file='+link+'&autostart=false&repeat='+loop+'&showdigits=true&showfsbutton=false"></embed>');
 }
-
 function embed_wmedia(width, height, link) {
 	document.writeln('<embed type="application/x-mplayer2" src="'+link+'" autosize="1" width="'+width+'" height="'+height+'" showcontrols="1" showstatusbar="0" showdisplay="0" autostart="0"></embed>');
 }
 			<?php
 			exit;
 		}
-
-		// Pass whatever was set with config options over to the sanitizer.
 		$this->sanitize->pass_cache_data($this->cache, $this->cache_location, $this->cache_name_function, $this->cache_class);
 		$this->sanitize->pass_file_data($this->file_class, $this->timeout, $this->useragent, $this->force_fsockopen);
 
@@ -1534,37 +528,29 @@ function embed_wmedia(width, height, link) {
 			if ($this->feed_url !== null)
 			{
 				$parsed_feed_url = SimplePie_Misc::parse_url($this->feed_url);
-				// Decide whether to enable caching
 				if ($this->cache && $parsed_feed_url['scheme'] !== '')
 				{
 					$cache = call_user_func(array($this->cache_class, 'create'), $this->cache_location, call_user_func($this->cache_name_function, $this->feed_url), 'spc');
 				}
-				// If it's enabled and we don't want an XML dump, use the cache
 				if ($cache && !$this->xml_dump)
 				{
-					// Load the Cache
 					$this->data = $cache->load();
 					if (!empty($this->data))
 					{
-						// If the cache is for an outdated build of SimplePie
 						if (!isset($this->data['build']) || $this->data['build'] != SIMPLEPIE_BUILD)
 						{
 							$cache->unlink();
 							$this->data = array();
 						}
-						// If we've hit a collision just rerun it with caching disabled
 						elseif (isset($this->data['url']) && $this->data['url'] != $this->feed_url)
 						{
 							$cache = false;
 							$this->data = array();
 						}
-						// If we've got a non feed_url stored (if the page isn't actually a feed, or is a redirect) use that URL.
 						elseif (isset($this->data['feed_url']))
 						{
-							// If the autodiscovery cache is still valid use it.
 							if ($cache->mtime() + $this->autodiscovery_cache_duration > time())
 							{
-								// Do not need to do feed autodiscovery yet.
 								if ($this->data['feed_url'] == $this->data['url'])
 								{
 									$cache->unlink();
