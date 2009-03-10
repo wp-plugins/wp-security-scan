@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.3.4
+Version: 2.3.5
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -30,6 +30,7 @@ require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
 require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
+require_once(ABSPATH."wp-content/plugins/wp-security-scan/simplepie.inc");
 //require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
 
@@ -45,7 +46,7 @@ remove_action('wp_head', 'wp_generator');
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
          if (function_exists('add_menu_page')){
-            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
+            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg',get_option('siteurl') . '/wp-content/plugins/wp-security-scan/lock.png');
             add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
             add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
             add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
@@ -113,11 +114,67 @@ if($mrt_latest > $mrt_version)
 	function wpss_mrt_meta_box3(){  
 		
 		?>
-		
-		<div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
-		<br /><br />
-		<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
-		<br /><br /><h4>Highest Donations</h4></div><?php 
+<div style="padding:10px;">
+	<div style="font-size:13pt;text-align:center;">Highest</div>		<?php
+//		include('/var/www/html/aioseo/wp-content/plugins/all-in-one-seo-pack/simplepie.inc');
+
+		$feed = new SimplePie();
+
+
+			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/highest-donations/feed/');
+			$feed->strip_htmltags(array('p'));
+			$feed->init();
+		$feed->handle_content_type();
+		?>
+				<?php if ($feed->data): ?>
+					<?php $items = $feed->get_items(); ?>
+
+					<?php foreach($items as $item): ?>
+<p>
+		<strong><?php echo $item->get_title(); ?></strong>
+		<?php echo $item->get_content(); ?>
+</p>
+
+					<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+
+	<div style="font-size:13pt;text-align:center;">Recent</div>		<?php
+//		include('/var/www/html/aioseo/wp-content/plugins/all-in-one-seo-pack/simplepie.inc');
+
+		$feed = new SimplePie();
+
+
+			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/wp-security-scan/feed/');
+			$feed->strip_htmltags(array('p'));
+			$feed->init();
+		$feed->handle_content_type();
+		?>
+				<?php if ($feed->data): ?>
+					<?php $items = $feed->get_items(); ?>
+
+					<?php foreach($items as $item): ?>
+<p>
+		<strong><?php echo $item->get_title(); ?></strong>
+		<?php echo $item->get_content(); ?>
+</p>
+
+					<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+				
+				<hr width="75%"/>
+
+					<div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
+					<br /><br />
+					<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
+
+</div>
+	
+	<!--	<br /><br /><h4>Highest Donations</h4></div>  -->
+	
+	<?php 
 
 		/*$ch = curl_init("http://semperfiwebdesign.com/top_donations.php");
 		$fp = fopen("top_donations.php", "w");
@@ -128,22 +185,25 @@ if($mrt_latest > $mrt_version)
 		fclose($fp);
 		*/
 
-		$ch = curl_init();
+	/*	$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/top_donations.php");
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_exec($ch);
 		curl_close($ch);
-
+*/
 		?>
-		<br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div><?php
+<!--		<br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div>
 
+-->
+<?php
 
+/*
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/recent_donations.php");
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_exec($ch);
 		curl_close($ch);
-
+*/
 		/*
 		$ch = curl_init("http://semperfiwebdesign.com/recent_donations.php");
 		$fp = fopen("recent_donations.php", "w");
