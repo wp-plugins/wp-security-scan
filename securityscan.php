@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.3.6
+Version: 2.3.7
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -125,7 +125,7 @@ if($mrt_latest > $mrt_version)
 
 			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/highest-donations/feed/');
 			$feed->strip_htmltags(array('p'));
-							$feed->cache_location('ABSPATH."wp-content/plugins/wp-security-scan/cache/');
+							$feed->set_cache_location('ABSPATH."wp-content/plugins/wp-security-scan/cache/');
 			$feed->init();
 		$feed->handle_content_type();
 		?>
