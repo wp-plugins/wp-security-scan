@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.4
+Version: 2.5
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -243,17 +243,17 @@ add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");
 
 <div id="dashboard-widgets-wrap">
 <div class="metabox-holder">
-	<div style="float:left; width:48%;" class="inner-sidebar">
+	<div style="float:left; width:48%;" class="inner-sidebar1">
 		<?php do_meta_boxes('wpss','advanced','');  ?>	
 	</div>
 
-	<div style="float:right; width:48%; " class="inner-sidebar">
+	<div style="float:right; width:48%; " class="inner-sidebar1">
 		<?php do_meta_boxes('wpss2','advanced',''); ?>	
 	</div>
 						
 <div style="clear:both"></div>
 						
-	<div style="float:left;width:500px;" class="inner-sidebar">
+	<div style="float:left;width:500px;" class="inner-sidebar1">
 		<?php do_meta_boxes('wpss3','advanced','');  ?>	
 	</div>
 </div>
