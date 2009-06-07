@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.5
+Version: 2.6
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -25,15 +25,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
+if ( ! defined( 'WP_CONTENT_URL' ) )
+      define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
+if ( ! defined( 'WP_CONTENT_DIR' ) )
+      define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+if ( ! defined( 'WP_PLUGIN_URL' ) )
+      define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
+if ( ! defined( 'WP_PLUGIN_DIR' ) )
+      define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
+
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/support.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/scanner.php");
+require_once(WP_PLUGIN_DIR  . "/wp-security-scan/password_tools.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/database.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/functions.php");
 if(!class_exists("SimplePie")){
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/simplepie.inc");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/simplepie.inc");
 }
-//require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
+//require_once(WP_PLUGIN_DIR . "/plugins/wp-security-scan/scripts.js");
 
 
 add_action( 'admin_notices', mrt_update_notice, 5 );
@@ -48,7 +57,7 @@ remove_action('wp_head', 'wp_generator');
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
          if (function_exists('add_menu_page')){
-            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg',get_option('siteurl') . '/wp-content/plugins/wp-security-scan/lock.png');
+            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg',WP_PLUGIN_URL . '/wp-security-scan/lock.png');
             add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
             add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
             add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
@@ -58,7 +67,7 @@ function add_men_pg() {
 
 /*function mrt_root_scripts(){
 $siteurl = get_option('siteurl');
-echo '<script language="JavaScript" type="text/javascript" src="' . $siteurl . '/wp-content/plugins/wp-security-scan/scripts.js"></script>';
+echo '<script language="JavaScript" type="text/javascript" src="' . WP_PLUGIN_URL . '/wp-security-scan/scripts.js"></script>';
 }*/
 
 function mrt_update_notice(){
@@ -118,14 +127,14 @@ if($mrt_latest > $mrt_version)
 		?>
 <div style="padding:10px;">
 	<div style="font-size:13pt;text-align:center;">Highest</div>		<?php
-//		include('/var/www/html/aioseo/wp-content/plugins/all-in-one-seo-pack/simplepie.inc');
+//		include('WP_PLUGIN_DIR . '/all-in-one-seo-pack/simplepie.inc');
 
 		$feed = new SimplePie();
 
 
 			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/highest-donations/feed/');
 			$feed->strip_htmltags(array('p'));
-							$feed->set_cache_location(ABSPATH . 'wp-content/plugins/wp-security-scan/');
+							$feed->set_cache_location(WP_PLUGIN_DIR . '/wp-security-scan/');
 			$feed->init();
 		$feed->handle_content_type();
 		?>
@@ -144,14 +153,14 @@ if($mrt_latest > $mrt_version)
 
 
 	<div style="font-size:13pt;text-align:center;">Recent</div>		<?php
-//		include('/var/www/html/aioseo/wp-content/plugins/all-in-one-seo-pack/simplepie.inc');
+//		include(WP_PLUGIN_DIR . '/all-in-one-seo-pack/simplepie.inc');
 
 		$feed = new SimplePie();
 
 
 			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/wp-security-scan/feed/');
 			$feed->strip_htmltags(array('p'));
-													$feed->set_cache_location(ABSPATH . 'wp-content/plugins/wp-security-scan/');
+													$feed->set_cache_location(WP_PLUGIN_DIR . '/wp-security-scan/');
   $feed->init();
 
 		$feed->handle_content_type();
@@ -271,11 +280,11 @@ add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");
 function mrt_hd()
 {
  $siteurl = get_option('siteurl');?>
-<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script>
-<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/scripts.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/plugins/wp-security-scan/js/scripts.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/plugins/wp-security-scan/scripts.js"></script>
 <script type="text/javascript">
 //window.onload=function(){enableTooltips()};
 </script>
-<!--<link rel="stylesheet" type="text/css" href="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/style.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="<?php //echo WP_PLUGIN_URL;?>/plugins/wp-security-scan/style.css" />-->
 <?php }
 ?>

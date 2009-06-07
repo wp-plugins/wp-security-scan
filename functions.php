@@ -124,5 +124,5 @@ if ($mrt_wp_ver < "2.7") $g2k5 = '<font color="red"><strong>WordPress version: '
 
 function mrt_javascript(){
 $siteurl = get_option('siteurl');
-?><script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script><?php
+?><script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_DIR;?>/wp-security-scan/js/scripts.js"></script><?php
 }?>

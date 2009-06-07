@@ -87,23 +87,23 @@ print_r($mrtright);*/
             }
         }//changing some "hardcoded" wp values within the tables
         echo ("<h3>&nbsp;&nbsp;Start changing Databasesettings:</h3>");
-        if ($wpdb->query("UPDATE ".$newpref."options SET option_name='".$newpref."user_roles' WHERE option_name='".$GLOBALS['table_prefix']."user_roles' LIMIT 1") <> 1) {
+        if ($wpdb->query($wpdb->prepare("UPDATE ".$newpref."options SET option_name='".$newpref."user_roles' WHERE option_name='".$GLOBALS['table_prefix']."user_roles' LIMIT 1")) <> 1) {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$newpref.'options: 1/1 <font color="#ff0000">Failed</font><br />');
         } else {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'options 1/1: <font color="#00ff00">Success</font><br />');
         }
-        if ($wpdb->query("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."capabilities' WHERE meta_key='".$GLOBALS['table_prefix']."capabilities'") <> 1) {
+        if ($wpdb->query($wpdb->prepare("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."capabilities' WHERE meta_key='".$GLOBALS['table_prefix']."capabilities'") <> 1)) {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 1/3: <font color="#ff0000">Failed</font><br />');
         } else {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 1/3: <font color="#00ff00">Success</font><br />');
         }
-        if ($wpdb->query("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."user_level' WHERE meta_key='".$GLOBALS['table_prefix']."user_level'") === FALSE)
+        if ($wpdb->query($wpdb->prepare("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."user_level' WHERE meta_key='".$GLOBALS['table_prefix']."user_level'")) === FALSE)
         {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 2/3: <font color="#ff0000">Failed</font><br />');
         } else {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 2/3: <font color="#00ff00">Success</font><br />');
         }
-        if ($wpdb->query("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."autosave_draft_ids' WHERE meta_key='".$GLOBALS['table_prefix']."autosave_draft_ids'") === 0) {
+        if ($wpdb->query($wpdb->prepare("UPDATE ".$newpref."usermeta SET meta_key='".$newpref."autosave_draft_ids' WHERE meta_key='".$GLOBALS['table_prefix']."autosave_draft_ids'")) === 0) {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 3/3: <font color="#000000">Value doesn\'t exist</font><br />');
         } else {
             echo ('&nbsp;&nbsp;&nbsp;Changing values in table '.$GLOBALS['table_prefix'].'usermeta 3/3: <font color="#00ff00">Success</font><br />');
