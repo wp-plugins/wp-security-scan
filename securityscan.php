@@ -4,7 +4,7 @@ Plugin Name: WP Security Scan
 Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
 Description: Perform security scan of WordPress installation.
 Author: Michael Torbert
-Version: 2.7.1.1
+Version: 2.7.1.2
 Author URI: http://semperfiwebdesign.com/
 */
 
@@ -113,6 +113,29 @@ if($mrt_latest > $mrt_version)
 		<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li><li>WordPress admin protection/security</li></ul>
 		<?php	}
 		
+	function wpss_mrt_meta_box4(){ ?>
+		<div style="padding-left:10px;">
+			<div style="padding: 10px 10px 10px 10px;border: 1px solid #ddd;">
+			<div style="margin-bottom:30px;">
+				We would also like to recommend <a href="http://www.pagelines.com/wpthemes/" target="_blank">PageLines</a> for Professional WordPress Themes.  They are attractive, affordable, performance optimized CMS themes that integrate perfectly with All in One SEO Pack to put your professional website at the top of the rankings.
+			</div>
+
+				<a target="_blank" title="iBlogPro" href="http://www.pagelines.com/wpthemes/">
+				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/iblogpro.jpg" alt="<?php _e('iBlogPro theme', 'all_in_one_seo_pack') ?>" />	</a>
+
+				<a target="_blank" title="PageLines Themes" href="http://www.pagelines.com/wpthemes/">	
+				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/pagelines.jpg" alt="<?php _e('Pagelines Themes', 'all_in_one_seo_pack') ?>" /> </a>	
+
+				<a target="_blank" title="WhiteHouse" href="http://www.pagelines.com/wpthemes/">	
+				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/whitehouse.jpg" alt="<?php _e('WhiteHouse theme', 'all_in_one_seo_pack') ?>" />	</a>
+
+
+			</div>
+			
+			
+		</div>
+			
+		<?php	}	
 		
 	function wpss_mrt_meta_box2(){ ?>
 		<div style="padding-left:10px;">
@@ -249,6 +272,7 @@ function mrt_opt_mng_pg() {
 add_meta_box("wpss_mrt", 'Initial Scan', "wpss_mrt_meta_box", "wpss");  
 add_meta_box("wpss_mrt", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");  
 add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");  
+add_meta_box("wpss_mrt", 'PageLines WordPress Themes', "wpss_mrt_meta_box4", "wpss4");  
 
 ?>
 
@@ -264,8 +288,12 @@ add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");
 						
 <div style="clear:both"></div>
 						
-	<div style="float:left;width:500px;" class="inner-sidebar1">
-		<?php do_meta_boxes('wpss3','advanced','');  ?>	
+	<div style="float:left;width:48%;" class="inner-sidebar1">
+		<?php do_meta_boxes('wpss4','advanced','');  ?>	
+	</div>
+	
+	<div style="float:right; width:48%;" class="inner-sidebar1">
+		<?php do_meta_boxes('wpss3','advanced',''); ?>	
 	</div>
 </div>
 
