@@ -102,10 +102,33 @@ global $wp_version;
 
 function mrt_remove_wp_version()
 {
-                if (!is_admin()) {
-                        global $wp_version;
-                        $wp_version = 'abc';
-                              }
+                 
+					function filter_generator( $gen, $type ) { 
+					    switch ( $type ) { 
+					        case 'html':
+					            $gen = '<meta name="generator" content="WordPress">';
+					            break;
+					        case 'xhtml':
+					            $gen = '<meta name="generator" content="WordPress" />';
+					            break;
+					        case 'atom':
+					            $gen = '<generator uri="http://wordpress.org/">WordPress</generator>';
+					            break;
+					        case 'rss2':
+					            $gen = '<generator>http://wordpress.org/?v=</generator>';
+					            break;
+					        case 'rdf':
+					            $gen = '<admin:generatorAgent rdf:resource="http://wordpress.org/?v=" />';
+					            break;
+					        case 'comment':
+					            $gen = '<!-- generator="WordPress" -->';
+					            break;
+					    }    
+					    return $gen;
+					}
+					foreach ( array( 'html', 'xhtml', 'atom', 'rss2', 'rdf', 'comment' ) as $type )
+					    add_filter( "get_the_generator_$type", 'filter_generator', 10, 2 );
+
 
 }
 
