@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: hallsofmontezuma
+Contributors: WebsiteDefender, hallsofmontezuma
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
 plugins, private, protection, tracking, wordpress
-Requires at least: 2.3
-Tested up to: 2.8
+Requires at least: 2.5
+Tested up to: 3.1
 Stable tag: trunk
 
 Scans your WordPress installation for security vulnerabilities.
