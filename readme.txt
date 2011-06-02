@@ -6,7 +6,7 @@ plugins, private, protection, tracking, wordpress
 Requires at least: 2.5
 Tested up to: 3.1
 Stable tag: trunk
-
+ 
 Scans your WordPress installation for security vulnerabilities.
 
 == Description ==
