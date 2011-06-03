@@ -153,6 +153,7 @@ $siteurl = get_option('siteurl');
 /*** make http requests, maintain cookies ***/
 function wpss_http_request($url, $request, $content_type, $method) {
 	static $cookie = "";
+	$wsd_cookie = null;
 	// performs the HTTP request
 	$opts = array ('http' => array (
 								'method'  => $method,
@@ -184,9 +185,7 @@ function wpss_http_request($url, $request, $content_type, $method) {
 /*** json2 rpc post ***/
 function wpss_json2_post($url, $request) {
         $request = json_encode($request);
-		print "// $request\n";
 		$response = wpss_http_request($url, $request, 'application/json', 'POST');
-		print "// $response\n";
 		if ($response !== false)
 			return json_decode($response,true);
 		else
@@ -219,7 +218,7 @@ function wpss_json2_is_error($response) {
 
 /*** checks $response for errors; returns a string if there were errors, false otherwise. ***/
 function wpss_json2_get_error($response) {
-	if (($response === false) || ($response['result'] === false))
+	if (($response === false) || ((isset($response['result']))&&($response['result'] === false)))
 		return "An error occurred, go to your <a href='http://dashboard.websitedefender.com/'>Dashboard</a> for support.\n";
 	if (is_array($response['error'])) {
 		$e = $response['error'];		
