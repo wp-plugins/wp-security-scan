@@ -34,11 +34,22 @@ if ( ! defined( 'WP_PLUGIN_URL' ) )
 if ( ! defined( 'WP_PLUGIN_DIR' ) )
       define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
 
+//main files
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/support.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/scanner.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/password_tools.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/database.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/functions.php");
+
+//menus
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/security.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/scanner.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/pwtool.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/db.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/support.php");
+
+
+
 
 //require_once(WP_PLUGIN_DIR . "/plugins/wp-security-scan/scripts.js");
 
@@ -159,56 +170,7 @@ if($mrt_latest > $mrt_version)
 			
 		<?php	}
 	
-function mrt_opt_mng_pg() {
-        ?>
 
-
-<div class="wrap">
-	<div class="wpss_icon"><br /></div>
-    <h2>WP - Security Admin Tools</h2>  
-
-<!--<div id='update-nag'>A new version of WP Security Scan is available!</div>-->
-<?php //$rss = fetch_rss('http://alexrabe.boelinger.com/?tag=nextgen-gallery&feed=rss2');?>
-
-
-<?php  
-
-add_meta_box("wpss_mrt", 'Initial Scan', "wpss_mrt_meta_box", "wpss");  
-add_meta_box("wpss_mrt", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");  
-add_meta_box("wpss_mrt", 'About Website Defender', "wpss_mrt_meta_box5", "wpss5");
-
-?>
-
-<div class="wrap">
-<div class="metabox-holder">
-
-	<div style="float:left; width:48%;" class="inner-sidebar1">
-		<?php do_meta_boxes('wpss','advanced','');  ?>	
-		<?php do_meta_boxes('wpss2','advanced',''); ?>	
-		
-	</div>
-		
-
-			<div style="float:right;width:48%;" class="inner-sidebar1">
-				<?php do_meta_boxes('wpss5','advanced','');  ?>	
-			</div>
-						
-<div style="clear:both"></div>
-		
-		
-	
-	
-</div>
-
-<div style="clear:both;"></div>
-</div>
-	
-	<br /><em>For comments, suggestions, bug reporting, etc please <a href="http://semperfiwebdesign.com/contact/">click here</a>.</em>
-
-       
-             Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
-        </div>
-<?php } 
 
 function mrt_hd()
 {
