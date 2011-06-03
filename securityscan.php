@@ -47,6 +47,8 @@ require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/scanner.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/pwtool.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/db.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/support.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/header.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/footer.php");
 
 
 
