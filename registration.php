@@ -1,13 +1,15 @@
 			<p><?php _e('WebsiteDefender.com is based upon web application scanning technology from <a href="http://www.acunetix.com/" target="_blank">Acunetix</a>; a pioneer in website security. WebsiteDefender requires no installation, no learning curve and no maintenance. Above all, there is no impact on site performance! WebsiteDefender regularly scans and monitors your WordPress website/blog effortlessly, efficient, easily and is available for Free! Start scanning your WordPress website/blog against malware and hackers, absolutely free!', FB_SWP_TEXTDOMAIN)?></p>
 			<?php
 					$hostname = wpss_get_hostname();
+					$targetid = get_option('wpss_targetid');
+					$scanner_copied = get_option('wpss_scanner_copied');
 					if (isset($_POST["agent_test"])&&($_POST["agent_test"])) { /*** Agent test ***/
 						if (!isset($id)) $id = rand(1000, 9999);
 						if (isset($_POST['targetid'])) $targetid = $_POST['targetid'];
-						$register_url = $hostname;
+						$register_url = "$hostname";
 						$response = wpss_json2_func_call("cPlugin.hello", $id, $register_url);
 						if (wpss_json2_is_error($response)) {
-						//	print wpss_json2_get_error($response) . '<br>';
+//							print wpss_json2_get_error($response) . '<br>';
 						}
 						$response = wpss_json2_func_call("cTargets.agenttest", $id, $targetid);
 
@@ -43,7 +45,7 @@
 							</form>
 							<?php
 						} else print "Website is registered.\n";
-						return;												
+						return;
 					}
 					if (!isset($_POST["account_agree"])) { /*** not registered yet? ***/
 						if (!isset($id)) $id = rand(1000, 9999);
@@ -51,6 +53,17 @@
 						$response = wpss_json2_func_call("cPlugin.hello", $id, $register_url);
 						if (wpss_json2_is_error($response)) {
 							print wpss_json2_get_error($response) . '<br>';
+							if ($targetid) {
+							?>
+							<form action="" method="post">
+							<input type="hidden" name="targetid" value="<?php print $targetid; ?>">
+							<input type="submit" name="agent_test" value="Agent Test">
+							<?php if ($scanner_copied === false) { ?>
+							<input type="submit" name="install_later" value="Install Agent Later">
+							<?php } ?>
+							</form>
+							<?php
+							}
 							return;
 						} else {
 			?>			
@@ -141,15 +154,18 @@
 					print 'Adding website: ' . wpss_json2_get_error($response) . '<br>';
 				else {
 					$tid = $response['result']['id'];
+					$stid = get_option('wpss_targetid');
+					if (($stid === false)||($stid != $tid))
+						update_option('wpss_targetid', $tid);
 					$scanner = wpss_scanner_download($tid);
-					if (!$scanner)
-						$scanner = file_get_contents("http://82.79.70.124/download.php?id=$tid");
-					if (!$scanner) $scanner = '<?php echo "Test security scanner placeholder script."; ?>';
 					if ($scanner) {
 						$sensor_url = parse_url($response['result']['sensor_url']);
 						$path = rtrim(ABSPATH, '/');
 						$path .= $sensor_url['path'];
-						file_put_contents($path, $scanner);
+						$scanner_copied = @file_put_contents($path, $scanner);
+					}
+					if ($scanner_copied) {
+						update_option('wpss_scanner_copied', true);
 					}
 					$response = wpss_json2_func_call("cTargets.agenttest", $id, $response['result']['id']);
 					if (wpss_json2_is_error($response)) {

@@ -151,29 +151,19 @@ $siteurl = get_option('siteurl');
 }
 
 /*** make http requests, maintain cookies ***/
-if (!session_id()) session_start();
 function wpss_http_request($url, $request, $content_type, $method) {
-	global $wsd_cookie;
 	static $cookie = "";
-	if ($_SESSION["wsd_cookie"])
-	$cookie = $_SESSION["wsd_cookie"]; /*** save the cookie ***/
-	
 	// performs the HTTP request
 	$opts = array ('http' => array (
 								'method'  => $method,
-	                            'header'  => "Content-type: $content_type\r\nCookie: $cookie",
-	                            'content' => $request
-	                            ));
-	if ($method == 'GET') {
-		$opts['http']['header'] .= "\r\nCookie: $request";
-		unset($opts['http']['content']);
-	}
+	                            'header'  => "Content-type: $content_type\r\n",
+	                            'content' => $request));
+	if ($cookie) $opts['http']['header'] .= "Cookie: $cookie";
 	$context  = stream_context_create($opts);
 	if ($fp = @fopen($url, 'r', false, $context)) {
 		$response = '';
 	    while($row = fgets($fp))
 			$response.= trim($row)."\n";
-		if (!$_SESSION["wsd_cookie"]) { /*** get the cookie ***/
 			$meta = stream_get_meta_data($fp);
 			for ($j = 0; isset($meta['wrapper_data'][$j]); $j++) {
 	   			$httpline = $meta['wrapper_data'][$j];
@@ -183,10 +173,7 @@ function wpss_http_request($url, $request, $content_type, $method) {
 	      			$wsd_cookie = trim($value);
 	      			break;
 	   			}
-			}
 			$cookie = $wsd_cookie;
-			session_register("wsd_cookie");
-	//		session_write_close();
 		}
 		return $response;
 	} else {
@@ -197,7 +184,9 @@ function wpss_http_request($url, $request, $content_type, $method) {
 /*** json2 rpc post ***/
 function wpss_json2_post($url, $request) {
         $request = json_encode($request);
+		print "// $request\n";
 		$response = wpss_http_request($url, $request, 'application/json', 'POST');
+		print "// $response\n";
 		if ($response !== false)
 			return json_decode($response,true);
 		else
@@ -215,7 +204,8 @@ function wpss_json2_func_call($method, $id, $params = Array(), $url = "http://82
 }
 
 function wpss_scanner_download($id, $url = "http://82.79.70.124/download.php") {
-	return wpss_http_request($url, "id=$id", 'text/html', 'GET');
+	$scanner = wpss_http_request($url . "?id=$id", "", 'application/octet-stream', 'GET');
+	return $scanner;
 }
 
 /*** checks $response for errors; returns true if there were errors, false otherwise. ***/
@@ -245,8 +235,6 @@ function wpss_json2_get_error($response) {
 }
 
 function wpss_get_hostname() {
-	// DEBUG
-//	return 'wdk.peterbaylies.com';
 	if (isset($_SERVER['SERVER_NAME'])) {
 		return $_SERVER['SERVER_NAME'];
 	} else {
