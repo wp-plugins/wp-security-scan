@@ -74,7 +74,7 @@ remove_action('wp_head', 'wp_generator');
 //add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
          if (function_exists('add_menu_page')){
-            add_menu_page('Security', 'Security', 'edit_pages', __FILE__, 'mrt_opt_mng_pg',WP_PLUGIN_URL . '/wp-security-scan/lock.png');
+            add_menu_page('Security', 'Security', 'edit_pages', __FILE__, 'mrt_opt_mng_pg',WP_PLUGIN_URL . '/wp-security-scan/images/wpss_icon_small_color.png');
             add_submenu_page(__FILE__, 'Scanner', 'Scanner', 'edit_pages', 'scanner', 'mrt_sub0');
             add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 'edit_pages', 'passwordtool', 'mrt_sub1');
             add_submenu_page(__FILE__, 'Database', 'Database', 'edit_pages', 'database', 'mrt_sub3');
