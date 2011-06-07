@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: WebsiteDefender, hallsofmontezuma
+Contributors: WebsiteDefender, Michael Torbert
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.5
-Tested up to: 3.1
+Tested up to: 3.1.3
 Stable tag: trunk
   
 Scans your WordPress installation for security vulnerabilities.
@@ -22,18 +22,8 @@ corrective actions.
 -removes WP Generator META tag from core code<br />
 
 
-**Future Releases**<br />
-*one-click change file/folder permissions<br />
-*test for XSS vulnerabilities<br />
-*intrusion detection/prevention<br />
-*lock out/log incorrect login attempts<br />
-*user enumeration protection<br />
-*.htaccess verification<br />
-*doc links<br />
+**Lighter, faster, with more features!
 
-[Changelog](http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/ "WP Security Scan Changelog")<br />
-[Documentation](http://semperfiwebdesign.com/category/documentation/wp-security-scan/ "WP Security Scan
-Documentation")
 
 == Installation ==
 
