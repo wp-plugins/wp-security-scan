@@ -163,19 +163,18 @@ function wpss_http_request($url, $request, $content_type, $method) {
 	$context  = stream_context_create($opts);
 	if ($fp = @fopen($url, 'r', false, $context)) {
 		$response = '';
-	    while($row = fgets($fp))
-			$response.= trim($row)."\n";
-			$meta = stream_get_meta_data($fp);
-			for ($j = 0; isset($meta['wrapper_data'][$j]); $j++) {
-	   			$httpline = $meta['wrapper_data'][$j];
-	   	   		@list($header,$parameters) = explode(";",$httpline,2);
-	   			@list($attr,$value) = explode(":",$header,2);
-	   			if (strtolower(trim($attr)) == "set-cookie") {
+		while($row = fgets($fp)) $response.= trim($row)."\n";
+		$meta = stream_get_meta_data($fp);
+		for ($j = 0; isset($meta['wrapper_data'][$j]); $j++) {
+	   		$httpline = $meta['wrapper_data'][$j];
+	   	   	@list($header,$parameters) = explode(";",$httpline,2);
+	   		@list($attr,$value) = explode(":",$header,2);
+	   		if (strtolower(trim($attr)) == "set-cookie") {
 	      			$wsd_cookie = trim($value);
 	      			break;
-	   			}
-			$cookie = $wsd_cookie;
+	   		}
 		}
+		$cookie = $wsd_cookie;
 		return $response;
 	} else {
 		return false;
