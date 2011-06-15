@@ -81,12 +81,6 @@
 			<div>
 				<img id="img_loading_animation" src="<?= get_plugins_url( 'images/loading45.gif', __FILE__ ) ?>" width="100" height="100" alt="loading"/>
 				<div id="wsd_new_user_form_div" style="visibility:hidden">
-<?php
-/*** old form post ***/
-/*
-					<form action="http://dashboard.websitedefender.com/swpuser.php?NEWUSER" target="_blank" method="post" id="wsd_new_user_form" name="wsd_new_user_form">
-*/
-?>
 					<form action="" method="post" id="wsd_new_user_form" name="wsd_new_user_form">
 						<table id="wsd_new_user_form_dynamic_inputs_table" class="form-table">
 						</table>
