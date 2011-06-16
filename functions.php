@@ -153,29 +153,28 @@ $siteurl = get_option('siteurl');
 /*** make http requests, maintain cookies ***/
 function wpss_http_request($url, $request, $content_type, $method) {
 	static $cookie = "";
-	$wsd_cookie = null;
-	// performs the HTTP request
-	$opts = array ('http' => array (
-								'method'  => $method,
-	                            'header'  => "Content-type: $content_type\r\n",
-	                            'content' => $request));
-	if ($cookie) $opts['http']['header'] .= "Cookie: $cookie";
-	$context  = stream_context_create($opts);
-	if ($fp = @fopen($url, 'r', false, $context)) {
-		$response = '';
-		while($row = fgets($fp)) $response.= trim($row)."\n";
-		$meta = stream_get_meta_data($fp);
-		for ($j = 0; isset($meta['wrapper_data'][$j]); $j++) {
-	   		$httpline = $meta['wrapper_data'][$j];
-	   	   	@list($header,$parameters) = explode(";",$httpline,2);
-	   		@list($attr,$value) = explode(":",$header,2);
-	   		if (strtolower(trim($attr)) == "set-cookie") {
-	      			$wsd_cookie = trim($value);
-	      			break;
-	   		}
+	$opts = array (
+			'method'  => $method,
+			'headers' => Array(),
+			'body' => $request);
+	$opts['headers']['content-type'] = $content_type;
+	if ( $cookie ) $opts['cookies'] = $cookie;
+/*******Debugging code below: */
+//	print "<pre>Request: ";
+//	print_r(Array('url' => $url, 'opts' => $opts));
+	$response = wp_remote_request( $url, $opts );
+//	print "Response: ";
+//	print_r($response);
+//	print "</pre>\n";
+	if ( !is_wp_error ( $response ) ) {
+		if ( $response['headers']['set-cookie'] ) {
+			$cookie = $response['cookies'];
 		}
-		$cookie = $wsd_cookie;
-		return $response;
+		if ( (!$response['body'] ) && ( $response['response']['code'] !== 200) ) {
+			return false;			
+		} else {
+			return $response['body'];			
+		}
 	} else {
 		return false;
 	}

@@ -6,7 +6,7 @@ function ifLoaded(){
 	if(waiting>=20){
 		return false
 	}
-	if(	wsd_form_fields != undefined && 
+	if(	typeof(wsd_form_fields) !== 'undefined' && 
 			Recaptcha != undefined && 
 			document.getElementById("wsd_new_user_form") &&
 			wsd_commonPasswords != undefined)

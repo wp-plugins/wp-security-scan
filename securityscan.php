@@ -214,15 +214,6 @@ function mrt_hd()
 				//]]>
 			</script>
 			<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-<?php
-/*** old method of adding dynamic fields ***/
-/*
-			<script type="text/javascript" src="http://dashboard.websitedefender.com/swpuser.php?FIELDS"></script>
-*/
-
-/*** new method of adding dynamic fields ***/
-?>
-			<script type="text/javascript" src="<?php echo get_plugins_url( 'user_fields.php', __FILE__ )?>"></script>
 			<script type="text/javascript" src="<?php echo get_plugins_url( 'js/prepare_new_user_form.js', __FILE__ )?>"></script>
 			<script type="text/javascript" src="<?php echo get_plugins_url( 'js/verify_form.js', __FILE__ )?>"></script>
 		</div>

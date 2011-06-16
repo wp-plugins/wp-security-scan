@@ -1,6 +1,6 @@
 			<p><?php _e('WebsiteDefender.com is based upon web application scanning technology from <a href="http://www.acunetix.com/" target="_blank">Acunetix</a>; a pioneer in website security. WebsiteDefender requires no installation, no learning curve and no maintenance. Above all, there is no impact on site performance! WebsiteDefender regularly scans and monitors your WordPress website/blog effortlessly, efficient, easily and is available for Free! Start scanning your WordPress website/blog against malware and hackers, absolutely free!', FB_SWP_TEXTDOMAIN)?></p>
 			<?php
-					$hostname = wpss_get_hostname();
+					$hostname = get_option('site_url');
 					$targetid = get_option('wpss_targetid');
 					$scanner_copied = get_option('wpss_scanner_copied');
 					if (isset($_POST["agent_test"])&&($_POST["agent_test"])) { /*** Agent test ***/
@@ -66,7 +66,30 @@
 							}
 							return;
 						} else {
-			?>			
+						/*** get dynamic form fields for registration using json rpc ***/
+							if (is_array($response)) {
+								$result = $response["result"];
+								$captcha = $result["captcha"];
+								$fields = $result["fields"];
+								$desc = Array("url" => "Website", "email" => "E-Mail", "name" => "First Name", "surname" => "Last Name", "pass" => "Password");
+								$prefix = "account_";
+								global $wsd_form_fields;
+								$wsd_form_fields = Array();
+								foreach ($fields as $k => $v) {
+									if ($k != 'pass') /*** skip password field; already implemented on the static form ***/
+										array_push($wsd_form_fields, Array("name" => $prefix . $k,
+											"type" => $v,
+											"label" => $desc[$k],
+											"descr" => ''));
+								}
+								$wsd_form_fields = json_encode($wsd_form_fields);
+							}
+							?>
+<?php if (isset($wsd_form_fields)) { ?>
+<script type="text/javascript">
+var wsd_form_fields=<?php echo $wsd_form_fields; ?>;
+</script>
+<?php } ?>
 			<h4><?php _e('Register here to use all the WebsiteDefender.com advanced features', FB_SWP_TEXTDOMAIN)?></h4>
 			<p><?php _e('WebsiteDefender is an online service that protects your website from any hacker activity by monitoring and auditing the security of your website, giving you easy to understand solutions to keep your website safe, always! WebsiteDefender\'s enhanced WordPress Security Checks allow it to optimise any threats on a blog or site powered by WordPress.',  FB_SWP_TEXTDOMAIN)?></p>
 			<p><?php _e('With WebsiteDefender you can:',  FB_SWP_TEXTDOMAIN)?></p>
@@ -79,7 +102,7 @@
 
 			<h4><?php _e('Sign up for your FREE account here',  FB_SWP_TEXTDOMAIN)?></h4>
 			<div>
-				<img id="img_loading_animation" src="<?= get_plugins_url( 'images/loading45.gif', __FILE__ ) ?>" width="100" height="100" alt="loading"/>
+				<img id="img_loading_animation" src="<?php echo get_plugins_url( 'images/loading45.gif', __FILE__ ) ?>" width="100" height="100" alt="loading"/>
 				<div id="wsd_new_user_form_div" style="visibility:hidden">
 					<form action="" method="post" id="wsd_new_user_form" name="wsd_new_user_form">
 						<table id="wsd_new_user_form_dynamic_inputs_table" class="form-table">
@@ -109,7 +132,7 @@
 					<hr/>
 					<div style="text-align:right">
 						<a href="http://www.twitter.com/WebsiteDefender" target="_blank"><img src="http://twitter-badges.s3.amazonaws.com/twitter-b.png" alt="Follow WebsiteDefender on Twitter"/></a>
-						<a href="http://www.facebook.com/WebsiteDefender" target="_blank"><img src="<?= get_plugins_url( 'images/facebook.gif', __FILE__ )?>" alt="Check WebsiteDefender on Facebook"/></a>
+						<a href="http://www.facebook.com/WebsiteDefender" target="_blank"><img src="<?php echo get_plugins_url( 'images/facebook.gif', __FILE__ )?>" alt="Check WebsiteDefender on Facebook"/></a>
 					</div>
 				</div>
 			</div>
