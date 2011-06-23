@@ -1,49 +1,51 @@
 === Plugin Name ===
-Contributors: WebsiteDefender, hallsofmontezuma, pbaylies
-Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
-Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts
+Contributors: WebsiteDefender
+Author: WebsiteDefender
+Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts, wsd, websitedefender,
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.5
-Tested up to: 3.1
+Tested up to: 3.1.3
 Stable tag: trunk
-
+  
 Scans your WordPress installation for security vulnerabilities.
 
 == Description ==
 
-Scans your WordPress installation for security vulnerabilities and suggests
-corrective actions.
+WP Security Scan checks your WordPress website/blog for security vulnerabilities and suggests corrective actions such as:
 
--passwords<br />
--file permissions<br />
--database security<br />
--version hiding<br />
--WordPress admin protection/security<br />
--removes WP Generator META tag from core code<br />
+1. Passwords
+2. File permissions
+3. Database security
+4. Version hiding
+5. WordPress admin protection/security
+6. Removes WP Generator META tag from core code
 
+= Requirements =
 
-**Future Releases**<br />
-*one-click change file/folder permissions<br />
-*test for XSS vulnerabilities<br />
-*intrusion detection/prevention<br />
-*lock out/log incorrect login attempts<br />
-*user enumeration protection<br />
-*.htaccess verification<br />
-*doc links<br />
+* WordPress version 2.6 and higher (tested at 3.1)
+* PHP5 (tested with PHP Interpreter >= 5.2.9)
 
-[Changelog](http://semperfiwebdesign.com/documentation/wp-security-scan/changelog/ "WP Security Scan Changelog")<br />
-[Documentation](http://semperfiwebdesign.com/category/documentation/wp-security-scan/ "WP Security Scan
-Documentation")
+For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
+
 
 == Installation ==
 
-1. Create backup.
-2. Upload the zip file to the `/wp-content/plugins/` directory
-3. Unzip.
+1. Make a backup of your current installation
+2. Unpack the download-package
+3. Upload the extracted files to the /wp-content/plugins/ directory
 4. Activate the plugin through the 'Plugins' menu in WordPress
 
+If you do encounter any bugs, or have comments or suggestions, please contact the WebsiteDefender team on support@websitedefender.com.
 
-Please let me know any bugs, improvements, comments, suggestions.
+For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
+
+== Changelog ==
+= v3.0.0 (03/22/2011) =
+* Feature: Relese new stable version
+* Feature: Rebranding of the plugin
+* Feature: Integrated WebsiteDefender registration in Settings
+
+For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Frequently Asked Questions ==
 
@@ -80,8 +82,8 @@ are version dependant.
 There is currently a small compatibility issue.  This can be temporarily
 solved by opening securityscan.php and commenting out the line
 `add_action("init",mrt_remove_wp_version,1);`
-I have contacted Dagon Designs about creating a solution, which should
-hopefully be in a future upgrade to their plugin.
+
+For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Screenshots ==
 
@@ -90,31 +92,11 @@ hopefully be in a future upgrade to their plugin.
 
 == WordPress Security ==
 
-<strong>Plugin currently in BETA version.
-
-== WordPress Security ==
-
 Security Scanner:
 
 1. Scans Wordpress installation for file/directory permissions vulnerabilites
-1. Recommends corrective actions
-1. Scans for general security vulnerabilities
-
-Join the BETA testers group if:
-
-* you have experience as a software tester
-* you have no experience as a software tester
-* you have a WordPress installation dedicated for testing
-* you have a general enthusiasm for WordPress use and/or development
+2. Recommends corrective actions
+3. Scans for general security vulnerabilities
 
 
-Visit our homepage at [Semper Fi Web Design](http://semperfiwebdesign.com/ "Raleigh Web Design") or our plugin page at [Semper Fi Plugins][sf plugins].
-We look forward to hearing your comments and suggestions.
-
-[sf plugins]: http://semperfiwebdesign.com/plugins/
-            "Raleigh Web Design"
-
-> WordPress Security Scanner for *2.3, 2.5*. Although if you're using lower
-> than 2.3 you should go ahead and install it because of **security**.
-
-`<?php code(); // backticks ?>`
+For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.

@@ -1,4 +1,31 @@
+.scanpass{
+	color:#339933;
+}
 
+
+.mrt_wpss_note{
+	text-align:center;
+	color:grey;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.wpss_icon{
+	background: url(./images/wpss_icon_large.png) no-repeat;
+	float: left;
+	height: 36px;
+	width: 36px;
+	margin-top:10px;
+}
+
+
+
+
+
+
+
+
+/* everything below here may be able to be removed*/
 
 #form_box {
 	float: left;

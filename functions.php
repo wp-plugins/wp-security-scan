@@ -148,4 +148,100 @@ if ($mrt_wp_ver < "2.8") $g2k5 = '<font color="red"><strong>WordPress version: '
 function mrt_javascript(){
 $siteurl = get_option('siteurl');
 ?><script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_DIR;?>/wp-security-scan/js/scripts.js"></script><?php
-}?>
+}
+
+/*** make http requests, maintain cookies ***/
+function wpss_http_request($url, $request, $content_type, $method) {
+	static $cookie = "";
+	$wsd_cookie = null;
+	// performs the HTTP request
+	$opts = array ('http' => array (
+								'method'  => $method,
+	                            'header'  => "Content-type: $content_type\r\n",
+	                            'content' => $request));
+	if ($cookie) $opts['http']['header'] .= "Cookie: $cookie";
+	$context  = stream_context_create($opts);
+	if ($fp = @fopen($url, 'r', false, $context)) {
+		$response = '';
+	    while($row = fgets($fp))
+			$response.= trim($row)."\n";
+			$meta = stream_get_meta_data($fp);
+			for ($j = 0; isset($meta['wrapper_data'][$j]); $j++) {
+	   			$httpline = $meta['wrapper_data'][$j];
+	   	   		@list($header,$parameters) = explode(";",$httpline,2);
+	   			@list($attr,$value) = explode(":",$header,2);
+	   			if (strtolower(trim($attr)) == "set-cookie") {
+	      			$wsd_cookie = trim($value);
+	      			break;
+	   			}
+			$cookie = $wsd_cookie;
+		}
+		return $response;
+	} else {
+		return false;
+	}
+}
+
+/*** json2 rpc post ***/
+function wpss_json2_post($url, $request) {
+        $request = json_encode($request);
+		$response = wpss_http_request($url, $request, 'application/json', 'POST');
+		if ($response !== false)
+			return json_decode($response,true);
+		else
+			return false;
+}
+
+/*** rpc call interface ***/
+function wpss_json2_func_call($method, $id, $params = Array(), $url = "http://82.79.70.124/jsrpc.php") {
+	$request = array('jsonrpc' => '2.0',
+		                 'id' => $id,
+		                 'method' => $method,
+		                 'params' => $params);
+	$response = wpss_json2_post($url, $request);
+	return $response;
+}
+
+function wpss_scanner_download($id, $url = "http://82.79.70.124/download.php") {
+	$scanner = wpss_http_request($url . "?id=$id", "", 'application/octet-stream', 'GET');
+	return $scanner;
+}
+
+/*** checks $response for errors; returns true if there were errors, false otherwise. ***/
+function wpss_json2_is_error($response) {
+	if ($response === false) return true;
+	if (isset($response['error'])) return true;
+	if ($response['result'] === false) return true;
+	if ((isset($response['result']['on'])&&($response['result']['on']!==true))) return true;
+	return false;
+}
+
+/*** checks $response for errors; returns a string if there were errors, false otherwise. ***/
+function wpss_json2_get_error($response) {
+	if (($response === false) || ((isset($response['result']))&&($response['result'] === false)))
+		return "An error occurred, go to your <a href='http://dashboard.websitedefender.com/'>Dashboard</a> for support.\n";
+	if (is_array($response['error'])) {
+		$e = $response['error'];		
+		if (($response['error']['code'] == 38) &&
+			($response['error']['message'] == 'Website already registered.'))
+				return 'This website is registered, login to your <a href="http://dashboard.websitedefender.com/">Dashboard</a>.';
+		else
+			return "Error code {$e['code']}: {$e['message']}, go to your <a href='http://dashboard.websitedefender.com/'>Dashboard</a> for support.\n";
+	}
+	if (isset($response['result']['on'])&&($response['result']['on']!=true))
+		return $response['result']['reason'];
+	return false;
+}
+
+function wpss_get_hostname() {
+	if (isset($_SERVER['SERVER_NAME'])) {
+		return $_SERVER['SERVER_NAME'];
+	} else {
+		$url = parse_url(get_option('siteurl'));
+		if (is_array($url)&&isset($url['host']))
+			return $url['host'];		
+	}
+	return false;
+}
+
+?>

@@ -1,15 +1,18 @@
 <?php
 /*
 Plugin Name: WP Security Scan
-Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
+Plugin URI: http://www.websitedefender.com/wp-secure-plugin/
+
 Description: Perform security scan of WordPress installation.
-Author: Michael Torbert, pbaylies, WebsiteDefender
-Version: 2.7.4
-Author URI: http://semperfiwebdesign.com/
+Author: WebsiteDefender
+Version: 3.0.0
+Author URI: http://www.websitedefender.com/
 */
 
 /*
-Copyright (C) 2008-2010 Michael Torbert / semperfiwebdesign.com (michael AT semperfiwebdesign DOT com)
+Copyright (C) 2008-2010 Acunetix / http://www.websitedefender.com
+(info AT websitedefender DOT com)
+
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,61 +37,129 @@ if ( ! defined( 'WP_PLUGIN_URL' ) )
 if ( ! defined( 'WP_PLUGIN_DIR' ) )
       define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
 
+//main files
+if(!function_exists('json_encode'))require_once(WP_PLUGIN_DIR . "/wp-security-scan/json.php");
+
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/support.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/scanner.php");
-require_once(WP_PLUGIN_DIR  . "/wp-security-scan/password_tools.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/password_tools.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/database.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/functions.php");
-if(!class_exists("SimplePie")){
-require_once(WP_PLUGIN_DIR . "/wp-security-scan/simplepie.inc");
-}
-//require_once(WP_PLUGIN_DIR . "/plugins/wp-security-scan/scripts.js");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/recaptchalib.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/wsd.php");
 
+//menus
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/security.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/scanner.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/pwtool.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/db.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/support.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/header.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/footer.php");
 
-add_action( 'admin_notices', mrt_update_notice, 5 );
+//## this will pop up on admin login
+add_action( 'admin_notices', 'mrt_update_notice', 5 );
+
+//## this is the container for header scripts
 add_action('admin_head', 'mrt_hd');
-add_action("init",mrt_wpdberrors,1);
-add_action("parse_query",mrt_wpdberrors,1);
-add_action('admin_menu', 'add_men_pg');
-add_action("init",mrt_remove_wp_version,1);   //comment out this line to make ddsitemapgen work
 
+//before sending headers
+add_action("init",'mrt_wpdberrors',1);
+
+//after executing a query
+add_action("parse_query",'mrt_wpdberrors',1);
+
+//##pentru a adauga meniuri extra dupa panoul admin
+add_action('admin_menu', 'add_men_pg');
+
+add_action("init", 'mrt_remove_wp_version',1);   //comment out this line to make ddsitemapgen work
+
+//before rendering each admin init
+add_action('admin_init','mrt_wpss_admin_init');
+
+
+function mrt_wpss_admin_init(){
+	wp_enqueue_style('mrt_wpss_style',WP_PLUGIN_URL . '/wp-security-scan/css/style.css');
+	wp_enqueue_style('wsd_style', WP_PLUGIN_URL . '/wp-security-scan/css/wsd.css');
+}
 
 remove_action('wp_head', 'wp_generator');
-//add_action('admin_head', 'mrt_root_scripts');
 function add_men_pg() {
          if (function_exists('add_menu_page')){
-            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg',WP_PLUGIN_URL . '/wp-security-scan/lock.png');
-            add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
-            add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
-            add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
-            add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
+            add_menu_page('Security', 'Security', 'edit_pages', __FILE__, 'mrt_opt_mng_pg');
+
+            add_submenu_page(__FILE__, 'Scanner', 'Scanner', 'edit_pages', 'scanner', 'mrt_sub0');
+            add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 'edit_pages', 'passwordtool', 'mrt_sub1');
+            add_submenu_page(__FILE__, 'Database', 'Database', 'edit_pages', 'database', 'mrt_sub3');
+            add_submenu_page(__FILE__, 'Support', 'Support', 'edit_pages', 'support', 'mrt_sub2');
          }
 }
 
-/*function mrt_root_scripts(){
-$siteurl = get_option('siteurl');
-echo '<script language="JavaScript" type="text/javascript" src="' . WP_PLUGIN_URL . '/wp-security-scan/scripts.js"></script>';
-}*/
+function wpss_admin_head() {
+	$scheme = 'http';
+	if ( is_ssl() )
+		$scheme = 'https';
+?>
+	<style type="text/css">
+		#toplevel_page_wp-security-scan-securityscan div.wp-menu-image {
+			background: url(<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/wpss_icon_small_combined.png) center top no-repeat;
+		}
 
-function mrt_update_notice(){
-/*$mrt_version = "2.2.52";
-$mrt_latest = fgets(fopen("http://semperfiwebdesign.com/wp-security-scan.html", "r"));
-echo $mrt_latest . " and " . $mrt_version;
-if($mrt_latest > $mrt_version)
-    echo "New Version Available";
-   else
-      echo "Latest Version";
-  */  }
+		#toplevel_page_wp-security-scan-securityscan.current div.wp-menu-image,
+		#toplevel_page_wp-security-scan-securityscan:hover div.wp-menu-image {
+			background-position: center bottom;
+		}
+	</style>
+<?php
+}
+add_action( 'admin_head', 'wpss_admin_head' );
 
 
-	function wpss_mrt_meta_box(){  
-	
+// function for WP < 2.8
+function get_plugins_url($path = '', $plugin = '') {
+
+  if ( function_exists('plugin_url') )
+    return plugins_url($path, $plugin);
+
+  if ( function_exists('is_ssl') )
+    $scheme = ( is_ssl() ? 'https' : 'http' );
+  else
+    $scheme = 'http';
+  if ( function_exists('plugins_url') )
+    $url = plugins_url();
+  else
+    $url = WP_PLUGIN_URL;
+  if ( 0 === strpos($url, 'http') ) {
+    if ( function_exists('is_ssl') && is_ssl() )
+      $url = str_replace( 'http://', "{$scheme}://", $url );
+  }
+
+  if ( !empty($plugin) && is_string($plugin) )
+  {
+    $folder = dirname(plugin_basename($plugin));
+    if ('.' != $folder)
+      $url .= '/' . ltrim($folder, '/');
+  }
+
+  if ( !empty($path) && is_string($path) && strpos($path, '..') === false )
+    $url .= '/' . ltrim($path, '/');
+
+  return apply_filters('plugins_url', $url, $path, $plugin);
+}
+
+
+function mrt_update_notice()
+{
+}
+
+function wpss_mrt_meta_box()
+{  
 		global $wpdb;
 		mrt_check_version();
 		mrt_check_table_prefix();
 		mrt_version_removal();
 		mrt_errorsoff();
-		echo '<div style="color:green">WP ID META tag removed form WordPress core</div>';
+		echo '<div class="scanpass">WP ID META tag removed form WordPress core</div>';
 
 		$name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
 		if ($name=="admin"){
@@ -107,214 +178,41 @@ if($mrt_latest > $mrt_version)
 
 		?>
 
-		<div style="text-align:center;color:grey;margin-top:20px;"><em>**WP Security Scan plugin must remain active for security features to remain**</em></div>
+		<div class="mrt_wpss_note"><em>**WP Security Scan plugin must remain active for security features to remain**</em></div>
 		
-		<div style="text-align:center;font-weight:bold;">Future Releases</div>
-		<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li><li>WordPress admin protection/security</li></ul>
 		<?php	}
-		
-	function wpss_mrt_meta_box4(){ ?>
-		<div style="padding-left:10px;">
-			<div style="padding: 10px 10px 10px 10px;border: 1px solid #ddd;">
-			<div style="margin-bottom:30px;">
-				We would also like to recommend <a href="http://www.pagelines.com/wpthemes/" target="_blank">PageLines</a> for Professional WordPress Themes.  They are attractive, affordable, performance optimized CMS themes that integrate perfectly with All in One SEO Pack to put your professional website at the top of the rankings.
-			</div>
 
-				<a target="_blank" title="iBlogPro" href="http://www.pagelines.com/wpthemes/">
-				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/iblogpro.jpg" alt="<?php _e('iBlogPro theme', 'all_in_one_seo_pack') ?>" />	</a>
-
-				<a target="_blank" title="PageLines Themes" href="http://www.pagelines.com/wpthemes/">	
-				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/pagelines.jpg" alt="<?php _e('Pagelines Themes', 'all_in_one_seo_pack') ?>" /> </a>	
-
-				<a target="_blank" title="WhiteHouse" href="http://www.pagelines.com/wpthemes/">	
-				<img src="<?php echo WP_PLUGIN_URL; ?>/wp-security-scan/images/whitehouse.jpg" alt="<?php _e('WhiteHouse theme', 'all_in_one_seo_pack') ?>" />	</a>
-
-
-			</div>
-			
-			
-		</div>
-			
-		<?php	}	
-		
+	
 	function wpss_mrt_meta_box2(){ ?>
-		<div style="padding-left:10px;">
+		<ul id="wsd-information-scan-list"">
 			<?php mrt_get_serverinfo(); ?>
-		</div>
+		</ul>
 			
 		<?php	}
 	
-	
-	function wpss_mrt_meta_box3(){  
-		
-		?>
-<div style="padding:10px;">
-	<div style="font-size:13pt;text-align:center;">Highest</div>		<?php
-//		include('WP_PLUGIN_DIR . '/all-in-one-seo-pack/simplepie.inc');
-
-		$feed = new SimplePie();
-
-
-			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/highest-donations/feed/');
-		$feed->enable_cache(false);
-    	$feed->strip_htmltags(array('p'));
-		//					$feed->set_cache_location(WP_PLUGIN_DIR . '/wp-security-scan/');
-			$feed->init();
-		$feed->handle_content_type();
-		?>
-				<?php if ($feed->data): ?>
-					<?php $items = $feed->get_items(); ?>
-
-					<?php foreach($items as $item): ?>
-<p>
-		<strong><?php echo $item->get_title(); ?></strong>
-		<?php echo $item->get_content(); ?>
-</p>
-
-					<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-
-
-	<div style="font-size:13pt;text-align:center;">Recent</div>		<?php
-//		include(WP_PLUGIN_DIR . '/all-in-one-seo-pack/simplepie.inc');
-
-		$feed = new SimplePie();
-
-
-			$feed->set_feed_url('feed://donations.semperfiwebdesign.com/category/wp-security-scan/feed/');
-$feed->enable_cache(false);
-			$feed->strip_htmltags(array('p'));
-//													$feed->set_cache_location(WP_PLUGIN_DIR . '/wp-security-scan/');
-  $feed->init();
-
-		$feed->handle_content_type();
-		?>
-				<?php if ($feed->data): ?>
-					<?php $items = $feed->get_items(); ?>
-
-					<?php foreach($items as $item): ?>
-<p>
-		<strong><?php echo $item->get_title(); ?></strong>
-		<?php echo $item->get_content(); ?>
-</p>
-
-					<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-				
-				<hr width="75%"/>
-
-					<div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
-					<br /><br />
-					<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
-
-</div>
-	
-	<!--	<br /><br /><h4>Highest Donations</h4></div>  -->
-	
-	<?php 
-
-		/*$ch = curl_init("http://semperfiwebdesign.com/top_donations.php");
-		$fp = fopen("top_donations.php", "w");
-		curl_setopt($ch, CURLOPT_FILE, $fp);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_exec($ch);
-		curl_close($ch);
-		fclose($fp);
-		*/
-
-	/*	$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/top_donations.php");
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_exec($ch);
-		curl_close($ch);
-*/
-		?>
-<!--		<br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div>
-
--->
-<?php
-
-/*
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "http://semperfiwebdesign.com/recent_donations.php");
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_exec($ch);
-		curl_close($ch);
-*/
-		/*
-		$ch = curl_init("http://semperfiwebdesign.com/recent_donations.php");
-		$fp = fopen("recent_donations.php", "w");
-		curl_setopt($ch, CURLOPT_FILE, $fp);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_exec($ch);
-		curl_close($ch);
-		fclose($fp);
-		*/
-		
-		}
-	
-
-function mrt_opt_mng_pg() {
-        ?>
-
-
-<div class="wrap">
-    <h2>WP - Security Admin Tools</h2>  
-
-<!--<div id='update-nag'>A new version of WP Security Scan is available!</div>-->
-<?php //$rss = fetch_rss('http://alexrabe.boelinger.com/?tag=nextgen-gallery&feed=rss2');?>
-
-
-<?php  
-
-add_meta_box("wpss_mrt", 'Initial Scan', "wpss_mrt_meta_box", "wpss");  
-add_meta_box("wpss_mrt", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");  
-add_meta_box("wpss_mrt", 'Donations', "wpss_mrt_meta_box3", "wpss3");  
-add_meta_box("wpss_mrt", 'PageLines WordPress Themes', "wpss_mrt_meta_box4", "wpss4");  
-
-?>
-
-<div id="dashboard-widgets-wrap">
-<div class="metabox-holder">
-	<div style="float:left; width:48%;" class="inner-sidebar1">
-		<?php do_meta_boxes('wpss','advanced','');  ?>	
-	</div>
-
-	<div style="float:right; width:48%; " class="inner-sidebar1">
-		<?php do_meta_boxes('wpss2','advanced',''); ?>	
-	</div>
-						
-<div style="clear:both"></div>
-						
-	<div style="float:left;width:48%;" class="inner-sidebar1">
-		<?php do_meta_boxes('wpss4','advanced','');  ?>	
-	</div>
-	
-	<div style="float:right; width:48%;" class="inner-sidebar1">
-		<?php do_meta_boxes('wpss3','advanced',''); ?>	
-	</div>
-</div>
-
-<div style="clear:both;"></div>
-</div>
-	
-	<br /><em>For comments, suggestions, bug reporting, etc please <a href="http://semperfiwebdesign.com/contact/">click here</a>.</em>
-
-       
-             Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
-        </div>
-<?php } 
-
 function mrt_hd()
 {
- $siteurl = get_option('siteurl');?>
+?>
 <script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/scripts.js"></script>
-<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/scripts.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/wsd.js"></script>
 <script type="text/javascript">
-//window.onload=function(){enableTooltips()};
+  var wordpress_site_name = "<?php echo htmlentities(get_bloginfo('siteurl'));?>"
 </script>
-<!--<link rel="stylesheet" type="text/css" href="<?php //echo WP_PLUGIN_URL;?>/plugins/wp-security-scan/style.css" />-->
+<script type="text/javascript">
+  //<![CDATA[
+  var _wsdPassStrengthProvider = null;
+  jQuery(document).ready( function($) {
+    _wsdPassStrengthProvider = new wsdPassStrengthProvider($);
+    _wsdPassStrengthProvider.init();
+  });
+  jQuery(document).ready( function($) {
+    $('.postbox h3').click( function() { $($(this).parent().get(0)).toggleClass('closed'); } );
+    $('.postbox .handlediv').click( function() { $($(this).parent().get(0)).toggleClass('closed'); } );
+    $('.postbox.close-me').each(function() {
+      $(this).addClass("closed");
+    });
+  });
+  //]]>
+</script>
 <?php }
 ?>
