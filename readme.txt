@@ -31,7 +31,7 @@ For more information on the WP Security Scan and other WordPress security news, 
 == Installation ==
 
 1. Make a backup of your current installation
-2. Unpack the download-package
+2. Unpack the download package
 3. Upload the extracted files to the /wp-content/plugins/ directory
 4. Activate the plugin through the 'Plugins' menu in WordPress
 
@@ -41,9 +41,9 @@ For more information on the WP Security Scan and other WordPress security news, 
 
 == Changelog ==
 = v3.0.0 (03/22/2011) =
-* Feature: Relese new stable version
+* Feature: Release new stable version
 * Feature: Rebranding of the plugin
-* Feature: Integrated WebsiteDefender registration in Settings
+* Feature: Integrated WebsiteDefender.com registration in Settings
 
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
@@ -57,22 +57,22 @@ functionality will cease if you deactivate the plugin.
 
 = How do I change the file permissions on my WordPress installation?  =
 
-From the linux command line (for advanced users):
+From the Linux command line (for advanced users):
     chmod xxx filename.ext
-    (replace xxx with with the permissions settings for the file or folder)
+    (replace xxx with with the permissions settings for the file or folder).
 
 From your FTP client:
     Most FTP clients, such as filezilla, etc, allow for changing file
-permissions.  Please consult your clients documentation for your specific
+permissions.  Please consult your client's documentation for your specific
 directions.
 
 For more information, please visit http://codex.wordpress.org/Changing_File_Permissions
 
 = Why do I need to hide my version of WordPress?  =
 
-Alot of attackers and automated tools will try and determine software versions
+Many attackers and automated tools will try and determine software versions
 before launching exploit code. Removing your WordPress blog version may
-discourage some attackers and certainly will mitigate virus and worm programs
+discourage some attackers and certainly will mitigate virus and malware programs
 that rely on software versions.
 
 NOTE: Hiding your version of WordPress may break any plugins you have which
@@ -82,6 +82,7 @@ are version dependant.
 There is currently a small compatibility issue.  This can be temporarily
 solved by opening securityscan.php and commenting out the line
 `add_action("init",mrt_remove_wp_version,1);`
+
 
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
