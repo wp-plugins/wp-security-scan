@@ -36,9 +36,10 @@ if ( ! defined( 'WP_PLUGIN_URL' ) )
       define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
 if ( ! defined( 'WP_PLUGIN_DIR' ) )
       define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
-
+      
 //main files
-if(!function_exists('json_encode'))require_once(WP_PLUGIN_DIR . "/wp-security-scan/json.php");
+if(!function_exists('json_encode'))
+  require_once(WP_PLUGIN_DIR . "/wp-security-scan/json.php");
 
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/support.php");
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/scanner.php");

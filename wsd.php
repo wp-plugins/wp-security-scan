@@ -436,7 +436,7 @@ function wsd_render_new_user($error = '')
 		</div>
 		<div class="wsd-new-user-section">
 		  <?php
-			echo recaptcha_get_html($recaptcha_publickey, NULL, true);
+			echo wsd_recaptcha_get_html($recaptcha_publickey, NULL, true);
 		  ?>
 		</div>
       <input type="submit" name="wsd-new-user" id="wsd-new-user" value="Register">
