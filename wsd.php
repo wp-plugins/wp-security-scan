@@ -1,6 +1,6 @@
 <?php
 define("WSD_URL", "https://dashboard.websitedefender.com/");
-//define("WSD_URL", "http://192.168.0.179/saasui/");
+//define("WSD_URL", "http://192.168.0.197/saas/");
 define("WSD_URL_RPC", WSD_URL . "jsrpc.php");
 define("WSD_URL_DOWN", WSD_URL . "download.php");
 define("WSD_SOURCE", 2);
@@ -432,7 +432,7 @@ function wsd_render_new_user($error = '')
 		</div>
 		<div class="wsd-new-user-section">
 			<label for="wsd_new_user_password_re">Retype Password:</label>
-			<input type="password" name="wsd_new_user_password_re" id="wsd_new_user_password_re"/>			
+			<input type="password" name="wsd_new_user_password_re" id="wsd_new_user_password_re"/>
 		</div>
 		<div class="wsd-new-user-section">
 		  <?php
@@ -451,30 +451,31 @@ function wsd_process_login()
 	$email = isset($_POST['wsd_login_form_email']) ? $_POST['wsd_login_form_email'] : null;
 	$password = isset($_POST['wsd_login_form_password']) ? $password = $_POST['wsd_login_form_password'] : null;
 
-	if (empty($email))
-  {
+	if (empty($email)) {
 		wsd_render_user_login('Email address is required.');
 		return;
 	}
 
-	if (empty($password))
-  {
+	if (empty($password)) {
 		wsd_render_user_login('Password is required.');
 		return;
 	}
 
-	$login = wsd_jsonRPC(WSD_URL_RPC, "cUser.login", array($email, md5($password)));
+	// $password is received as MD5 hash
+	$login = wsd_jsonRPC(WSD_URL_RPC, "cUser.login", array($email, $password));
 
-	if ($login == NULL)
-  {
+	if ($login == NULL) {
 		wsd_render_user_login('Invalid login');
 		return;
 	}
-  
-  $user = get_option("WSD-USER");
-  if($user === False) add_option("WSD-USER", $email); else update_option("WSD-USER", $email);  
-  
-  wsd_add_or_process_target();
+
+	$user = get_option("WSD-USER");
+	if ($user === False)
+		add_option("WSD-USER", $email);
+	else
+		update_option("WSD-USER", $email);
+
+	wsd_add_or_process_target();
 }
 
 function wsd_render_add_target_id()
@@ -633,7 +634,8 @@ function wsd_process_new_user_form()
                                       "email" => $email,
                                       "name" => $name,
                                       "surname" => $surname,
-                                      "pass" => md5($password),
+									// the password comes from the client already as a hash
+                                      "pass" => $password,
                                       "source" => WSD_SOURCE
                                       )
                                 ));

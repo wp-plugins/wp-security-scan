@@ -155,65 +155,92 @@ function mrt_update_notice()
 
 function wpss_mrt_meta_box()
 {  
+?>
+	<div id="wsd-initial-scan" class="wsd-inside">
+		<div class="wsd-initial-scan-section">
+			<?php mrt_check_version();?>
+		</div>
+
+		<div class="wsd-initial-scan-section">
+			<?php mrt_check_table_prefix();?>
+		</div>
+
+		<div class="wsd-initial-scan-section">
+			<?php mrt_version_removal();?>
+		</div>
+
+		<div class="wsd-initial-scan-section">
+			<?php mrt_errorsoff();?>
+		</div>
+<?php
 		global $wpdb;
-		mrt_check_version();
-		mrt_check_table_prefix();
-		mrt_version_removal();
-		mrt_errorsoff();
+
 		echo '<div class="scanpass">WP ID META tag removed form WordPress core</div>';
 
+		echo '<div class="wsd-initial-scan-section">';
 		$name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
-		if ($name=="admin"){
-		  echo '<a href="http://semperfiwebdesign.com/documentation/wp-security-scan/change-wordpress-admin-username/" title="WordPress Admin" target="_blank"><font color="red">"admin" user exists.</font></a>';
-		  }
-		  else{
-		      echo '<font color="green">No user "admin".</font>';
-		      }
-		?><br /><?php 
+		if ($name == "admin")
+			echo '<a href="http://semperfiwebdesign.com/documentation/wp-security-scan/change-wordpress-admin-username/" title="WordPress Admin" target="_blank"><font color="red">"admin" user exists.</font></a>';
+		else
+			echo '<font color="green">No user "admin".</font>';
+		echo '</div>';
+
+		echo '<div class="wsd-initial-scan-section">';
 		$filename = '.htaccess';
-		if (file_exists($filename)) {
+		if (file_exists($filename))
 		    echo '<font color="green">.htaccess exists in wp-admin/</font>';
-		} else {
+		else
 		    echo '<font color="red">The file .htaccess does not exist in wp-admin/.</font>';
-		}
+		echo '</div>';
 
 		?>
 
-		<div class="mrt_wpss_note"><em>**WP Security Scan plugin must remain active for security features to remain**</em></div>
-		
-		<?php	}
+		<div class="mrt_wpss_note">
+			<em>**WP Security Scan plugin must remain active for security features to remain**</em>
+		</div>
+	</div>
+<?php
+}
 
 	
-	function wpss_mrt_meta_box2(){ ?>
-		<ul id="wsd-information-scan-list"">
-			<?php mrt_get_serverinfo(); ?>
-		</ul>
-			
-		<?php	}
+function wpss_mrt_meta_box2()
+{
+?>
+	<ul id="wsd-information-scan-list"">
+		<?php mrt_get_serverinfo(); ?>
+	</ul>
+<?php
+}
 	
 function mrt_hd()
 {
 ?>
-<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/scripts.js"></script>
-<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/wsd.js"></script>
-<script type="text/javascript">
-  var wordpress_site_name = "<?php echo htmlentities(get_bloginfo('siteurl'));?>"
-</script>
-<script type="text/javascript">
-  //<![CDATA[
-  var _wsdPassStrengthProvider = null;
-  jQuery(document).ready( function($) {
-    _wsdPassStrengthProvider = new wsdPassStrengthProvider($);
-    _wsdPassStrengthProvider.init();
-  });
-  jQuery(document).ready( function($) {
-    $('.postbox h3').click( function() { $($(this).parent().get(0)).toggleClass('closed'); } );
-    $('.postbox .handlediv').click( function() { $($(this).parent().get(0)).toggleClass('closed'); } );
-    $('.postbox.close-me').each(function() {
-      $(this).addClass("closed");
-    });
-  });
-  //]]>
-</script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/json.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/md5.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/scripts.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo WP_PLUGIN_URL;?>/wp-security-scan/js/wsd.js"></script>
+	<script type="text/javascript">
+		var wordpress_site_name = "<?php echo htmlentities(get_bloginfo('siteurl'));?>"
+	</script>
+	<script type="text/javascript">
+	  var _wsdPassStrengthProvider = null;
+
+	  jQuery(document).ready(function($) {
+		_wsdPassStrengthProvider = new wsdPassStrengthProvider($);
+		_wsdPassStrengthProvider.init();
+
+		$('#wpss_mrt_1.postbox h3, #wpss_mrt_2.postbox h3, #wpss_mrt_3.postbox h3').click(function() {
+			var parent = $(this).parent();
+			if (parent) parent.toggleClass('closed');
+		});
+		$('#wpss_mrt_1.postbox .handlediv, #wpss_mrt_2.postbox .handlediv, #wpss_mrt_3.postbox .handlediv').click(function() {
+			var parent = $(this).parent();
+			if (parent) parent.toggleClass('closed');
+		});
+		$('#wpss_mrt_1.postbox.close-me, #wpss_mrt_2.postbox.close-me, #wpss_mrt_3.postbox.close-me').each(function() {
+			$(this).addClass("closed");
+		});
+	  });
+	</script>
 <?php }
 ?>

@@ -3,9 +3,9 @@
 function mrt_opt_mng_pg() {
 	mrt_wpss_menu_head('WP-Security Admin tools by WebsiteDefender');
 
-			add_meta_box("wpss_mrt", 'Initial Scan', "wpss_mrt_meta_box", "wpss");  
-			add_meta_box("wpss_mrt", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");  
-			add_meta_box("wpss_mrt", 'About Website Defender', "wsd_render_main", "wpss_wsd");
+			add_meta_box("wpss_mrt_1", 'Initial Scan', "wpss_mrt_meta_box", "wpss");
+			add_meta_box("wpss_mrt_2", 'System Information Scan', "wpss_mrt_meta_box2", "wpss2");
+			add_meta_box("wpss_mrt_3", 'About Website Defender', "wsd_render_main", "wpss_wsd");
 
 echo '	
 			<div class="metabox-holder">

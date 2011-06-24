@@ -1,3 +1,6 @@
+if(console===undefined){var console={log:function(){return;}};}
+
+
 function wsdPassStrengthProvider($) {
 	this.badPass=['abc123','password','computer','123456','tigger','a1b2c3','qwerty','password1','carmen','mickey','secret','summer','internet','service','canada','ranger','shadow','baseball','donald','harley','hockey','letmein','maggie','mustang','snoopy','buster','dragon','jordan','michael','michelle','patrick','123abc','andrew','calvin','changeme','diamond','fuckme','fuckyou','matthew','miller','trustno1','12345678','123456789','avalon','brandy','chelsea','coffee','falcon','freedom','gandalf','helpme','merlin','molson','newyork','soccer','thomas','wizard','Monday','asdfgh','bandit','batman','butthead','dorothy','eeyore','fishing',
 'football','george','iloveyou','jennifer','jonathan','marina','master','monday','monkey','natasha','ncc1701','newpass','pamela','pepper','piglet','poohbear','pookie','rabbit','rachel','rocket','sparky','spring','steven','success','sunshine','thx1138','victoria','whatever','zapata','8675309','Internet','amanda','august','barney','biteme','boomer','cowboy','doctor','fisher','foobar','island','joshua','marley','orange','please','rascal','richard','scooter','shalom','silver','skippy','stanley','taylor','welcome','zephyr','111111','aaaaaa','access','albert','alexander','andrea','anthony','asdfjkl;','ashley','basketball',
@@ -149,8 +152,35 @@ this.init = function() {
 				_wsdPassStrengthProvider.showPassStrength(score);
 				return false;
 			}
+			else {
+				var password = $wsd_new_user_password.val();
+				var passwordHash = MD5(password);
+
+				$wsd_new_user_password.val(passwordHash);
+				$wsd_new_user_password_re.val(passwordHash);
+			}
 			return true;
 		});
+
+		var $wsd_login_form = $('#wsd_login_form');
+		$wsd_login_form.delegate('#wsd-login', 'click',
+			function() {
+				var $wsd_login_form_password = $('#wsd_login_form_password');
+				var password = $wsd_login_form_password.val();
+				if (password != '') {
+					var passwordHash = wsdMD5(password);
+					$wsd_login_form_password.val(passwordHash);
+				}
+				else {
+					alert('Password is required!');
+					$wsd_login_form_password.focus();
+					return false;
+				}
+				return true;
+			});
+
+
+
 };
 
 }// end of wsdPassStrengthProvider
