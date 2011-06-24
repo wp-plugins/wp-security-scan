@@ -194,7 +194,7 @@ span.wsd-target-status-section-enabled {
 	text-align: center;
 	font-weight: bold;
 
-	background: url('./images/agent-green.png') no-repeat scroll left top transparent;
+	background: url('../images/agent-green.png') no-repeat scroll left top transparent;
 }
 
 span.wsd-target-status-section-disabled {
@@ -211,7 +211,7 @@ span.wsd-target-status-section-disabled {
 	text-align: center;
 	font-weight: bold;
 
-	background: url('./images/agent-red.png') no-repeat scroll left top transparent;
+	background: url('../images/agent-red.png') no-repeat scroll left top transparent;
 }
 
 
