@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Security Scan
-Plugin URI: http://www.websitedefender.com/wp-secure-plugin/
+Plugin URI: http://www.websitedefender.com/news/free-wordpress-security-scan-plugin/
 
 Description: Perform security scan of WordPress installation.
 Author: WebsiteDefender
@@ -10,7 +10,7 @@ Author URI: http://www.websitedefender.com/
 */
 
 /*
-Copyright (C) 2008-2010 Acunetix / http://www.websitedefender.com
+Copyright (C) 2008-2010 Acunetix / http://www.websitedefender.com/
 (info AT websitedefender DOT com)
 
 

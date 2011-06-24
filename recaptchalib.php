@@ -211,7 +211,7 @@ function wsd__recaptcha_aes_pad($val) {
 
 /* Mailhide related code */
 
-function _recaptcha_aes_encrypt($val,$ky) {
+function wsd__recaptcha_aes_encrypt($val,$ky) {
 	if (! function_exists ("mcrypt_encrypt")) {
 		die ("To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.");
 	}
@@ -235,7 +235,7 @@ function wsd_recaptcha_mailhide_url($pubkey, $privkey, $email) {
 
 
 	$ky = pack('H*', $privkey);
-	$cryptmail = _recaptcha_aes_encrypt ($email, $ky);
+	$cryptmail = wsd__recaptcha_aes_encrypt ($email, $ky);
 
 	return "http://www.google.com/recaptcha/mailhide/d?k=" . $pubkey . "&c=" . wsd__wsd_recaptcha_mailhide_urlbase64 ($cryptmail);
 }
