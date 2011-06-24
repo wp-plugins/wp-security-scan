@@ -5,7 +5,7 @@ Plugin URI: http://www.websitedefender.com/wp-secure-plugin/
 
 Description: Perform security scan of WordPress installation.
 Author: WebsiteDefender
-Version: 3.0.0
+Version: 3.0.1
 Author URI: http://www.websitedefender.com/
 */
 
@@ -91,7 +91,7 @@ function add_men_pg() {
 
             add_submenu_page(__FILE__, 'Scanner', 'Scanner', 'edit_pages', 'scanner', 'mrt_sub0');
             add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 'edit_pages', 'passwordtool', 'mrt_sub1');
-            add_submenu_page(__FILE__, 'Database', 'Database', 'edit_pages', 'database', 'mrt_sub3');
+            //add_submenu_page(__FILE__, 'Database', 'Database', 'edit_pages', 'database', 'mrt_sub3');
             add_submenu_page(__FILE__, 'Support', 'Support', 'edit_pages', 'support', 'mrt_sub2');
          }
 }

@@ -40,6 +40,12 @@ If you do encounter any bugs, or have comments or suggestions, please contact th
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Changelog ==
+
+= v3.0.1 (03/24/2011) =
+* Regression: Temporarily disabled database change feature
+* Fixed: Resolved conflict with plugins using the reCAPTCHA library
+* Bugfix: Fixed CSS image background not showing corectly
+
 = v3.0.0 (03/22/2011) =
 * Feature: Release new stable version
 * Feature: Rebranding of the plugin
