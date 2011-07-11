@@ -1,27 +1,23 @@
 <?php
 define("WSD_URL", "https://dashboard.websitedefender.com/");
-//define("WSD_URL", "http://192.168.0.197/saas/");
 define("WSD_URL_RPC", WSD_URL . "jsrpc.php");
 define("WSD_URL_DOWN", WSD_URL . "download.php");
 define("WSD_SOURCE", 2);
-
 //error codes
-define('WSD_ERROR_LIMITATION'             ,0x27);
-define('WSD_ERROR_WPP_SERVICE_DOWN'			  ,0x50);
-define('WSD_ERROR_WPP_ERROR_INVALID_URL'	,0x51);
-define('WSD_ERROR_WPP_URL_REGISTERED'		  ,0x52);
-define('WSD_WSD_ERROR_WPP_NEWUSR_PARAM'		,0x53);
-define('WSD_ERROR_WPP_INVALID_CAPTCHA'    ,0x54);
-define('WSD_ERROR_WPP_USER_EXIST'         ,0x55);
-define('WSD_ERROR_WPP_URL_EXIST'          ,0x56);
-
+define('WSD_ERROR_LIMITATION' ,0x27);
+define('WSD_ERROR_WPP_SERVICE_DOWN' ,0x50);
+define('WSD_ERROR_WPP_ERROR_INVALID_URL' ,0x51);
+define('WSD_ERROR_WPP_URL_REGISTERED' ,0x52);
+define('WSD_WSD_ERROR_WPP_NEWUSR_PARAM' ,0x53);
+define('WSD_ERROR_WPP_INVALID_CAPTCHA' ,0x54);
+define('WSD_ERROR_WPP_USER_EXIST' ,0x55);
+define('WSD_ERROR_WPP_URL_EXIST' ,0x56);
 //http status
 define("HTTP_STATUS", 0);
 define("HTTP_HEADERS", 1);
 define("HTTP_BODY", 2);
 define("HTTP_CHUNK_HEADER", 3);
 define("HTTP_CHUNK_BODY", 4);
-
 //globals
 $GLOBALS['wsd_last_err'] = array('code'=>0, 'message'=>'');
 function wsd_site_url(){return get_option( "siteurl" )."/";}
@@ -387,7 +383,7 @@ function wsd_render_new_user($error = '')
   
   //intro text
   echo '<p class="wsd-inside" style="margin-top: 0px;">';
-	_e('WebsiteDefender.com is based upon web application scanning technology from <a href="http://www.acunetix.com/" target="_blank">Acunetix</a>; a pioneer in website security. WebsiteDefender requires no installation, no learning curve and no maintenance. Above all, there is no impact on site performance! WebsiteDefender regularly scans and monitors your WordPress website/blog effortlessly, efficient, easily and is available for Free! Start scanning your WordPress website/blog against malware and hackers, absolutely free!', FB_SWP_TEXTDOMAIN);
+	_e('WebsiteDefender.com is based upon web application scanning technology from <a href="http://www.acunetix.com/" target="_blank">Acunetix</a>; a pioneer in website security. <a href="http://www.websitedefender.com" target="_blank">WebsiteDefender</a> requires no installation, no learning curve and no maintenance. Above all, there is no impact on site performance! WebsiteDefender regularly scans and monitors your WordPress website/blog effortlessly, efficient, easily and is available for Free! Start scanning your WordPress website/blog against malware and hackers, absolutely free!', FB_SWP_TEXTDOMAIN);
   echo "</p>";
     
   ?>
@@ -398,13 +394,16 @@ function wsd_render_new_user($error = '')
 
 		<h4><?php _e('Register here to use all the WebsiteDefender.com advanced features', FB_SWP_TEXTDOMAIN)?></h4>
 		<p><?php _e('WebsiteDefender is an online service that protects your website from any hacker activity by monitoring and auditing the security of your website, giving you easy to understand solutions to keep your website safe, always! WebsiteDefender\'s enhanced WordPress Security Checks allow it to optimise any threats on a blog or site powered by WordPress.',  FB_SWP_TEXTDOMAIN)?></p>
-		<p><?php _e('With WebsiteDefender you can:',  FB_SWP_TEXTDOMAIN)?></p>
-		<p> &ndash; <?php _e('Detect Malware present on your website',  FB_SWP_TEXTDOMAIN)?></p>
-		<p> &ndash; <?php _e('Audit your website for security issues',  FB_SWP_TEXTDOMAIN)?></p>
-		<p> &ndash; <?php _e('Avoid getting blacklisted by Google',  FB_SWP_TEXTDOMAIN)?></p>
-		<p> &ndash; <?php _e('Keep your website content and data safe',  FB_SWP_TEXTDOMAIN)?></p>
-		<p> &ndash; <?php _e('Get alerted to suspicious hacker activity',  FB_SWP_TEXTDOMAIN)?></p>
-		<p><?php _e('WebsiteDefender.com does all this an more via an easy-to-understand web-based dashboard, which gives step by step solutions on how to make sure your website stays secure!',  FB_SWP_TEXTDOMAIN)?></p>
+		<p><?php _e('<strong>With WebsiteDefender you can:</strong>',  FB_SWP_TEXTDOMAIN)?></p>
+        <ul class="wsd_commonList">
+            <li><span>Detect Malware present on your website</span></li>
+            <li><span>Audit your website for security issues</span></li>
+            <li><span>Avoid getting blacklisted by Google</span></li>
+            <li><span>Keep your website content and data safe</span></li>
+            <li><span>Get alerted to suspicious hacker activity</span></li>
+        </ul>
+
+        <p><?php _e('WebsiteDefender.com does all this an more via an easy-to-understand web-based dashboard, which gives step by step solutions on how to make sure your website stays secure!',  FB_SWP_TEXTDOMAIN)?></p>
 
 		<h4><?php _e('Sign up for your FREE account here',  FB_SWP_TEXTDOMAIN)?></h4>
 
@@ -412,33 +411,33 @@ function wsd_render_new_user($error = '')
       if($error !== '') wsd_render_error($error);
     ?>
 
-    <form action="" method="post" id="wsd_new_user_form" name="wsd_new_user_form">
-		<div class="wsd-new-user-section">
-			<label for="wsd_new_user_email">Email:</label>
-			<input type="text" name="wsd_new_user_email" id="wsd_new_user_email" value="<?php echo get_option("admin_email"); ?>" />
-		</div>
-		<div class="wsd-new-user-section">
-			<label for="wsd_new_user_name">Name:</label>
-			<input type="text" name="wsd_new_user_name" id="wsd_new_user_name" value="<?php echo isset($_POST['wsd_new_user_name']) ? $_POST['wsd_new_user_name'] : '' ?>" />
-		</div>
-		<div class="wsd-new-user-section">
-			<label for="wsd_new_user_surname">Surname:</label>
-			<input type="text" name="wsd_new_user_surname" id="wsd_new_user_surname" value="<?php echo isset($_POST['wsd_new_user_surname']) ? $_POST['wsd_new_user_surname']: '' ?>" />
-		</div>
-		<div class="wsd-new-user-section">
-			<label for="wsd_new_user_password">Password:</label>
-			<input type="password" name="wsd_new_user_password" id="wsd_new_user_password"/>
-			<label class="password-meter" style="background-color: rgb(238, 0, 0);">Too Short</label>
-		</div>
-		<div class="wsd-new-user-section">
-			<label for="wsd_new_user_password_re">Retype Password:</label>
-			<input type="password" name="wsd_new_user_password_re" id="wsd_new_user_password_re"/>
-		</div>
-		<div class="wsd-new-user-section">
-		  <?php
-			echo wsd_recaptcha_get_html($recaptcha_publickey, NULL, true);
-		  ?>
-		</div>
+    <form action="#em" method="post" id="wsd_new_user_form" name="wsd_new_user_form">
+        <div id="em" class="wsd-new-user-section">
+                <label for="wsd_new_user_email">Email:</label>
+                <input type="text" name="wsd_new_user_email" id="wsd_new_user_email" value="<?php echo get_option("admin_email"); ?>" />
+        </div>
+        <div class="wsd-new-user-section">
+                <label for="wsd_new_user_name">Name:</label>
+                <input type="text" name="wsd_new_user_name" id="wsd_new_user_name" value="<?php echo isset($_POST['wsd_new_user_name']) ? $_POST['wsd_new_user_name'] : '' ?>" />
+        </div>
+        <div class="wsd-new-user-section">
+                <label for="wsd_new_user_surname">Surname:</label>
+                <input type="text" name="wsd_new_user_surname" id="wsd_new_user_surname" value="<?php echo isset($_POST['wsd_new_user_surname']) ? $_POST['wsd_new_user_surname']: '' ?>" />
+        </div>
+        <div class="wsd-new-user-section">
+                <label for="wsd_new_user_password">Password:</label>
+                <input type="password" name="wsd_new_user_password" id="wsd_new_user_password"/>
+                <label class="password-meter" style="background-color: rgb(238, 0, 0);">Too Short</label>
+        </div>
+        <div class="wsd-new-user-section">
+                <label for="wsd_new_user_password_re">Retype Password:</label>
+                <input type="password" name="wsd_new_user_password_re" id="wsd_new_user_password_re"/>
+        </div>
+        <div class="wsd-new-user-section">
+          <?php
+                echo wsd_recaptcha_get_html($recaptcha_publickey, NULL, true);
+          ?>
+        </div>
       <input type="submit" name="wsd-new-user" id="wsd-new-user" value="Register">
     </form>    
   </div>
@@ -480,7 +479,6 @@ function wsd_process_login()
 
 function wsd_render_add_target_id()
 {
-  //echo "wsd_render_add_target_id<br>";
   ?>
 	<div class="wsd-inside">
 		<?php if(!empty($error)) wsd_render_error($error); ?>
@@ -546,8 +544,6 @@ function wsd_add_or_process_target()
     return;
   }
   
-  //echo "wsd_add_or_process_target";
-  
   if(!array_key_exists("id", $newtarget))
   {
     wsd_render_error("Invalid WSD response received.");
@@ -589,7 +585,7 @@ function wsd_add_or_process_target()
   $testTarget = wsd_jsonRPC(WSD_URL_RPC, "cTargets.agenttest", $newtarget['id']);  
   $enbableTarget = wsd_jsonRPC(WSD_URL_RPC, "cTargets.enable", array($newtarget['id'], true));
   
-  if($targetInstalError != '')wsd_render_agent_install_issues($targetIstalError);
+  if($targetInstalError != '')wsd_render_agent_install_issues($targetInstalError);
     
   wsd_render_target_status();  
 }
@@ -677,7 +673,7 @@ function wsd_render_target_status()
     return False;
   }
 
-  echo '<p class="wsd-inside" style="margin-top: 0px;">';
+  echo '<p class="wsd-inside">';
     echo 'Thank you for registering with WebsiteDefender.  Please navigate to the <a target="_blank" href="https://dashboard.websitedefender.com/">WebsiteDefender dashboard</a> to see the alerts.';
   echo "</p>";
 
@@ -738,7 +734,6 @@ function wsd_render_target_status()
 
 function wsd_render_main()
 {
-  #echo "wsd_render_main<br>";  
   if(1==0)
   {
     delete_option('WSD-TARGETID');

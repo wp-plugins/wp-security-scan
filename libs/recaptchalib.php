@@ -106,7 +106,7 @@ function wsd__recaptcha_http_post($host, $path, $data, $port = 80) {
 function wsd_recaptcha_get_html ($pubkey, $error = null, $use_ssl = false)
 {
 	if ($pubkey == null || $pubkey == '') {
-		die ("To use reCAPTCHA you must get an API key from <a href='https://www.google.com/recaptcha/admin/create'>https://www.google.com/recaptcha/admin/create</a>");
+		die ('To use reCAPTCHA you must get an API key from <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a>');
 	}
 
 	if ($use_ssl) {
@@ -152,11 +152,11 @@ class wsd_ReCaptchaResponse {
 function wsd_recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $extra_params = array())
 {
 	if ($privkey == null || $privkey == '') {
-		die ("To use reCAPTCHA you must get an API key from <a href='https://www.google.com/recaptcha/admin/create'>https://www.google.com/recaptcha/admin/create</a>");
+		die ('To use reCAPTCHA you must get an API key from <a href="https://www.google.com/recaptcha/admin/create" target="_blank">https://www.google.com/recaptcha/admin/create</a>');
 	}
 
 	if ($remoteip == null || $remoteip == '') {
-		die ("For security reasons, you must pass the remote ip to reCAPTCHA");
+		die ('For security reasons, you must pass the remote ip to reCAPTCHA');
 	}
 
 
@@ -200,7 +200,7 @@ function wsd_recaptcha_check_answer ($privkey, $remoteip, $challenge, $response,
 * @param string $appname The name of your application
 */
 function wsd_recaptcha_get_signup_url ($domain = null, $appname = null) {
-	return "https://www.google.com/recaptcha/admin/create?" .  wsd__recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
+	return 'https://www.google.com/recaptcha/admin/create?' .  wsd__recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
 }
 
 function wsd__recaptcha_aes_pad($val) {
@@ -213,7 +213,7 @@ function wsd__recaptcha_aes_pad($val) {
 
 function wsd__recaptcha_aes_encrypt($val,$ky) {
 	if (! function_exists ("mcrypt_encrypt")) {
-		die ("To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.");
+		die ('To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.');
 	}
 	$mode=MCRYPT_MODE_CBC;
 	$enc=MCRYPT_RIJNDAEL_128;
@@ -229,8 +229,8 @@ function wsd__wsd_recaptcha_mailhide_urlbase64 ($x) {
 /* gets the reCAPTCHA Mailhide url for a given email, public key and private key */
 function wsd_recaptcha_mailhide_url($pubkey, $privkey, $email) {
 	if ($pubkey == '' || $pubkey == null || $privkey == "" || $privkey == null) {
-		die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, " .
-			"you can do so at <a href='http://www.google.com/recaptcha/mailhide/apikey'>http://www.google.com/recaptcha/mailhide/apikey</a>");
+		die ('To use reCAPTCHA Mailhide, you have to sign up for a public and private key, ' .
+			'you can do so at <a href="http://www.google.com/recaptcha/mailhide/apikey" target="_blank">http://www.google.com/recaptcha/mailhide/apikey</a>');
 	}
 
 

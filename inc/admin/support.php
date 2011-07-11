@@ -3,10 +3,12 @@ function mrt_sub2()
 {
 	mrt_wpss_menu_head('WP - Security Support');
 	?>
-<div style="height:299px">
-	Under Construction...<br /><br />
+<div>
+    <br/>
+	<p>Under Construction...</p>
+    <br /><br />
 	<ul>
-		<li><a href='http://semperfiwebdesign.com/documentation/wp-security-scan/' target="_blank">Documentation</a></li>
+		<li><a href='http://www.websitedefender.com/category/faq/' target="_blank">Documentation</a></li>
 	</ul>
 	<br /><br />
 	<strong>Backup early, backup often!</strong>

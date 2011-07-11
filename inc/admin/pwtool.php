@@ -9,13 +9,29 @@ function mrt_sub1(){
               <?php
 echo "<br /><strong>Password Strength Tool</strong>";
 ?>
-<table><tr valign=top><td><form name="commandForm">
-Type password: <input type=password size=30 maxlength=50 name=password onkeyup="testPassword(document.forms.commandForm.password.value);" value="">
-<br/><font color="#808080">Minimum 6 Characters</td><td><font size="1">  Password Strength:</font><a id="Words"><table><tr><td><table><tr><td height=4 width=150 bgcolor=tan></td></tr></table></td><td>   <b>Begin Typing</b></td></tr></table></a></td></tr></table></td></tr></table></form>
-<br /><hr align=left size=2 width=612px>
+<table id="wsd_pwdtool">
+    <tr valign="top">
+        <td>
+            <form name="commandForm">
+                Type password: <input type="password" size="30" maxlength="50" name="password" onkeyup="testPassword(this.value);" value="" />
+                <br/>
+                <span style="color:#808080">Minimum 6 Characters</span>
+            </form>
+        </td>
+        <td style="padding-left: 6px;">
+            <span>Password Strength:</span>
+            <div id="Words">
+                <p class="indicator"></p>
+                <p><strong>Begin Typing</strong></p>
+            </div>
+        </td>
+    </tr>
+</table>
+              
+<br /><hr align="left" size="2" width="612px" />
 <?php
 echo "<br /><br /><strong>Strong Password Generator</strong><br />";
-echo "Strong Password: " . '<font color="red">' . make_password(15) . "</font>";
+echo "Strong Password: " . '<span style="color:#f00;">' . make_password(15) . "</span>";
 ?>
      </div>
  

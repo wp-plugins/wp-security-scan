@@ -1,11 +1,11 @@
 function testPassword(passwd){
 var description = new Array();
-description[0] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=30 bgcolor=#ff0000></td><td height=4 width=120 bgcolor=tan></td></tr></table></td><td>   <b>Weakest</b></td></tr></table>";
-description[1] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=60 bgcolor=#990000></td><td height=4 width=90 bgcolor=tan></td></tr></table></td><td>   <b>Weak</b></td></tr></table>";
-description[2] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=90 bgcolor=#990099></td><td height=4 width=60 bgcolor=tan></td></tr></table></td><td>   <b>Improving</b></td></tr></table>";
-description[3] = "<table><tr><td><table cellpadding=0 cellspacing=2><tr><td height=4 width=120 bgcolor=#000099></td><td height=4 width=30 bgcolor=tan></td></tr></table></td><td>   <b>Strong</b></td></tr></table>";
-description[4] = "<table><tr><td><table><tr><td height=4 width=150 bgcolor=#0000ff></td></tr></table></td><td>   <b>Strongest</b></td></tr></table>";
-description[5] = "<table><tr><td><table><tr><td height=4 width=150 bgcolor=tan></td></tr></table></td><td>   <b>Begin Typing</b></td></tr></table>";
+description[0] = '<p class="indicator indicator-1"></p> <p><strong>Weakest</strong></p>';
+description[1] = '<p class="indicator indicator-2"></p> <p><strong>Weak</strong></p>';
+description[2] = '<p class="indicator indicator-3"></p> <p><strong>Improving</strong></p>';
+description[3] = '<p class="indicator indicator-4"></p> <p><strong>Strong</strong></p>';
+description[4] = '<p class="indicator indicator-5"></p> <p><strong>Strongest</strong></p>';
+description[5] = '<p class="indicator indicator-6"></p> <p><strong>Begin Typing</strong></p>';
 
 var base = 0
 var combos = 0

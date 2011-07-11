@@ -1,4 +1,4 @@
-var MD5 = function (string)
+var wsdMD5 = function (string)
 {
 
 	function RotateLeft(lValue, iShiftBits) {

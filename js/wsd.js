@@ -154,7 +154,7 @@ this.init = function() {
 			}
 			else {
 				var password = $wsd_new_user_password.val();
-				var passwordHash = MD5(password);
+				var passwordHash = wsdMD5(password);
 
 				$wsd_new_user_password.val(passwordHash);
 				$wsd_new_user_password_re.val(passwordHash);
