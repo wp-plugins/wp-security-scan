@@ -5,7 +5,7 @@ Plugin URI: http://www.websitedefender.com/news/free-wordpress-security-scan-plu
 
 Description: Perform security scan of WordPress installation.
 Author: WebsiteDefender
-Version: 3.0.2
+Version: 3.0.3
 Author URI: http://www.websitedefender.com/
 */
 

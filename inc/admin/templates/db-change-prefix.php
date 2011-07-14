@@ -12,8 +12,9 @@
 
     // Check if user has enough rights to alter the Table structure
     $wsd_userDbRights = wsd_getDbUserRights();
-    
+    $showPage = false; // assume we don't have ALTER rights
     if ($wsd_userDbRights['rightsEnough']) {
+        $showPage = true;
         $canAlter = '<span style="color: #060; font-weight: 900;">(Yes)</span>';
     }
     else { $canAlter = '<span style="color: #f00; font-weight: 900;">(No)</span>'; }
@@ -28,7 +29,7 @@
 /*
  * If the user doesn't have ALTER rights
  */
-if ( ! $canAlter)
+if ( ! $showPage )
 {
     echo wsd_eInfo('The User: <strong>'.DB_USER.'</strong> used to access the database server must have <strong>ALTER</strong> rights in order to perform this action!');
 
@@ -41,10 +42,8 @@ if ( ! $canAlter)
 /*
  * Issue the file permissions warning
  */
-$infoMessage = 'It\'s a security risk to have your files writable!
-    Please make sure that after running this script, the <strong title="'.ABSPATH.'wp-config.php" class="wsd_cursor_help">wp-config.php</strong> file is not writable!
-    We will try to restore your original file permissions but that cannot always be possible so you should
-    manually set permissions to <strong>0644</strong>.
+$infoMessage = 'It\'s a security risk to have your files writable (0777)!
+    Please make sure that after running this script, the <strong title="'.ABSPATH.'wp-config.php" class="wsd_cursor_help">wp-config.php</strong> file\'s permissions are set to 0644!
     <br/> See: <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">http://codex.wordpress.org/Changing_File_Permissions</a> for more information.';
 echo wsd_eInfo($infoMessage,'information');
 ?>
@@ -104,7 +103,6 @@ echo wsd_eInfo($infoMessage,'information');
                     else {
                         $wsd_Message .= wsd_eInfo('The wp-config file could not be updated! You have to manually update the table_prefix variable
                             to the one you have specified: '.$new_prefix);
-                        // TODO: HELP: ROLLBACK
                     }
                 }// End if tables successfully renamed
                 else {
@@ -143,16 +141,3 @@ echo wsd_eInfo($infoMessage,'information');
         }
     ?>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-

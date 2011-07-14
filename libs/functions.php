@@ -18,7 +18,7 @@ return $token;
 function check_perms($name,$path,$perm)
 {
     clearstatcache();
-    $configmod = substr(sprintf(".%o.", fileperms($path)), -4);
+    $configmod = substr(sprintf("%o", fileperms($path)), -4);
     $trcss = (($configmod != $perm) ? "background-color:#fd7a7a;" : "background-color:#91f587;");
     echo "<tr style=".$trcss.">";
         echo '<td style="border:0px;">' . $name . "</td>";
@@ -32,7 +32,9 @@ function check_perms($name,$path,$perm)
 function wsd_getFilePermissions($filePath)
 {
     clearstatcache();
-    return substr(sprintf("%o.", fileperms($filePath)), -4);
+    $res =  @substr(sprintf("%o", fileperms($filePath)), -4);
+    
+    return (empty($res) ? '0' : $res);
 }
 
 function mrt_get_serverinfo() {
@@ -94,9 +96,8 @@ function mrt_errorsoff(){
 
 function mrt_wpdberrors()
 {
-		global $wpdb;
-		$wpdb->show_errors = false;
-
+    global $wpdb;
+    $wpdb->show_errors = false;
 }
 
 function mrt_version_removal(){
@@ -165,7 +166,7 @@ function wsd_wpConfigCheckPermissions($wpConfigFilePath)
 {
     if (!is_writable($wpConfigFilePath)) { return false; }
 
-    // We use this functions later to access the wp-config file
+    // We use these functions later to access the wp-config file
     // so if they're not available we stop here
     if (!function_exists('file') || !function_exists('file_get_contents') || !function_exists('file_put_contents'))
     {
@@ -188,7 +189,9 @@ function wsd_getDbUserRights()
     $rightsenough = $rightstomuch = false;
 
     foreach ($rights as $right) {
-        if (ereg("ALTER(.*)(\*|`".str_replace("_", "\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'", $right[0]) || ereg("ALL PRIVILEGES ON (\*|`".str_replace("_", "\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'", $right[0])) {
+        
+        
+        if (ereg("ALTER(.*)(\*|`".str_replace("_", "\\\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'", $right[0]) || ereg("ALL PRIVILEGES ON (\*|`".str_replace("_", "\\\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'", $right[0])) {
             $rightsenough = $rightstomuch = true;
             break;
         }
@@ -203,7 +206,7 @@ function wsd_getDbUserRights()
     return array(
         'rightsEnough' => $rightsenough,
         'rightsTooMuch' => $rightstomuch,
-    );
+    );    
 }
 
 
@@ -211,24 +214,27 @@ function wsd_getDbUserRights()
 /**
  * @public
  * @since v3.0.2
- * Update the wp-config file to reflect the table prefix change
+ * @revision $1 07/13/2011 $k
+ * 
+ * Update the wp-config file to reflect the table prefix change.
+ * The wp file must be writable for this operation to work!
+ * 
  * @param string $wsd_wpConfigFile The path to the wp-config file
  * @param string $newPrefix The new prefix to use instead of the old one
  * @return boolean
  */
 function wsd_updateWpConfigTablePrefix($wsd_wpConfigFile, $oldPrefix, $newPrefix)
 {
-    // Get original permissions
-    $defaultPermissions = wsd_getPermissions($wsd_wpConfigFile);
-
     // Check file' status's permissions
     if (!is_writable($wsd_wpConfigFile))
     {
-        if (!@chmod($wsd_wpConfigFile,'0777')) {
-            return -1;
-        }
+        return -1;
     }
     
+    if (!function_exists('file')) {
+        return -1;
+    }
+
     // Try to update the wp-config file
     $lines = file($wsd_wpConfigFile);
     $fcontent = '';
@@ -247,23 +253,8 @@ function wsd_updateWpConfigTablePrefix($wsd_wpConfigFile, $oldPrefix, $newPrefix
         // Save wp-config file
         $result = file_put_contents($wsd_wpConfigFile, $fcontent);
     }
-    // Restore default permissions
-    @chmod($wsd_wpConfigFile,$defaultPermissions);
-
+    
     return $result;
-}
-
-/**
- * @public
- * @since v3.0.2
- * Retrieve the file permissions set to the specified file
- * @param string $filePath the path to the file
- * @return type string
- */
-function wsd_getPermissions($filePath)
-{
-    clearstatcache();
-    return substr(sprintf(".%o.", fileperms($filePath)), -4);
 }
 
 /**
@@ -304,7 +295,8 @@ function wsd_renameTables($tables, $currentPrefix, $newPrefix)
         $wpdb->hide_errors();
 
         // Try to rename the table
-        $tableNewName = str_ireplace($currentPrefix, $newPrefix, $tableOldName);
+        $tableNewName = substr_replace($tableOldName, $newPrefix, 0, strlen($currentPrefix));
+        //$tableNewName = str_ireplace($currentPrefix, $newPrefix, $tableOldName);
 
         // Try to rename the table
         $wpdb->query("RENAME TABLE `{$tableOldName}` TO `{$tableNewName}`");
@@ -316,7 +308,10 @@ function wsd_renameTables($tables, $currentPrefix, $newPrefix)
 /**
  * @public
  * @since v3.0.2
- * Rename some fields from tables in ordere to reflect the prefix change
+ * @revision $1 07/13/2011 $k
+ * 
+ * Rename some fields from options & usermeta tables in order to reflect the prefix change
+ *
  * @global object $wpdb
  * @param string $newPrefix the new prefix to use
  */
@@ -324,26 +319,34 @@ function wsd_renameDbFields($oldPrefix,$newPrefix)
 {
     global $wpdb;
 
+/*
+ * usermeta table
+ * ===========================
+    wp_*
+ 
+ * options table
+ * ===========================
+    wp_user_roles
+    
+*/
     $str = '';
-    if (false === $wpdb->query($wpdb->prepare("UPDATE {$newPrefix}options SET option_name='{$newPrefix}user_roles' WHERE option_name='{$oldPrefix}user_roles' LIMIT 1"))) {
-        $str .= '<br/>Changing values in table <strong>'.$newPrefix.'options</strong>: <font color="#ff0000">Failed</font>';
+
+    if (false === $wpdb->query("UPDATE {$newPrefix}options SET option_name='{$newPrefix}user_roles' WHERE option_name='{$oldPrefix}user_roles';")) {
+        $str .= '<br/>Changing value: '.$newPrefix.'user_roles in table <strong>'.$newPrefix.'options</strong>: <font color="#ff0000">Failed</font>';
     }
 
-    if (false === $wpdb->query($wpdb->prepare("UPDATE ".$newPrefix."usermeta SET meta_key='".$newPrefix."capabilities' WHERE meta_key='".$oldPrefix."capabilities'"))) {
-        $str .= '<br/>Changing values in table <strong>'.$newPrefix.'usermeta (1/1)</strong>: <font color="#ff0000">Failed</font>';
-    }
-    
-    if (false === $wpdb->query($wpdb->prepare("UPDATE ".$newPrefix."usermeta SET meta_key='".$newPrefix."user_level' WHERE meta_key='".$oldPrefix."user_level'")))
-    {
-        $str .= '<br/>Changing values in table <strong>'.$newPrefix.'usermeta</strong> (1/2): <font color="#ff0000">Failed</font>';
-    }
-    
-    if (false === $wpdb->query($wpdb->prepare("UPDATE ".$newPrefix."usermeta SET meta_key='".$newPrefix."autosave_draft_ids' WHERE meta_key='".$oldPrefix."autosave_draft_ids'"))) {
-        $str .= '<br/>Changing values in table <strong>'.$newPrefix.'usermeta</strong> (1/3): <font color="#ff0000">Failed</font>';
-    }
+    $query = 'update '.$newPrefix.'usermeta
+set meta_key = CONCAT(replace(left(meta_key, ' . strlen($oldPrefix) . "), '{$oldPrefix}', '{$newPrefix}'), SUBSTR(meta_key, " . (strlen($oldPrefix) + 1) . "))
+where 
+    meta_key in ('{$oldPrefix}autosave_draft_ids', '{$oldPrefix}capabilities', '{$oldPrefix}metaboxorder_post', '{$oldPrefix}user_level', '{$oldPrefix}usersettings', 
+                '{$oldPrefix}usersettingstime', '{$oldPrefix}user-settings', '{$oldPrefix}user-settings-time', '{$oldPrefix}dashboard_quick_press_last_post_id')";
 
+    if (false === $wpdb->query($query)) {
+        $str .= '<br/>Changing values in table <strong>'.$newPrefix.'usermeta</strong>: <font color="#ff0000">Failed</font>';
+    }
+    
     if (!empty($str)) {
-        $str = '<div class="wsd_user_information"><p>Changing Database settings:</p><p>'.$str.'</p></div>';
+        $str = '<div class="wsd_user_information"><p>Changing database prefix:</p><p>'.$str.'</p></div>';
     }
     
     return $str;
@@ -418,12 +421,11 @@ function wsd_backupDatabase($tables = '*')
     $return.="\n\n\n";
   }
   
-  
- 
   //save file
-    $fname = 'bck-'.date("m-d-Y",time()).'-'.md5($_tables).'.sql';
-    $filePath = ABSPATH. '/wp-content/plugins/wp-security-scan/backups/'.$fname;
-    if (file_put_contents($filePath, $return) > 0) {
+    $fname = 'bck-'.date("m-d-Y",time()).'-'.md5(uniqid(rand())).'.sql';
+    $filePath = ABSPATH.PLUGINDIR .'/wp-security-scan/backups/'.$fname;
+    $ret = file_put_contents($filePath, $return); 
+    if ($ret > 0) {
         return $fname;
     }
     return '';

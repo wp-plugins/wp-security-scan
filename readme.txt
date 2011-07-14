@@ -4,7 +4,7 @@ Author: WebsiteDefender
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts, wsd, websitedefender,
 plugins, private, protection, tracking, wordpress
 Requires at least: 2.6
-Tested up to: 3.2
+Tested up to: 3.2.1
 Stable tag: trunk
   
 Scans your WordPress installation for security vulnerabilities.
@@ -22,7 +22,7 @@ WP Security Scan checks your WordPress website/blog for security vulnerabilities
 
 = Requirements =
 
-* WordPress version 2.6 and higher (tested at <= 3.2)
+* WordPress version 2.6 and higher (tested at <= 3.2.1)
 * PHP5 (tested with PHP Interpreter >= 5.2.9)
 
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
@@ -40,6 +40,10 @@ If you do encounter any bugs, or have comments or suggestions, please contact th
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Changelog ==
+
+= v3.0.3 (07/14/2011) =
+* Bugfix: Fixed the code error in the change database prefix feature
+* Update: More code cleanup
 
 = v3.0.2 (07/11/2011) =
 * Feature: Enabled automatic database table prefix rename feature
