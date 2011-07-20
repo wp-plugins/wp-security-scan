@@ -1,8 +1,5 @@
 <?php
-#define("WSD_URL", "https://dashboard.websitedefender.com/");
-
-define("WSD_URL", "http://192.168.0.197/saas/");
-
+define("WSD_URL", "https://dashboard.websitedefender.com/");
 define("WSD_URL_RPC", WSD_URL . "jsrpc.php");
 define("WSD_URL_DOWN", WSD_URL . "download.php");
 define("WSD_SOURCE", 2);
