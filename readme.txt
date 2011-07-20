@@ -41,6 +41,9 @@ For more information on the WP Security Scan and other WordPress security news, 
 
 == Changelog ==
 
+== v3.0.4 (07/20/2011) =
+* Update: the plug-in has been made compatible with Secure WP plug-in
+
 = v3.0.3 (07/14/2011) =
 * Bugfix: Fixed the code error in the change database prefix feature
 * Update: More code cleanup

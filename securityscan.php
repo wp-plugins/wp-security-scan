@@ -5,7 +5,7 @@ Plugin URI: http://www.websitedefender.com/news/free-wordpress-security-scan-plu
 
 Description: Perform security scan of WordPress installation.
 Author: WebsiteDefender
-Version: 3.0.3
+Version: 3.0.4
 Author URI: http://www.websitedefender.com/
 */
 
@@ -41,12 +41,18 @@ if ( ! defined('WP_PLUGIN_DIR')) {
 }
       
 //main files
-if(!function_exists('json_encode')) {
+//## $rev #1 07/17/2011 {c}$
+if(!function_exists('json_encode') || !class_exists('Services_JSON')) {
     require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/json.php");
 }
 
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/functions.php");
-require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/recaptchalib.php");
+
+//## $rev #1 07/17/2011 {c}$
+if (!defined('WSD_RECAPTCHA_API_SERVER')) {
+    require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/recaptchalib.php");
+}
+
 require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/wsd.php");
 
 //menus
