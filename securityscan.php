@@ -1,15 +1,24 @@
 <?php
 /*
 Plugin Name: WP Security Scan
-Plugin URI: http://semperfiwebdesign.com/plugins/wp-security-scan/
+Plugin URI: http://www.websitedefender.com/news/free-wordpress-security-scan-plugin/
+
 Description: Perform security scan of WordPress installation.
-Author: Michael Torbert
-Version: 2.2.56.44
-Author URI: http://semperfiwebdesign.com/
+Author: WebsiteDefender
+Version: 3.0.6
+Author URI: http://www.websitedefender.com/
 */
 
 /*
-Copyright (C) 2008 semperfiwebdesign.com (michael AT semperfiwebdesign DOT com)
+ * $rev #1 07/17/2011 {c}
+ * $rev #2 07/26,27/2011 {c}
+ * $rev #3 08/05/2011 {c}
+ * $rev #4 08/26/2011 {c}
+ */
+/*
+Copyright (C) 2008-2010 Acunetix / http://www.websitedefender.com/
+(info AT websitedefender DOT com)
+
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,140 +33,229 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+if ( ! defined('WP_CONTENT_URL')) {
+    define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
+}
+if ( ! defined('WP_CONTENT_DIR')) {
+    define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+}
+if ( ! defined('WP_PLUGIN_URL')) {
+    define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
+}
+if ( ! defined('WP_PLUGIN_DIR')) {
+    define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
+}
 
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/support.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/scanner.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/password_tools.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/database.php");
-require_once(ABSPATH."wp-content/plugins/wp-security-scan/functions.php");
-//require_once(ABSPATH."wp-content/plugins/wp-security-scan/scripts.js");
 
-add_action( 'admin_notices', mrt_update_notice, 5 );
+
+//## $rev #1, #2, #3 {c}$
+if(!function_exists('json_encode') || !class_exists('Services_JSON')) {
+    @require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/json.php");
+}
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/functions.php");
+
+if (!defined('WSD_RECAPTCHA_API_SERVER')) {
+    @require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/recaptchalib.php");
+}
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/libs/wsd.php");
+
+//menus
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/security.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/scanner.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/pwtool.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/db.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/support.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/header.php");
+require_once(WP_PLUGIN_DIR . "/wp-security-scan/inc/admin/templates/footer.php");
+
+
+//## this is the container for header scripts
 add_action('admin_head', 'mrt_hd');
-add_action("init",mrt_wpdberrors,1);
-add_action("parse_query",mrt_wpdberrors,1);
+// # $rev #2 {c}
+add_action('admin_init', 'wps_admin_init_load_resources');
+
+//before sending headers
+add_action("init",'mrt_wpdberrors',1);
+
+//after executing a query
+add_action("parse_query",'mrt_wpdberrors',1);
+
+//## add the sidebar menu
 add_action('admin_menu', 'add_men_pg');
-add_action("init",mrt_remove_wp_version,1);
-//add_action('admin_head', 'mrt_root_scripts');
+
+add_action("init", 'mrt_remove_wp_version',1);   //comment out this line to make ddsitemapgen work
+
+//before rendering each admin init
+add_action('admin_init','mrt_wpss_admin_init');
+
+// Check to see whether or not we should display the dashboard widget
+//@ $rev4
+$plugin1 = 'websitedefender-wordpress-security';
+$plugin2 = 'secure-wordpress';
+if (! in_array($plugin1.'/'.$plugin1.'.php', apply_filters('active_plugins', get_option('active_plugins')))
+        || ! in_array($plugin2.'/'.$plugin2.'.php', apply_filters('active_plugins', get_option('active_plugins'))))
+{
+    define('WPSS_WSD_BLOG_FEED', 'http://www.websitedefender.com/feed/');
+    @require_once('libs/wpssUtil.php');
+    //@@ Hook into the 'wp_dashboard_setup' action to create the dashboard widget
+    add_action('wp_dashboard_setup', "wpssUtil::addDashboardWidget");
+}
+unset($plugin1,$plugin2);
+
+//@===
+
+function mrt_wpss_admin_init(){
+    wp_enqueue_style('wsd_style', WP_PLUGIN_URL . '/wp-security-scan/css/wsd.css');
+}
+
+remove_action('wp_head', 'wp_generator');
 function add_men_pg() {
-         if (function_exists('add_menu_page')){
-            add_menu_page('Security', 'Security', 8, __FILE__, 'mrt_opt_mng_pg');
-            add_submenu_page(__FILE__, 'Scanner', 'Scanner', 8, 'scanner', 'mrt_sub0');
-            add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 8, 'passwordtool', 'mrt_sub1');
-            add_submenu_page(__FILE__, 'Database', 'Database', 8, 'database', 'mrt_sub3');
-            add_submenu_page(__FILE__, 'Support', 'Support', 8, 'support', 'mrt_sub2');
-         }
+    if (function_exists('add_menu_page'))
+    {
+        add_menu_page('Security', 'Security', 'edit_pages', __FILE__, 'mrt_opt_mng_pg', WP_PLUGIN_URL.'/wp-security-scan/images/wsd-logo-small.png');
+            add_submenu_page(__FILE__, 'Scanner', 'Scanner', 'edit_pages', 'scanner', 'mrt_sub0');
+            add_submenu_page(__FILE__, 'Password Tool', 'Password Tool', 'edit_pages', 'passwordtool', 'mrt_sub1');
+            add_submenu_page(__FILE__, 'Database', 'Database', 'edit_pages', 'database', 'mrt_sub3');
+            add_submenu_page(__FILE__, 'Support', 'Support', 'edit_pages', 'support', 'mrt_sub2');
+    }
 }
 
-/*function mrt_root_scripts(){
-$siteurl = get_option('siteurl');
-echo '<script language="JavaScript" type="text/javascript" src="' . $siteurl . '/wp-content/plugins/wp-security-scan/scripts.js"></script>';
-}*/
-
-function mrt_update_notice(){
-/*$mrt_version = "2.2.52";
-$mrt_latest = fgets(fopen("http://semperfiwebdesign.com/wp-security-scan.html", "r"));
-echo $mrt_latest . " and " . $mrt_version;
-if($mrt_latest > $mrt_version)
-    echo "New Version Available";
-   else
-      echo "Latest Version";
-  */  }
-
-function mrt_opt_mng_pg() {
-        ?>
-<!--<div id='update-nag'>A new version of WP Security Scan is available!</div>-->
-<?php //$rss = fetch_rss('http://alexrabe.boelinger.com/?tag=nextgen-gallery&feed=rss2');?>
-
-<div class=wrap>
-                <h2><?php _e('WP - Security Admin Tools') ?></h2>
-<br /><em>For comments, suggestions, bug reporting, etc please <a href="http://semperfiwebdesign.com/contact/">click here</a>.</em>
-
-          <div>
-<!--               <div id="message" class="updated fade"><p></p></div>-->
-<br /><div style="float: left;width: 600px; height: 450px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 5px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Initial Scan</h3></div>
-<?php
-global $wpdb;
-mrt_check_version();
-mrt_check_table_prefix();
-mrt_version_removal();
-mrt_errorsoff();
 
 
-$name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
-if ($name=="admin"){
-  echo '<a href="http://semperfiwebdesign.com/documentation/wp-security-scan/change-wordpress-admin-username/" title="WordPress Admin" target="_blank"><font color="red">"admin" user exists.</font></a>';
+function wpss_admin_head() {
+	$scheme = 'http';
+	if ( is_ssl() ) {
+        $scheme = 'https';
+    }
+}
+add_action( 'admin_head', 'wpss_admin_head' );
+
+
+// function for WP < 2.8
+function get_plugins_url($path = '', $plugin = '') {
+
+  if ( function_exists('plugin_url') )
+    return plugins_url($path, $plugin);
+
+  if ( function_exists('is_ssl') )
+    $scheme = ( is_ssl() ? 'https' : 'http' );
+  else
+    $scheme = 'http';
+  if ( function_exists('plugins_url') )
+    $url = plugins_url();
+  else
+    $url = WP_PLUGIN_URL;
+  if ( 0 === strpos($url, 'http') ) {
+    if ( function_exists('is_ssl') && is_ssl() )
+      $url = str_replace( 'http://', "{$scheme}://", $url );
   }
-  else{
-      echo '<font color="green">No user "admin".</font>';
-      }
-?><br /><?php 
-$filename = '.htaccess';
-if (file_exists($filename)) {
-    echo '<font color="green">.htaccess exists in wp-admin/</font>';
-} else {
-    echo '<font color="red">The file .htaccess does not exist in wp-admin/.</font>';
+
+  if ( !empty($plugin) && is_string($plugin) )
+  {
+    $folder = dirname(plugin_basename($plugin));
+    if ('.' != $folder)
+      $url .= '/' . ltrim($folder, '/');
+  }
+
+  if ( !empty($path) && is_string($path) && strpos($path, '..') === false )
+    $url .= '/' . ltrim($path, '/');
+
+  return apply_filters('plugins_url', $url, $path, $plugin);
 }
 
+function wpss_mrt_meta_box()
+{  
 ?>
+    <div id="wsd-initial-scan" class="wsd-inside">
+            <div class="wsd-initial-scan-section">
+                    <?php mrt_check_version();?>
+            </div>
 
-<br /><br /><br />
-<div style="text-align:center;color:grey;"><em>**click on an above link for documentation**</em></div>
-<br />
-<hr align=center size=2 width=500px>
-<br />
+            <div class="wsd-initial-scan-section">
+                    <?php mrt_check_table_prefix();?>
+            </div>
 
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Future Releases</h3></div>
-<ul><li>one-click change file/folder permissions</li><li>test for XSS vulnerabilities</li><li>intrusion detection/prevention</li><li>lock out/log incorrect login attempts</li><li>user enumeration protection</li><li>WordPress admin protection/security</li></ul>
-</div>
+            <div class="wsd-initial-scan-section">
+                    <?php mrt_version_removal();?>
+            </div>
 
+            <div class="wsd-initial-scan-section">
+                    <?php mrt_errorsoff();?>
+            </div>
+<?php
+            global $wpdb;
 
-<div style="float: left; height: 430px;border: 1px solid #999;margin: 0 15px 15px 0;padding: 15px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>System Information Scan</h3></div>
-<?php mrt_get_serverinfo(); ?>
-</div>
+            echo '<div class="scanpass">WP ID META tag removed form WordPress core</div>';
 
-<div style="float: left;width: 350px; height: 255;border: 1px solid #999;margin: 0 15px 15px 0;padding: 25px;">
-<div width=600px style="text-align:center;font-weight:bold;"><h3>Donations</h3></div>
-<div style="text-align:center"><em>This plugin is updated as a free service to the WordPress community.  Donations of any size are appreciated.</em>
-<br /><br />
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=Support%20WordPress%20Security%20Scan%20Plugin&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" target="_blank">Click here to support this plugin.</a>
-<br /><br /><h4>Highest Donations</h4></div><?php 
+            echo '<div class="wsd-initial-scan-section">';
+                $name = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_login='admin'");
+                if ($name == "admin") {
+                        echo '<a href="http://www.websitedefender.com/wordpress-security/change-wordpress-admin-username" title="Change WordPress Admin username" target="_blank"><font color="red">"admin" user exists.</font></a>';
+                }
+                else { echo '<span class="scanpass">No user "admin".</span>'; }
+            echo '</div>';
 
-if (function_exists('fopen')) {
-   $file = fopen("http://semperfiwebdesign.com/top_donations.php", "r");
-   while ( ! feof($file) ) {
-         $text = fgets($file);
-         echo '<li>' . $text . '</li>';
-   }
-   fclose($file);
+            echo '<div class="wsd-initial-scan-section">';
+                if (file_exists('.htaccess')) {
+                    echo '<span class="scanpass">.htaccess exists in wp-admin/</span>';
+                }
+                else { echo '<span style="color:#f00;">The file .htaccess does not exist in wp-admin/.</span>'; }
+            echo '</div>';
+
+            ?>
+
+            <div class="mrt_wpss_note">
+                <em>**WP Security Scan plugin <strong>must</strong> remain active for security features to persist**</em>
+            </div>
+    </div>
+<?php
 }
-?>
-<br /><br /><div style="text-align:center"><h4>Recent Donations</h4></div><?php
 
-if (function_exists('fopen')) {
-   $file = fopen("http://semperfiwebdesign.com/recent_donations.php", "r");
-   while ( ! feof($file) ) {
-         $text = fgets($file);
-         echo '<li>' . $text . '</li>';
-   }
-   fclose($file);
-}
+	
+function wpss_mrt_meta_box2()
+{
 ?>
-</div>
-<div style="clear:both"></div>
-</div>
-             Plugin by <a href="http://semperfiwebdesign.com/" title="Semper Fi Web Design">Semper Fi Web Design</a>
-        </div>
-<?php } 
+    <ul id="wsd-information-scan-list"">
+            <?php mrt_get_serverinfo(); ?>
+    </ul>
+<?php
+}
+
+
+// $rev #2: only load if they're not already.
+function wps_admin_init_load_resources()
+{
+    wp_enqueue_script('acx-json', WP_PLUGIN_URL.'/wp-security-scan/js/json.js');
+    wp_enqueue_script('acx-md5', WP_PLUGIN_URL.'/wp-security-scan/js/md5.js');
+    wp_enqueue_script('wsd-scripts', WP_PLUGIN_URL.'/wp-security-scan/js/scripts.js');
+    wp_enqueue_script('wsd-wsd', WP_PLUGIN_URL.'/wp-security-scan/js/wsd.js');
+}
 
 function mrt_hd()
 {
- $siteurl = get_option('siteurl');?>
-<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/js/scripts.js"></script>
-<script language="JavaScript" type="text/javascript" src="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/scripts.js"></script>
+?>
+	<script type="text/javascript">
+		var wordpress_site_name = "<?php echo htmlentities(get_bloginfo('siteurl'));?>"
+	</script>
+	<script type="text/javascript">
+	  var _wsdPassStrengthProvider = null;
 
-<!--<link rel="stylesheet" type="text/css" href="<?php echo $siteurl;?>/wp-content/plugins/wp-security-scan/style.css" />-->
+	  jQuery(document).ready(function($) {
+		_wsdPassStrengthProvider = new wsdPassStrengthProvider($);
+		_wsdPassStrengthProvider.init();
+
+		$('#wpss_mrt_1.postbox h3, #wpss_mrt_2.postbox h3, #wpss_mrt_3.postbox h3').click(function() {
+			var parent = $(this).parent();
+			if (parent) parent.toggleClass('closed');
+		});
+		$('#wpss_mrt_1.postbox .handlediv, #wpss_mrt_2.postbox .handlediv, #wpss_mrt_3.postbox .handlediv').click(function() {
+			var parent = $(this).parent();
+			if (parent) parent.toggleClass('closed');
+		});
+		$('#wpss_mrt_1.postbox.close-me, #wpss_mrt_2.postbox.close-me, #wpss_mrt_3.postbox.close-me').each(function() {
+			$(this).addClass("closed");
+		});
+	  });
+	</script>
 <?php }
 ?>
