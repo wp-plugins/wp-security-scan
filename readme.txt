@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== WP Security Scan ===
 Contributors: WebsiteDefender
 Author: WebsiteDefender
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts, wsd, websitedefender,
@@ -40,6 +40,13 @@ If you do encounter any bugs, or have comments or suggestions, please contact th
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Changelog ==
+
+= v3.0.6 =
+* Feature: The WebsiteDefender RSS widget added to the admin dashboard
+* Update: The plug-in has been made compatible with Secure WP and WebsiteDefender WordPress Security
+* Update: The plug-in can be safe used in a Multi User WP environment
+* Bugfix: Fixed the bug related to the database ALTER rights retrieval
+* BugFix: Fixed the version information script
 
 = v3.0.5 (07/20/2011) =
 * Bugfix: Updated the links to websitedefender.com
