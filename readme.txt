@@ -3,7 +3,7 @@ Contributors: WebsiteDefender
 Author: WebsiteDefender
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts, wsd, websitedefender,
 plugins, private, protection, tracking, wordpress
-Requires at least: 2.6
+Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: trunk
   
@@ -22,7 +22,7 @@ WP Security Scan checks your WordPress website/blog for security vulnerabilities
 
 = Requirements =
 
-* WordPress version 2.6 and higher (tested at <= 3.2.1)
+* WordPress version 3.0 and higher (tested at <= 3.2.1)
 * PHP5 (tested with PHP Interpreter >= 5.2.9)
 
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
@@ -40,6 +40,11 @@ If you do encounter any bugs, or have comments or suggestions, please contact th
 For more information on the WP Security Scan and other WordPress security news, visit the <a href="http://www.websitedefender.com/blog" target="_blank">WebsiteDefender Blog</a> and join our <a href="http://www.facebook.com/websitedefender" target="_blank">Facebook</a> page. Post any questions or feedback on the <a href="http://www.websitedefender.com/forums/wp-security-scan-plugin/" target="_blank">WP Security Scan plugin forum</a>.
 
 == Changelog ==
+
+= v3.0.7 =
+* BugFix: The bug reported about ALTER rights retrieval has been addressed
+* Update: Code cleanup
+* Update: Minor internal updates
 
 = v3.0.6 =
 * Feature: The WebsiteDefender RSS widget added to the admin dashboard
