@@ -1,6 +1,11 @@
 <?php
 
 if (!function_exists('make_seed')) :
+	/**
+	 * @public
+	 * Create a number
+	 * @return double
+	 */
     function make_seed()
     {
         list($usec, $sec) = explode(' ', microtime());
@@ -8,7 +13,14 @@ if (!function_exists('make_seed')) :
     }
 endif;
 
+
 if (!function_exists('make_password')) :
+	/**
+	 * @public
+	 * @uses make_seed()
+	 * Generate a strong password
+	 * @return string
+	 */
     function make_password($password_length)
     {
         srand(make_seed());
@@ -20,7 +32,6 @@ if (!function_exists('make_password')) :
         return $token;
     }
 endif;
-
 
 function check_perms($name,$path,$perm)
 {
@@ -142,41 +153,16 @@ function mrt_remove_wp_version()
     }
 }
 
-function mrt_check_version()
-{
-    //$rev #3 08/05/2011 {c}
-
-    $str = '';
-    
-    $c = get_site_transient( 'update_core' );
-    if (is_object($c))
-    {
-        if (empty($c->updates))
-        {
-            $str = '<span class="scanpass">'.__('You have the latest version of Wordpress.').'</span><br />';
-        }
-        else
-        {
-            if (!empty($c->updates[0]))
-            {
-                $c = $c->updates[0];
-
-                if ( !isset($c->response) || 'latest' == $c->response ) {
-                    $str = '<span class="scanpass">'.__('You have the latest version of Wordpress.').'</span><br />';
-                }
-                else
-                {
-                    if ('upgrade' == $c->response)
-                    {
-                        $lv = $c->current;
-                        $str = '<span style="color:#f00">'.sprintf('A new version of Wordpress <strong>(%s)</strong> is available. You should upgrade to the latest version.', $lv).'</span><br />';
-                    }
-                }
-            }
-        }
+function mrt_check_version(){
+//echo "WordPress Version: ";
+global $wp_version;
+$mrt_wp_ver = ereg_replace("[^0-9]", "", $wp_version);
+while ($mrt_wp_ver > 10){
+    $mrt_wp_ver = $mrt_wp_ver/10;
     }
-
-    echo $str;
+if ($mrt_wp_ver >= "2.8") $g2k5 = '<span class="scanpass"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You have the latest stable version of WordPress.</span><br />';
+if ($mrt_wp_ver < "2.8") $g2k5 = '<span style="color:#f00"><strong>WordPress version: ' . $wp_version . '</strong> &nbsp;&nbsp;&nbsp; You need version 2.8.6.  Please <a href="http://wordpress.org/download/">upgrade</a> immediately.</span><br />';
+echo $g2k5;
 }
 
 
@@ -215,9 +201,8 @@ function wsd_wpConfigCheckPermissions($wpConfigFilePath)
  */
 function wsd_getDbUserRights()
 {
-	/*
+/*
     global $wpdb;
-    
     $rights = $wpdb->get_results("SHOW GRANTS FOR '".DB_USER."'@'".DB_HOST."'", ARRAY_N);
     $rightsenough = $rightstomuch = false;
 
@@ -239,71 +224,46 @@ function wsd_getDbUserRights()
     return array(
         'rightsEnough' => $rightsenough,
         'rightsTooMuch' => $rightstomuch,
+    );    
+ */
+    global $wpdb;
+
+    $rightsenough = $rightstoomuch = false;
+    $data = array(
+        'rightsEnough' => false,
+        'rightsTooMuch' => false
     );
-	*/
-	
-    	global $wpdb;
 
-		$rightsenough = $rightstoomuch = false;
-		$data = array(
-			'rightsEnough' => $rightsenough,
-			'rightsTooMuch' => $rightstoomuch
-		);
+//@ $r1 09/12/2011 {c} $
 
-//@ $rev #1 07/26/2011 {cos} 
-		$rights = $wpdb->get_results("SHOW GRANTS FOR '".DB_USER."'@'".DB_HOST."'", ARRAY_N);
-		if (empty($rights[0][0])) {
-			return $data;
-		}
-		$rights = $rights[0][0];
+    $rights = $wpdb->get_results("SHOW PRIVILEGES", ARRAY_N);
 
-		$to = preg_quote("TO '".DB_USER."'@'".DB_HOST."'");
+    if (empty($rights)) { return $data; }
 
-		//@ If GRANT ALL
-		if (preg_match("/\bALL PRIVILEGES\b(.*)".$to."/msiU", $rights))
-		{
-			$rightsenough = $rightstoomuch = true;
-		}
-		//@ IF !ALTER
-		else if (!preg_match("/\bALTER(\s+)[^a-z],\b".$to."/msiU", $rights))
-		{
-			$rightsenough = false;
-		}
-		//@ Anything but ALTER
-		else { $rightsenough = true; }
-		
-		return array(
-			'rightsEnough' => $rightsenough,
-			'rightsTooMuch' => $rightstoomuch,
-		);    
+    $_tooManyRights = array('CREATE','DELETE','DROP','EVENT','EXECUTE','FILE','GRANT','PROCESS','RELOAD','SHUTDOWN','SUPER');
+    $numRights = 0;
+    foreach ($rights as $right)
+    {
+        if (! empty($right[0]))
+        {
+            $_right = strtoupper($right[0]);
+            if ('ALTER' == $_right) {
+                $rightsenough = true;
+            }
+            if (in_array($_right, $tooManyRights)) {
+                $numRights += 1;
+            }
+        }
+    }
+    if ($numRights >= 5) {
+        $rightstoomuch = true;
+    }
 
-
-/*
-		$chk1 = "ALTER(.*)(\*|`".str_replace("_", "\\\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'";
-		$chk2 = "ALL PRIVILEGES ON (\*|`".str_replace("_", "\\\\_", DB_NAME)."`)\.(\*|`".DB_HOST."`) TO '".DB_USER."'@'".DB_HOST."'";
-		$chk3 = "ALTER(.*)`".DB_NAME."`";
-
-		foreach ($rights as $right)
-		{
-			if (preg_match("/$chk1/", $right[0]) || preg_match("/$chk2/", $right[0])) {
-				$rightsenough = $rightstoomuch = true;
-				break;
-			}
-			else {
-				if (preg_match("/$chk3/", $right[0])) {
-					$rightsenough = true;
-					break;
-				}
-			}
-		}
-
-		return array(
-			'rightsEnough' => $rightsenough,
-			'rightsTooMuch' => $rightstoomuch,
-		);    
-*/    
+    return array(
+        'rightsEnough' => $rightsenough,
+        'rightsTooMuch' => $rightstoomuch,
+    );    
 }
-
 
 
 /**
@@ -605,6 +565,4 @@ function wsd_eInfo($infoMessage, $alertType = 'notify')
 {
     return ('<p class="wsd_user_'.$alertType.'">'.$infoMessage.'</p>');
 }
-
-
 ?>

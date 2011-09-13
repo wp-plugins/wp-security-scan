@@ -5,15 +5,15 @@ Plugin URI: http://www.websitedefender.com/news/free-wordpress-security-scan-plu
 
 Description: Perform security scan of WordPress installation.
 Author: WebsiteDefender
-Version: 3.0.6
+Version: 3.0.7
 Author URI: http://www.websitedefender.com/
 */
-
 /*
  * $rev #1 07/17/2011 {c}
  * $rev #2 07/26,27/2011 {c}
  * $rev #3 08/05/2011 {c}
  * $rev #4 08/26/2011 {c}
+ * $rev #5 09/12/2011 {c}
  */
 /*
 Copyright (C) 2008-2010 Acunetix / http://www.websitedefender.com/
@@ -46,6 +46,9 @@ if ( ! defined('WP_PLUGIN_DIR')) {
     define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
 }
 
+
+//! #r4# @see http://wordpress.org/support/topic/update-to-306-breaks-wp-321
+@require_once(ABSPATH.'wp-includes/pluggable.php');
 
 
 //## $rev #1, #2, #3 {c}$
@@ -106,6 +109,10 @@ unset($plugin1,$plugin2);
 
 function mrt_wpss_admin_init(){
     wp_enqueue_style('wsd_style', WP_PLUGIN_URL . '/wp-security-scan/css/wsd.css');
+    /* #r5# */
+    $h6 = 'swp-dashboard';
+    wp_register_style($h6, WP_PLUGIN_URL . '/wp-security-scan/css/acx-wp-dashboard.css');
+    wp_enqueue_style($h6);
 }
 
 remove_action('wp_head', 'wp_generator');

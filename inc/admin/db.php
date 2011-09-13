@@ -3,7 +3,7 @@ function mrt_sub3()
 {
     // Show header
     mrt_wpss_menu_head('WP - Database Security');
-
+    
     $wsd_wpConfigFile = ABSPATH.'wp-config.php';
 
     // internal flag
