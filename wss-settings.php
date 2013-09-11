@@ -34,7 +34,7 @@ define('WSS_PLUGIN_TEXT_DOMAIN', 'WSDWP_SECURITY');
 define('WSS_PLUGIN_SETTINGS_OPTION_NAME', 'wsdplugin_settings');
 
 /**
- * Set the path to the WebsiteDefender.com feed
+ * Set the path to the acunetix.com feed
  */
 define('WSS_PLUGIN_BLOG_FEED','http://www.acunetix.com/blog/');
 

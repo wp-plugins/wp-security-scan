@@ -161,8 +161,7 @@ if ( ! $showPage )
                  if (empty($acx_dbRights['rightsEnough']))
                  {
                      $wsd_Message .= '<span class="acx-icon-alert-critical">'. __('The User which is used to access your Wordpress Database, hasn\'t enough rights (is missing the <code>ALTER</code> right) to alter the Table structure.
-                            Please visit the <a href="http://www.websitedefender.com/category/faq/" target=_blank">WebsiteDefender WP Security Scan WordPress plugin documentation</a> website for more information.
-                            If the user <code>has ALTER</code> rights and the tool is still not working, please <a href="http://www.websitedefender.com/support/" target="_blank">contact us</a> for assistance!').'</span>';
+                            If the user <code>has ALTER</code> rights and the tool is still not working, please <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_blank">contact us</a> for assistance!').'</span>';
                  }
 
                  if (strlen($new_prefix) < strlen($_POST['newPrefixInput'])){

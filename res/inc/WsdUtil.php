@@ -574,7 +574,7 @@ class WsdUtil
     {
         $rssWidgetData = get_option('WSD-RSS-WGT-DISPLAY');
         if(($rssWidgetData == 'yes')){
-           wp_add_dashboard_widget('acx_plugin_dashboard_widget', __('WebsiteDefender news and updates'), array(get_class(),'displayDashboardWidget'));
+           wp_add_dashboard_widget('acx_plugin_dashboard_widget', __('Acunetix news and updates'), array(get_class(),'displayDashboardWidget'));
         }
     }
     /**
