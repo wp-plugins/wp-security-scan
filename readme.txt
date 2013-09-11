@@ -28,10 +28,6 @@ Acunetix WP Security checks your WordPress website/blog for security vulnerabili
 * WordPress version 3.0 and higher
 * PHP5 (tested with PHP Interpreter >= 5.2.9)
 
-For more information on the Acunetix WP Security plug-in and other WordPress security news, visit the
-<a href="http://www.acunetix.com/blog/" target="_blank">Acunetix Blog</a> and join
-our <a href="http://www.facebook.com/Acunetix" target="_blank">Facebook</a> page. Post any questions or feedback
-on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_blank">Acunetix WP Security plug-in forum</a>.
 
 = Key security features: =
 
@@ -69,21 +65,6 @@ on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_b
 
 If you encounter any bugs, or have comments or suggestions, please post them on the
 <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_blank">Acunetix WP Security plug-in forum</a>.
-
-For more information on the Acunetix WP Security plug-in and other WordPress security news, visit the
-<a href="http://www.acunetix.com/blog/" target="_blank">Acunetix Blog</a> and join
-our <a href="http://www.facebook.com/Acunetix" target="_blank">Facebook</a> page. Post any questions or feedback
-on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_blank">Acunetix WP Security plug-in forum</a>.
-
-
-== WordPress Security ==
-
-Security Scanner:
-
-1. Scans Wordpress installation for file/directory permissions vulnerabilites
-2. Recommends corrective actions
-3. Scans for general security vulnerabilities
-
 
 For more information on the Acunetix WP Security plug-in and other WordPress security news, visit the
 <a href="http://www.acunetix.com/blog/" target="_blank">Acunetix Blog</a> and join
@@ -133,6 +114,15 @@ on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_b
 4. The new Dashboard page
 
 
+== WordPress Security ==
+
+Security Scanner:
+
+1. Scans Wordpress installation for file/directory permissions vulnerabilites
+2. Recommends corrective actions
+3. Scans for general security vulnerabilities
+
+
 == Other Notes ==
 = License =
 Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog.
@@ -144,6 +134,10 @@ on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_b
 
 
 == Changelog ==
+
+= 4.0.1 =
+* Fixed the LiveTraffic bug
+
 
 = 4.0.0 =
 * Complete core update

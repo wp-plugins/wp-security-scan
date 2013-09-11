@@ -137,15 +137,15 @@ class WsdLiveTraffic
     {
         global $wpdb;
         if(empty($maxEntries)){
-            return $wpdb->get_results("SELECT entryId,entryTime,entryIp,entryReferrer,entryUA,entryRequestedUrl FROM ".SwpaPlugin::getTableName(SWPA_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC");
+            return $wpdb->get_results("SELECT entryId,entryTime,entryIp,entryReferrer,entryUA,entryRequestedUrl FROM ".WsdPlugin::getTableName(WSS_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC");
         }
-        else { return $wpdb->get_results("SELECT entryId,entryTime,entryIp,entryReferrer,entryUA,entryRequestedUrl FROM ".SwpaPlugin::getTableName(SWPA_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC LIMIT 0, ".$maxEntries);}
+        else { return $wpdb->get_results("SELECT entryId,entryTime,entryIp,entryReferrer,entryUA,entryRequestedUrl FROM ".WsdPlugin::getTableName(WSS_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC LIMIT 0, ".$maxEntries);}
     }
 
     final public static function getLastID()
     {
         global $wpdb;
-        return $wpdb->get_var("SELECT entryId FROM ".SwpaPlugin::getTableName(SWPA_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC");
+        return $wpdb->get_var("SELECT entryId FROM ".WsdPlugin::getTableName(WSS_PLUGIN_LIVE_TRAFFIC_TABLE_NAME)." ORDER BY entryId DESC");
     }
 
     final public static function ajaxGetTrafficData($maxEntries = 0)
