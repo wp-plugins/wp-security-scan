@@ -6,6 +6,8 @@ plugins, private, protection, tracking, wordpress
 Requires at least: 3.0
 Tested up to: 3.7.1
 Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Scans your WordPress installation for security vulnerabilities.
 
@@ -140,6 +142,23 @@ on the <a href="http://wordpress.org/support/plugin/wp-security-scan" target="_b
 
 
 == Changelog ==
+
+= 4.0.3 =
+* New Feature: Added support for MultiSite
+* New Feature: Added the WP file scan tool for checking the core WP files for modification date
+* New Feature: Added geo location to Live traffic tool
+* New Feature: Added ip lookup to Live Traffic tool
+* New Feature: Added support for deleting the database backup files
+* New Feature: Added the link to the plugin's settings page in the plugins page
+* New Feature: Live traffic tool can now be enabled/disabled from the settings page
+* New Alerts: Two new security checks were added for the install.php and upgrade.php files from wp-admin directory
+* Update: Improved the Live Traffic code and functionality
+* Update: Fixed the broken path to wp-config.php file
+* Update: Improved the Dashboard's UI
+* Update: When running in a MultiSite installation, the plugin can only be "Network activated"
+* Fixed bug when the ReflectionClass is not available.
+* Fixed various bugs reported in the forums
+
 
 = 4.0.2 =
 * New Feature: Added support for MultiSite
