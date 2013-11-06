@@ -1,15 +1,30 @@
 <?php
 /**
-Plugin Name: Acunetix WP Security
-Plugin URI: http://www.acunetix.com/websitesecurity/wordpress-security-plugin/
-Description: The Acunetix WP Security plugin is the ultimate must-have tool when it comes to WordPress security. The plugin is free and monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
-Version: 4.0.2
-Author: Acunetix
-Author URI: http://www.acunetix.com/
-License: GPLv2 or later
-Text Domain: WSDWP_SECURITY
-Domain Path: /languages
+ * Plugin Name: Acunetix WP Security
+ * Plugin URI: http://www.acunetix.com/websitesecurity/wordpress-security-plugin/
+ * Description: The Acunetix WP Security plugin is the ultimate must-have tool when it comes to WordPress security. The plugin is free and monitors your website for security weaknesses that hackers might exploit and tells you how to easily fix them.
+ * Version: 4.0.3
+ * Author: Acunetix
+ * Author URI: http://www.acunetix.com/
+ * License: GPLv2 or later
+ * Text Domain: WSDWP_SECURITY
+ * Domain Path: /languages
  */
+ /*  Copyright 2013 Acunetix
+
+	This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 define('WPS_PLUGIN_PREFIX', 'wps_');
 define('WPS_PLUGIN_NAME', 'Acunetix WP Security');
 define('WPS_PLUGIN_URL', trailingslashit(plugins_url('', __FILE__)));
