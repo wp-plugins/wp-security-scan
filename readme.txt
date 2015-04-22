@@ -4,7 +4,7 @@ Author: Acunetix
 Tags: security, securityscan, chmod, permissions, admin, administration, authentication, database, dashboard, post, notification, password, plugin, posts,
 plugins, private, protection, tracking, wordpress
 Requires at least: 3.0
-Tested up to: 4.0
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
